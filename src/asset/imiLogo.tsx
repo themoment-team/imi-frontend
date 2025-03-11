@@ -1,12 +1,6 @@
 import React from 'react';
 
-export const ImiLogo = ({
-  width,
-  height,
-}: {
-  width: string;
-  height: string;
-}) => {
+const ImiLogo = ({ width, height }: { width: string; height: string }) => {
   return (
     <svg
       width={width}
@@ -15,31 +9,40 @@ export const ImiLogo = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M5.91809 84.9119L6 18.6428" stroke="black" stroke-width="10" />
+      <path
+        d="M5.918 84.912V18.643"
+        stroke="black"
+        strokeWidth="10"
+        strokeLinecap="round"
+      />
       <circle
         cx="6"
-        cy="5.02202"
+        cy="5.022"
         r="5"
-        transform="rotate(-90 6 5.02202)"
+        transform="rotate(-90 6 5.022)"
         fill="black"
       />
       <path
-        d="M27.9949 84.9119C27.9949 84.9119 23.5063 28.7264 27.9949 14.8318C32.4836 0.937291 58.9314 48.4001 65.4143 48.3123C71.8972 48.2245 98.3904 2.4239 102.834 14.8318C107.277 27.2398 102.834 84.9119 102.834 84.9119"
+        d="M28 84.912s-4.5-56.186 0-70.08c4.5-13.894 30.948 33.568 37.43 33.48 6.483-.088 32.977-45.889 37.42-33.48 4.444 12.408 0 70.08 0 70.08"
         stroke="black"
-        stroke-width="10"
+        strokeWidth="10"
+        strokeLinecap="round"
       />
       <path
-        d="M124.727 84.9119L124.808 18.6428"
+        d="M124.727 84.912V18.643"
         stroke="black"
-        stroke-width="10"
+        strokeWidth="10"
+        strokeLinecap="round"
       />
       <circle
         cx="124.808"
-        cy="5.02202"
+        cy="5.022"
         r="5"
-        transform="rotate(-90 124.808 5.02202)"
+        transform="rotate(-90 124.808 5.022)"
         fill="black"
       />
     </svg>
   );
 };
+
+export default ImiLogo;
