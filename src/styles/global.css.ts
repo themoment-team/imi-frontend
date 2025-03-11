@@ -1,5 +1,7 @@
 import { globalStyle } from '@vanilla-extract/css';
 
+import { vars } from './theme.css';
+
 globalStyle(
   `html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -18,6 +20,8 @@ globalStyle(
     margin: 0,
     padding: 0,
     border: 0,
+    backgroundColor: vars.color.background,
+    color: vars.color.text,
     fontSize: '100%',
     fontFamily:
       "'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif",
