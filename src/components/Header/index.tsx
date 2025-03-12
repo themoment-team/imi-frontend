@@ -9,6 +9,10 @@ import * as S from './header.css';
 export default function Header() {
   const router = useRouter();
 
+  /**
+   *  로그인 여부를 판별하기 위해 임시로 만든 변수
+   * 로그인 기능 추가후 삭제 & 변경 바람
+   */
   const login = true;
 
   return (
