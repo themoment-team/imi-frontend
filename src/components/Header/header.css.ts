@@ -8,6 +8,7 @@ export const HeaderBox = style({
   justifyContent: 'center',
   width: '100%',
   height: '72px',
+  background: vars.color.white,
 });
 
 export const HeaderWrapper = style({
@@ -16,6 +17,7 @@ export const HeaderWrapper = style({
   justifyContent: 'space-between',
   width: '1280px',
   height: '40px',
+  background: vars.color.white,
 });
 
 export const RightItems = style({
@@ -24,6 +26,7 @@ export const RightItems = style({
   justifyContent: 'space-between',
   width: '359.97px',
   height: '40px',
+  background: vars.color.white,
 });
 
 export const Navigation = style({
@@ -32,6 +35,7 @@ export const Navigation = style({
   justifyContent: 'space-between',
   width: '248px',
   height: '22px',
+  background: vars.color.white,
 });
 
 export const LoginSignupBox = style({
@@ -40,6 +44,7 @@ export const LoginSignupBox = style({
   justifyContent: 'space-between',
   width: '173px',
   height: '32px',
+  background: vars.color.white,
 });
 
 export const LoginBtn = style({
@@ -70,4 +75,5 @@ export const Logout = style({
 
 export const NavigationBtn = style({
   cursor: 'pointer',
+  background: vars.color.white,
 });
