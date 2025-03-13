@@ -14,6 +14,7 @@ export const BackBtn = style({
 
 export const Name = style({
   fontSize: '2rem',
+  fontWeight: '500',
   paddingBottom: '5.5rem',
   textAlign: 'center',
 });
