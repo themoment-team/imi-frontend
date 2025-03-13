@@ -26,7 +26,9 @@ export const EmptuContent = style({
 export const LinkWrite = style({
   display: 'flex',
   width: 'fit-content',
+  padding: '0.4rem 1rem',
   backgroundColor: vars.color.primary,
   justifyContent: 'center',
   cursor: 'pointer',
+  borderRadius: '1rem',
 });
