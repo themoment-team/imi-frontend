@@ -15,12 +15,10 @@ export const EmptyTitle = style({
   fontSize: '2.5rem',
   fontWeight: '500',
   paddingBottom: '1rem',
-  backgroundColor: vars.color.white,
 });
 
-export const EmptuContent = style({
+export const EmptyContent = style({
   paddingBottom: '3.6rem',
-  backgroundColor: vars.color.white,
 });
 
 export const LinkWrite = style({
