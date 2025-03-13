@@ -12,42 +12,11 @@ export const Title = style({
   fontWeight: '500',
 });
 
-export const ClubsContainer = style({
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: '0.625rem',
-  marginTop: '4.4rem',
-  marginBottom: '4.1rem',
-
-  paddingLeft: '1rem',
-  borderLeft: 'solid 4px',
-  borderColor: vars.color.primary,
-});
-
-export const Club = style({
-  padding: '0.9rem 1rem',
-  borderRadius: '2rem',
-  cursor: 'pointer',
-  border: '2px solid',
-  borderColor: vars.color.primary,
-  transition: 'background-color 0.3s',
-  selectors: {
-    '&:hover': {
-      backgroundColor: vars.color.light,
-    },
-  },
-});
-
 export const CardContainer = style({
   display: 'flex',
   flexWrap: 'wrap',
   gap: '3rem',
   // justifyContent: 'space-between',
-});
-
-/* 활성화된 버튼 */
-export const Active = style({
-  backgroundColor: vars.color.primary,
 });
 
 export const Card = style({

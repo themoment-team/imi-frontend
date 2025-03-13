@@ -2,27 +2,12 @@
 
 import { useRouter } from 'next/navigation';
 
+import ClubSelector from '@/components/ClubSelector';
+
 import { useState } from 'react';
 
 import * as T from '../styles/profile.css';
 import * as S from './profile.css';
-
-const clubs = [
-  '더모먼트',
-  'MSG',
-  '앰퍼샌드',
-  '마인드웨이',
-  '잡탕',
-  'S/ASH',
-  '인력사무소',
-  '깨소금',
-  '맛소금',
-  '아티',
-  '마사삭',
-  '코디',
-  '아잉',
-  '콩보리',
-];
 
 const profiles = [
   { id: 1111, name: '정효주', major: 'FE', wanted: ['더모먼트', 'MSG'] },
@@ -69,17 +54,7 @@ export default function ProfileList() {
       <h1 className={S.Title}>자기소개서 목록</h1>
 
       {/* 동아리 */}
-      <div className={S.ClubsContainer}>
-        {clubs.map((club) => (
-          <a
-            key={club}
-            className={`${S.Club} ${selectedClubs.includes(club) ? S.Active : ''}`}
-            onClick={() => toggleClub(club)}
-          >
-            {club}
-          </a>
-        ))}
-      </div>
+      <ClubSelector selectedClubs={selectedClubs} toggleClub={toggleClub} />
 
       {/* 자소서 카드 */}
       <div className={S.CardContainer}>
