@@ -26,7 +26,7 @@ export const Card = style({
   borderRadius: '1rem',
   boxSizing: 'border-box',
   boxShadow: '0px 4px 10px 0px rgba(0, 0, 0, 0.10);',
-  backgroundColor: '#fff',
+  backgroundColor: vars.color.white,
   cursor: 'pointer',
   transition: 'transform 0.2s',
   selectors: {
@@ -42,5 +42,4 @@ export const WantedContainer = style({
   gap: '0.3rem',
   padding: '0.5rem 0',
   fontSize: '1.25rem',
-  backgroundColor: vars.color.white,
 });

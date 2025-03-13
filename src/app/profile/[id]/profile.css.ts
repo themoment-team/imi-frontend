@@ -22,8 +22,7 @@ export const Name = style({
 export const EditBtn = style({
   alignSelf: 'flex-end',
   padding: '0.4rem 0.9rem',
-  border: 'solid 1px',
-  borderColor: vars.color.primary,
+  border: `solid 1px ${vars.color.primary}`,
   borderRadius: '1rem',
   width: 'fit-content',
   cursor: 'pointer',
