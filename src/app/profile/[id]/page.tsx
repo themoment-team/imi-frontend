@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import EmptyProfile from '@/components/EmptyProfile/EmptyProfile';
+import EmptyProfile from '@/components/EmptyProfile';
 
 import BackBtn from '../../../asset/BackBtn.png';
 import * as T from '../styles/profile.css';
