@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
 import { vars } from '@/styles/theme.css';
 
@@ -66,6 +66,9 @@ export const Signup = style({
 });
 
 export const Logout = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   width: '80px',
   height: '32px',
   border: `2px solid ${vars.color.primary}`,
@@ -74,6 +77,42 @@ export const Logout = style({
 });
 
 export const NavigationBtn = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  position: 'relative',
   cursor: 'pointer',
   background: vars.color.white,
+});
+
+export const Underline = style({
+  selectors: {
+    '&::after': {
+      content: '',
+      position: 'absolute',
+      left: 0,
+      top: '40px',
+      width: '0',
+      height: '3.5px',
+      backgroundColor: vars.color.primary,
+      transition: 'width 0.3s ease',
+    },
+  },
+});
+
+export const UnderlineVariants = styleVariants({
+  active: {
+    selectors: {
+      '&::after': {
+        width: '100%',
+      },
+    },
+  },
+  inactive: {
+    selectors: {
+      '&::after': {
+        width: '0%',
+      },
+    },
+  },
 });
