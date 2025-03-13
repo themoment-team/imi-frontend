@@ -38,11 +38,11 @@ export default function ProfileDetail() {
               수정하기
             </a>
             <div className={T.TextContainer}>
-              <p className={T.Tag}>관심 분야 </p>
+              <p className={T.Tag}>관심 분야</p>
               <p className={T.Content}>{profile.major}</p>
             </div>
             <div className={T.TextContainer}>
-              <p className={T.Tag}>희망 동아리 </p>
+              <p className={T.Tag}>희망 동아리</p>
               <p className={T.Content}>{profile.wanted}</p>
             </div>
 
