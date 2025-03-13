@@ -30,7 +30,12 @@ export const Club = style({
   cursor: 'pointer',
   border: '2px solid',
   borderColor: vars.color.primary,
-  transition: 'background-color 0.2s',
+  transition: 'background-color 0.3s',
+  selectors: {
+    '&:hover': {
+      backgroundColor: vars.color.light,
+    },
+  },
 });
 
 export const CardContainer = style({
