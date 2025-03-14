@@ -1,4 +1,3 @@
-// ClubCard.tsx
 import Image from 'next/image';
 
 import * as S from './clubCard.css';
