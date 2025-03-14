@@ -17,14 +17,14 @@ export const cardContainer = style({
 export const imageWrapper = style({
   position: 'relative',
   width: '100%',
-  height: 207,
+  height: '12.9375rem',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
 });
 
 export const infoContainer = style({
-  padding: '1rem 1rem 1.75rem 1rem',
+  padding: '1rem 1rem 1.65rem 1rem',
   display: 'flex',
   flexDirection: 'column',
   flex: 1,
@@ -46,7 +46,7 @@ export const projectTitle = style({
 export const leaderBadge = style({
   padding: '0.125rem 0.75rem',
   backgroundColor: vars.color.primary,
-  borderRadius: 8,
+  borderRadius: '0.5rem',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
