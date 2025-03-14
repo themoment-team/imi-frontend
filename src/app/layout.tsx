@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import '@/styles/global.css';
 
 import { themeClass } from '../styles/theme.css';
+import Provider from './provider';
 
 export const metadata: Metadata = {
   title: 'IMI',
@@ -24,7 +25,9 @@ const RootLayout = ({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css"
         />
       </head>
-      <body className={themeClass}>{children}</body>
+      <body className={themeClass}>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 };
