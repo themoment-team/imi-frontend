@@ -4,8 +4,8 @@ import * as S from './clubCard.css';
 
 const ClubCard = () => {
   return (
-    <div className={S.cardContainer}>
-      <div className={S.imageWrapper}>
+    <div className={S.CardContainer}>
+      <div className={S.ImageWrapper}>
         <Image
           src="/images/the-moment.png"
           alt="더모먼트"
@@ -14,14 +14,14 @@ const ClubCard = () => {
           priority
         />
       </div>
-      <div className={S.infoContainer}>
-        <div className={S.headerRow}>
-          <p className={S.clubTitle}>더모먼트</p>
-          <div className={S.leaderBadge}>
-            <p className={S.leaderText}>이세민</p>
+      <div className={S.InfoContainer}>
+        <div className={S.HeaderRow}>
+          <p className={S.ClubTitle}>더모먼트</p>
+          <div className={S.LeaderBadge}>
+            <p className={S.LeaderText}>이세민</p>
           </div>
         </div>
-        <p className={S.projectTitle}>Hello GSM, GSM-Network</p>
+        <p className={S.ProjectTitle}>Hello GSM, GSM-Network</p>
       </div>
     </div>
   );
