@@ -16,7 +16,6 @@ export const CardContainer = style({
   display: 'flex',
   flexWrap: 'wrap',
   gap: '3rem',
-  // justifyContent: 'space-between',
 });
 
 export const Card = style({
