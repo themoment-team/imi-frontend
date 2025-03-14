@@ -44,9 +44,9 @@ export default function Footer() {
           </div>
           <div className={S.Contact}>
             <h1 className={S.Text}>Contant</h1>
-            <p className={S.Text}>email:</p>
-            <p className={S.Text}>insta:</p>
-            <p className={S.Text}>phone:</p>
+            <p className={S.Text}>email:s24070@gsm.hs.kr</p>
+            <p className={S.Text}>insta:j_.yx0n_</p>
+            <p className={S.Text}>discord: junjuny0227</p>
           </div>
         </div>
         <div className={S.UnderBox}>
