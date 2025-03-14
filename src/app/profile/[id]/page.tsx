@@ -1,7 +1,7 @@
-import { ProfilePage } from '@/pageContainer';
+import { ProfileDetailPage } from '@/pageContainer';
 
-const Profile = () => {
-  return <ProfilePage />;
+const ProfileDetail = () => {
+  return <ProfileDetailPage />;
 };
 
-export default Profile;
+export default ProfileDetail;
