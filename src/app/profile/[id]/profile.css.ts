@@ -26,6 +26,12 @@ export const EditBtn = style({
   borderRadius: '1rem',
   width: 'fit-content',
   cursor: 'pointer',
+  transition: 'background-color 0.3s',
+  selectors: {
+    '&:hover': {
+      backgroundColor: vars.color.light,
+    },
+  },
 });
 
 export const ContentContainer = style({
