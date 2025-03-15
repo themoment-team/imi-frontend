@@ -15,12 +15,11 @@ globalStyle(
   article, aside, canvas, details, embed, 
   figure, figcaption, footer, header, hgroup, 
   menu, nav, output, ruby, section, summary,
-  time, mark, audio, video`,
+  time, mark, audio, video, button`,
   {
     margin: 0,
     padding: 0,
     border: 0,
-    backgroundColor: vars.color.background,
     color: vars.color.text,
     fontSize: '100%',
     fontFamily:
@@ -29,6 +28,8 @@ globalStyle(
     boxSizing: 'border-box',
   }
 );
+
+globalStyle('body', { backgroundColor: vars.color.background });
 
 globalStyle(
   'article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section',
@@ -69,17 +70,4 @@ globalStyle('button', {
   outline: 'none',
   background: 'inherit',
   cursor: 'pointer',
-});
-
-globalStyle('html', {
-  '@media': {
-    '(max-width: 599px)': { fontSize: '15px' },
-    '(max-width: 530px)': { fontSize: '14px' },
-    '(max-width: 490px)': { fontSize: '13px' },
-    '(max-width: 460px)': { fontSize: '12px' },
-    '(max-width: 420px)': { fontSize: '11px' },
-    '(max-width: 390px)': { fontSize: '10px' },
-    '(max-width: 350px)': { fontSize: '9px' },
-    '(max-width: 320px)': { fontSize: '8px' },
-  },
 });
