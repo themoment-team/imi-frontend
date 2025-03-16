@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import * as S from './footer.css';
 
 interface QuickLink {
@@ -55,13 +57,13 @@ const Footer = () => {
             <div className={S.ContentList}>
               {data.isLink
                 ? data.content.map((item, itemIndex) => (
-                    <a
+                    <Link
                       key={itemIndex}
                       href={item.url}
                       className={S.ContentText}
                     >
                       {item.text}
-                    </a>
+                    </Link>
                   ))
                 : data.content.map((item, itemIndex) => (
                     <p key={itemIndex} className={S.ContentText}>
