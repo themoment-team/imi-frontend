@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { Header } from '@/components';
 import '@/styles/global.css';
 
 import { themeClass } from '../styles/theme.css';
@@ -26,7 +27,10 @@ const RootLayout = ({
         />
       </head>
       <body className={themeClass}>
-        <Provider>{children}</Provider>
+        <Provider>
+          <Header />
+          {children}
+        </Provider>
       </body>
     </html>
   );
