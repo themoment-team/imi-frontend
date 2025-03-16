@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Header } from '@/components';
+import { Footer, Header } from '@/components';
 import '@/styles/global.css';
 
 import { themeClass } from '../styles/theme.css';
@@ -30,6 +30,8 @@ const RootLayout = ({
         <Provider>
           <Header />
           {children}
+          <Footer />
+          {/* 추후에 footer가 필요한 페이지와 불필요한 페이지 구분 필요 */}
         </Provider>
       </body>
     </html>
