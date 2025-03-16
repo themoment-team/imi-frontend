@@ -47,7 +47,7 @@ const FooterData: FooterSection[] = [
 
 const Footer = () => {
   return (
-    <div className={S.FooterContainer}>
+    <footer className={S.FooterContainer}>
       <div className={S.ContentContainer}>
         {FooterData.map((data, index) => (
           <div key={index} className={S.SectionBox}>
@@ -73,7 +73,7 @@ const Footer = () => {
         ))}
       </div>
       <p className={S.ContentText}>© 2025 IMI. All rights reserved.</p>
-    </div>
+    </footer>
   );
 };
 

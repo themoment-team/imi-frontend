@@ -17,7 +17,7 @@ const Header = () => {
   const path = usePathname();
 
   return (
-    <div className={S.HeaderContainer}>
+    <header className={S.HeaderContainer}>
       <div className={S.NavigationContainer}>
         <Link href="/">
           <ImiLogo />
@@ -41,7 +41,7 @@ const Header = () => {
         <button className={S.SignUpButton}>회원가입</button>
         {/* 로그인 여부에 따라 '로그인' or '로그아웃' 버튼 표시 필요. 현재는 임시 */}
       </div>
-    </div>
+    </header>
   );
 };
 
