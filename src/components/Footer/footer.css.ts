@@ -5,22 +5,22 @@ import { vars } from '@/styles/theme.css';
 export const Container = style({
   display: 'flex',
   justifyContent: 'center',
-  width: '100vw',
-  height: '430px',
+  width: '100%',
+  height: '26.875rem',
 });
 
 export const FooterBox = style({
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
-  width: '1353.06px',
-  height: '300.33px',
-  borderTop: `2px solid ${vars.color.primary}`,
+  width: '84.57rem',
+  height: '18.77rem',
+  borderTop: `0.125rem solid ${vars.color.primary}`,
 });
 
 export const UpperBox = style({
   width: '100%',
-  height: '278.33px',
+  height: '17.4rem',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
@@ -32,50 +32,50 @@ export const UnderBox = style({
   justifyContent: 'center',
   color: vars.color.gray,
   width: '100%',
-  height: '22px',
+  height: '1.375rem',
 });
 
 export const IntroduceBox = style({
   display: 'flex',
   flexDirection: 'column',
   alignContent: 'space-between',
-  width: '210px',
-  height: '110px',
+  width: '13.125rem',
+  height: '6.875rem',
   color: vars.color.gray,
 });
 
 export const QuickLink = style({
   display: 'flex',
   flexDirection: 'column',
-  width: '101px',
-  height: '110px',
+  width: '6.3125rem',
+  height: '6.875rem',
 });
 
 export const Contact = style({
   display: 'flex',
   alignContent: 'space-between',
   flexDirection: 'column',
-  width: '183px',
-  height: '110px',
+  width: '11.4375rem',
+  height: '6.875rem',
 });
 
 export const HeadText = style({
   color: vars.color.gray,
-  marginBottom: '8px',
+  marginBottom: '0.5rem',
   lineHeight: '140%',
-  fontSize: '20px',
+  fontSize: '1.25rem',
 });
 
 export const Text = style({
   color: vars.color.gray,
-  fontSize: '16px',
-  marginBottom: '4px',
+  fontSize: '1rem',
+  marginBottom: '0.25rem',
   lineHeight: '140%',
 });
 
 export const TextLink = style({
   color: vars.color.gray,
   cursor: 'pointer',
-  marginBottom: '4px',
+  marginBottom: '0.25rem',
   lineHeight: '140%',
 });
