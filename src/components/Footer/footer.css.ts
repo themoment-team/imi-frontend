@@ -71,7 +71,6 @@ export const Text = style({
   color: vars.color.gray,
   fontSize: '1rem',
   lineHeight: '140%',
-  cursor: 'pointer',
 });
 
 export const TitleText = style({
