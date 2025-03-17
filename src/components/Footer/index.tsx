@@ -28,7 +28,7 @@ export default function Footer() {
             <p
               className={S.TextLink}
               onClick={() => {
-                router.push('/profile/list');
+                router.push('/write');
               }}
             >
               자기소개서 작성
@@ -36,7 +36,7 @@ export default function Footer() {
             <p
               className={S.TextLink}
               onClick={() => {
-                router.push('/profile/[id]');
+                router.push('/profile/list');
               }}
             >
               소개서 목록
