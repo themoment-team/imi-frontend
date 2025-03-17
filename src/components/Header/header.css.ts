@@ -131,3 +131,7 @@ export const BoldVariants = styleVariants({
     fontWeight: '400',
   },
 });
+
+export const LogoBox = style({
+  cursor: 'pointer',
+});

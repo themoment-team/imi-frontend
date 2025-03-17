@@ -43,7 +43,7 @@ export default function Header() {
     <div className={S.HeaderBox}>
       <div className={S.HeaderWrapper}>
         <div className={S.RightItems}>
-          <div onClick={() => handleNavigation('/')}>
+          <div onClick={() => handleNavigation('/')} className={S.LogoBox}>
             <ImiLogo />
           </div>
           <div className={S.Navigation}>
