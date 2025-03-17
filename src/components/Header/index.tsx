@@ -20,6 +20,7 @@ export default function Header() {
 
   const handleNavigation = (path: string) => {
     setActivePath(path);
+    console.log(path);
     router.push(path);
   };
 
@@ -39,7 +40,7 @@ export default function Header() {
     <div className={S.HeaderBox}>
       <div className={S.HeaderWrapper}>
         <div className={S.RightItems}>
-          <div onClick={() => router.push('/')}>
+          <div onClick={() => handleNavigation('/')}>
             <ImiLogo width="51.97" height="40" />
           </div>
           <div className={S.Navigation}>
