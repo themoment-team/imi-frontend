@@ -44,20 +44,23 @@ export const InputEmail = style({
   alignItems: 'center',
   border: `2px solid ${vars.color.primary} `,
   borderRadius: '8px',
-  justifyContent: 'space-between',
   padding: '1rem',
+  justifyContent: 'space-between',
   width: '30.125rem',
-  height: '4.5625rem',
 });
 
 export const InputBox = style({
   border: 'none',
   color: 'black',
   width: '100%',
-  background: 'none',
+  background: vars.color.background,
   selectors: {
     '&:placehorder': {
       color: vars.color.gray,
+      background: 'none',
+    },
+    '&:valid': {
+      background: 'none',
     },
     '&:focus': {
       outline: 'none',
@@ -124,4 +127,8 @@ export const SignupBox = style({
   width: '15.6rem',
   height: '1.375rem',
   marginTop: '1.5rem',
+});
+
+export const ErrorText = style({
+  color: 'red',
 });

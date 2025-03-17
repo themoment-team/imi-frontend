@@ -5,23 +5,29 @@ import { useRouter } from 'next/navigation';
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
 
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import * as S from './signIn.css';
 
+type FormValues = {
+  email: string;
+  password: string;
+};
+
 const SignInPage = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  const [emailValue, setEmailValue] = useState<string>('');
-  const [pwValue, setPwValue] = useState<string>('');
-
   const router = useRouter();
+  const [isOpen, setOpen] = useState(false);
 
-  const handleRouter = () => {
-    router.push('/signup');
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    mode: 'onChange',
+  });
 
-  const handlePassword = () => {
-    setOpen((value) => !value);
+  const onSubmit = (data: FormValues) => {
+    console.log('로그인 정보:', data);
   };
 
   return (
@@ -29,48 +35,61 @@ const SignInPage = () => {
       <div className={S.LogoContainer}>
         <ImiLogo width="4.125rem" height="3rem" />
       </div>
-      <div className={S.InputContainer}>
+      <form onSubmit={handleSubmit(onSubmit)} className={S.InputContainer}>
         <div className={S.InputEmailContainer}>
           <p className={S.Text}>Email</p>
           <div className={S.InputEmail}>
             <input
               placeholder="이메일을 입력해주세요"
               className={S.InputBox}
-              onChange={(e) => setEmailValue(e.target.value)}
+              {...register('email', {
+                required: '이메일을 입력해주세요.',
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@gsm\.hs\.kr$/,
+                  message: '학교 이메일(@gsm.hs.kr)만 사용 가능합니다.',
+                },
+              })}
             />
             <p className={S.InputText}>@gsm.hs.kr</p>
           </div>
+          {errors.email && (
+            <p className={S.ErrorText}>{errors.email.message}</p>
+          )}
         </div>
         <div className={S.InputEmailContainer}>
           <p className={S.Text}>Password</p>
           <div className={S.InputEmail}>
-            {isOpen ? (
-              <input
-                type="text"
-                placeholder="비밀번호를 입력해주세요"
-                className={S.InputBox}
-                onChange={(e) => setPwValue(e.target.value)}
-                value={pwValue}
-              />
-            ) : (
-              <input
-                type="password"
-                placeholder="비밀번호를 입력해주세요"
-                className={S.InputBox}
-                onChange={(e) => setPwValue(e.target.value)}
-                value={pwValue}
-              />
-            )}
-            <div className={S.IconBox} onClick={handlePassword}>
+            <input
+              type={isOpen ? 'text' : 'password'}
+              placeholder="비밀번호를 입력해주세요"
+              className={S.InputBox}
+              {...register('password', {
+                required: '비밀번호를 입력해주세요.',
+                minLength: {
+                  value: 8,
+                  message: '8~16자의 영문, 숫자를 포함해야합니다.',
+                },
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@gsm\.hs\.kr$/,
+                  message: '학교 이메일(@gsm.hs.kr)만 사용 가능합니다.',
+                },
+              })}
+            />
+            <div className={S.IconBox} onClick={() => setOpen(!isOpen)}>
               {isOpen ? <OpenEyes /> : <CloseEyes />}
             </div>
           </div>
+          {errors.password && (
+            <p className={S.ErrorText}>{errors.password.message}</p>
+          )}
         </div>
-      </div>
-      <div className={S.LoginBtn}>로그인</div>
+        <button type="submit" className={S.LoginBtn}>
+          로그인
+        </button>
+      </form>
       <div className={S.SignupBox}>
         <p className={S.Text}>계정이 없으신가요?</p>
-        <p className={S.GrayText} onClick={handleRouter}>
+        <p className={S.GrayText} onClick={() => router.push('/signup')}>
           회원가입
         </p>
       </div>
