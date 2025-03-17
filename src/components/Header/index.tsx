@@ -40,7 +40,7 @@ export default function Header() {
       <div className={S.HeaderWrapper}>
         <div className={S.RightItems}>
           <div onClick={() => handleNavigation('/')}>
-            <ImiLogo width="51.97" height="40" />
+            <ImiLogo />
           </div>
           <div className={S.Navigation}>
             {NavigationArray.map((value) => {
