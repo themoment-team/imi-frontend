@@ -20,14 +20,13 @@ export default function Header() {
 
   const handleNavigation = (path: string) => {
     setActivePath(path);
-    console.log(path);
     router.push(path);
   };
 
   const NavigationArray: NavigationType[] = [
     { name: '동아리', path: '/clubs' },
-    { name: '소개서 목록', path: '/profil/list' },
-    { name: '자기소개서', path: '/profil/[id]' },
+    { name: '소개서 목록', path: '/profile/list' },
+    { name: '자기소개서', path: '/profile/[id]' },
   ];
 
   /**
