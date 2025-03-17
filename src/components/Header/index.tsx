@@ -49,7 +49,7 @@ export default function Header() {
           <div className={S.Navigation}>
             {NavigationArray.map((value) => {
               return (
-                <p
+                <div
                   key={value.name}
                   className={`${S.NavigationBtn} ${
                     S.BoldVariants[
@@ -66,7 +66,7 @@ export default function Header() {
                       ]
                     } ${S.UnderlineVariants}`}
                   />
-                </p>
+                </div>
               );
             })}
           </div>
