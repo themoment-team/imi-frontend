@@ -55,6 +55,9 @@ export const LoginBtn = style({
   color: vars.color.white,
   fontWeight: 'bolder',
   cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
 export const Signup = style({
@@ -63,6 +66,9 @@ export const Signup = style({
   border: `2px solid ${vars.color.primary}`,
   borderRadius: '8px',
   cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
 export const Logout = style({
