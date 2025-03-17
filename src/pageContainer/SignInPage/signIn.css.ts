@@ -7,7 +7,7 @@ export const SigninContainer = style({
   alignItems: 'center',
   justifyContent: 'center',
   flexDirection: 'column',
-  width: '100vw',
+  width: '100%',
   height: '100vh',
   background: vars.color.background,
 });
