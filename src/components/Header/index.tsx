@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/Navigation';
+import { usePathname, useRouter } from 'next/Navigation';
 
 import { ImiLogo } from '@/asset';
 
