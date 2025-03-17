@@ -31,10 +31,7 @@ export default function ProfileDetailPage() {
           </div>
           <h1 className={S.Name}>{profile.name}</h1>
           <div className={S.ContentContainer}>
-            <a
-              className={S.EditBtn}
-              onClick={() => router.push(`/write/${profile.id}`)}
-            >
+            <a className={S.EditBtn} onClick={() => router.push(`/write`)}>
               수정하기
             </a>
             <div className={T.TextContainer}>
