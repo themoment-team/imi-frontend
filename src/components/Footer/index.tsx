@@ -52,7 +52,14 @@ export default function Footer() {
             >
               insta: j_.yx0n_
             </a>
-            <p className={S.TextLink}>discord: junjuny0227</p>
+            <a
+              className={S.TextLink}
+              href="https://discord.com/users/junjuny0227"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              discord: junjuny0227
+            </a>
           </div>
         </div>
         <div className={S.UnderBox}>
