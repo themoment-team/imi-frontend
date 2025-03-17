@@ -6,6 +6,24 @@ export const ProfileDetailContainer = style({
   display: 'flex',
   flexDirection: 'column',
   padding: '6.5rem 20rem',
+
+  '@media': {
+    'screen and (max-width: 1728px)': {
+      padding: '6.5rem 16rem',
+    },
+    'screen and (max-width: 1440px)': {
+      padding: '6.5rem 11rem',
+    },
+    'screen and (max-width: 1200px)': {
+      padding: '6.5rem 6rem',
+    },
+    'screen and (max-width: 768px)': {
+      padding: '6.5rem 5rem',
+    },
+    'screen and (max-width: 480px)': {
+      padding: '6.5rem 2.5rem',
+    },
+  },
 });
 
 export const BackBtn = style({
@@ -38,6 +56,18 @@ export const ContentContainer = style({
   display: 'flex',
   flexDirection: 'column',
   padding: '0 4.5rem',
+
+  '@media': {
+    'screen and (max-width: 1200px)': {
+      padding: '0 2rem',
+    },
+    'screen and (max-width: 768px)': {
+      padding: '0 1rem',
+    },
+    'screen and (max-width: 480px)': {
+      padding: '0 0.5rem',
+    },
+  },
 });
 
 export const Content = style({
