@@ -44,7 +44,14 @@ export default function Footer() {
           </div>
           <div className={S.Contact}>
             <h3 className={S.TitleText}>Contant</h3>
-            <p className={S.TextLink}>email: s24070@gsm.hs.kr</p>
+            <a
+              className={S.TextLink}
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=s24070@gsm.hs.kr"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              email: s24070@gsm.hs.kr
+            </a>
             <a
               className={S.TextLink}
               href="https://www.instagram.com/j_.yx0n_?igsh=dG90em10d2dwajJm"
