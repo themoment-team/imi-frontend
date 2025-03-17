@@ -49,14 +49,15 @@ export const QuickLink = style({
   flexDirection: 'column',
   width: '6.3125rem',
   height: '6.875rem',
+  gap: '0.25rem',
 });
 
 export const Contact = style({
   display: 'flex',
-  alignContent: 'space-between',
   flexDirection: 'column',
   width: '11.5rem',
   height: '6.875rem',
+  gap: '0.25rem',
 });
 
 export const HeadText = style({
@@ -69,7 +70,6 @@ export const HeadText = style({
 export const Text = style({
   color: vars.color.gray,
   fontSize: '1rem',
-  marginBottom: '0.25rem',
   lineHeight: '140%',
   cursor: 'pointer',
 });
@@ -85,6 +85,5 @@ export const TitleText = style({
 export const TextLink = style({
   color: vars.color.gray,
   cursor: 'pointer',
-  marginBottom: '0.25rem',
   lineHeight: '140%',
 });
