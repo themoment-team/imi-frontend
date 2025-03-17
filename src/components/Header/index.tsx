@@ -4,7 +4,7 @@ import { useRouter } from 'next/Navigation';
 
 import { ImiLogo } from '@/asset';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import * as S from './header.css';
 
@@ -22,6 +22,10 @@ export default function Header() {
     setActivePath(path);
     router.push(path);
   };
+
+  useEffect(() => {
+    setActivePath(window.location.pathname);
+  }, []);
 
   const NavigationArray: NavigationType[] = [
     { name: '동아리', path: '/clubs' },
