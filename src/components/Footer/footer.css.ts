@@ -55,7 +55,7 @@ export const Contact = style({
   display: 'flex',
   alignContent: 'space-between',
   flexDirection: 'column',
-  width: '11.4375rem',
+  width: '11.5rem',
   height: '6.875rem',
 });
 
