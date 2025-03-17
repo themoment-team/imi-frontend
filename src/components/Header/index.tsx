@@ -45,7 +45,7 @@ export default function Header() {
           <div className={S.Navigation}>
             {NavigationArray.map((value) => {
               return (
-                <h3
+                <p
                   key={value.name}
                   className={`${S.NavigationBtn}  `}
                   onClick={() => handleNavigation(value.path)}
@@ -58,7 +58,7 @@ export default function Header() {
                       ]
                     } ${S.UnderlineVariants}`}
                   />
-                </h3>
+                </p>
               );
             })}
           </div>

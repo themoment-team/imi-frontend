@@ -82,6 +82,7 @@ export const NavigationBtn = style({
   alignItems: 'center',
   position: 'relative',
   cursor: 'pointer',
+  fontWeight: '400',
   background: vars.color.white,
 });
 
