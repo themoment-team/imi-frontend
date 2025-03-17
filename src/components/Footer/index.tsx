@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
         </div>
         <div className={S.UnderBox}>
-          <p className={S.Text}>© 2025 IMI.All rights reserved.</p>
+          <p className={S.Text}>© 2025 IMI. All rights reserved.</p>
         </div>
       </div>
     </div>
