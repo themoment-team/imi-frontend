@@ -6,7 +6,7 @@ export const Container = style({
   display: 'flex',
   justifyContent: 'center',
   width: '100%',
-  height: '26.875rem',
+  height: '23.6205rem',
 });
 
 export const FooterBox = style({
