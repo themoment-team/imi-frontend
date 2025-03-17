@@ -88,7 +88,6 @@ export const NavigationBtn = style({
   alignItems: 'center',
   position: 'relative',
   cursor: 'pointer',
-  fontWeight: '400',
   background: vars.color.white,
 });
 
@@ -121,5 +120,14 @@ export const UnderlineVariants = styleVariants({
         width: '0%',
       },
     },
+  },
+});
+
+export const BoldVariants = styleVariants({
+  active: {
+    fontWeight: '600',
+  },
+  inactive: {
+    fontWeight: '400',
   },
 });

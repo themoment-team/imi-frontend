@@ -47,7 +47,11 @@ export default function Header() {
               return (
                 <p
                   key={value.name}
-                  className={`${S.NavigationBtn}  `}
+                  className={`${S.NavigationBtn} ${
+                    S.BoldVariants[
+                      activePath === value.path ? 'active' : 'inactive'
+                    ]
+                  } `}
                   onClick={() => handleNavigation(value.path)}
                 >
                   {value.name}
