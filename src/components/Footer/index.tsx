@@ -12,11 +12,11 @@ export default function Footer() {
       <div className={S.FooterBox}>
         <div className={S.UpperBox}>
           <div className={S.IntroduceBox}>
-            <h1 className={S.Text}>IMI</h1>
+            <h3 className={S.TitleText}>IMI</h3>
             <p className={S.Text}>당신의 열정과 재능을 보여주세요!</p>
           </div>
           <div className={S.QuickLink}>
-            <h1 className={S.Text}>Quick Link</h1>
+            <h3 className={S.TitleText}>Quick Link</h3>
             <p
               className={S.TextLink}
               onClick={() => {
@@ -43,9 +43,15 @@ export default function Footer() {
             </p>
           </div>
           <div className={S.Contact}>
-            <h1 className={S.Text}>Contant</h1>
+            <h3 className={S.TitleText}>Contant</h3>
             <p className={S.Text}>email:s24070@gsm.hs.kr</p>
-            <p className={S.Text}>insta:j_.yx0n_</p>
+            <a
+              className={S.Text}
+              href="https://www.instagram.com/j_.yx0n_?igsh=dG90em10d2dwajJm"
+              target="_blank"
+            >
+              insta:j_.yx0n_
+            </a>
             <p className={S.Text}>discord:junjuny0227</p>
           </div>
         </div>

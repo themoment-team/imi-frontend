@@ -71,6 +71,15 @@ export const Text = style({
   fontSize: '1rem',
   marginBottom: '0.25rem',
   lineHeight: '140%',
+  cursor: 'pointer',
+});
+
+export const TitleText = style({
+  fontSize: '1.25rem',
+  fontWeight: '500',
+  lineHeight: '140%',
+  color: vars.color.gray,
+  marginBottom: '0.3rem',
 });
 
 export const TextLink = style({
