@@ -44,15 +44,15 @@ export default function Footer() {
           </div>
           <div className={S.Contact}>
             <h3 className={S.TitleText}>Contant</h3>
-            <p className={S.Text}>email: s24070@gsm.hs.kr</p>
+            <p className={S.TextLink}>email: s24070@gsm.hs.kr</p>
             <a
-              className={S.Text}
+              className={S.TextLink}
               href="https://www.instagram.com/j_.yx0n_?igsh=dG90em10d2dwajJm"
               target="_blank"
             >
               insta: j_.yx0n_
             </a>
-            <p className={S.Text}>discord: junjuny0227</p>
+            <p className={S.TextLink}>discord: junjuny0227</p>
           </div>
         </div>
         <div className={S.UnderBox}>
