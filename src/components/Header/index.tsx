@@ -1,10 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/Navigation';
+import { usePathname, useRouter } from 'next/Navigation';
 
 import { ImiLogo } from '@/asset';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import * as S from './header.css';
 
@@ -23,6 +23,12 @@ export default function Header() {
     router.push(path);
   };
 
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setActivePath(pathname);
+  }, [pathname]);
+
   const NavigationArray: NavigationType[] = [
     { name: '동아리', path: '/clubs' },
     { name: '소개서 목록', path: '/profile/list' },
@@ -39,15 +45,19 @@ export default function Header() {
     <div className={S.HeaderBox}>
       <div className={S.HeaderWrapper}>
         <div className={S.RightItems}>
-          <div onClick={() => handleNavigation('/')}>
-            <ImiLogo width="51.97" height="40" />
+          <div onClick={() => handleNavigation('/')} className={S.LogoBox}>
+            <ImiLogo />
           </div>
           <div className={S.Navigation}>
             {NavigationArray.map((value) => {
               return (
-                <p
+                <div
                   key={value.name}
-                  className={`${S.NavigationBtn}  `}
+                  className={`${S.NavigationBtn} ${
+                    S.BoldVariants[
+                      activePath === value.path ? 'active' : 'inactive'
+                    ]
+                  } `}
                   onClick={() => handleNavigation(value.path)}
                 >
                   {value.name}
@@ -58,7 +68,7 @@ export default function Header() {
                       ]
                     } ${S.UnderlineVariants}`}
                   />
-                </p>
+                </div>
               );
             })}
           </div>

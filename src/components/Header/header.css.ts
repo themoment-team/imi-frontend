@@ -55,6 +55,9 @@ export const LoginBtn = style({
   color: vars.color.white,
   fontWeight: 'bolder',
   cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
 export const Signup = style({
@@ -63,6 +66,9 @@ export const Signup = style({
   border: `2px solid ${vars.color.primary}`,
   borderRadius: '8px',
   cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
 export const Logout = style({
@@ -82,7 +88,6 @@ export const NavigationBtn = style({
   alignItems: 'center',
   position: 'relative',
   cursor: 'pointer',
-  fontWeight: '400',
   background: vars.color.white,
 });
 
@@ -92,9 +97,9 @@ export const Underline = style({
       content: '',
       position: 'absolute',
       left: 0,
-      top: '40px',
+      top: '43px',
       width: '0',
-      height: '3.5px',
+      height: '2px',
       backgroundColor: vars.color.primary,
       transition: 'width 0.3s ease',
     },
@@ -116,4 +121,17 @@ export const UnderlineVariants = styleVariants({
       },
     },
   },
+});
+
+export const BoldVariants = styleVariants({
+  active: {
+    fontWeight: '600',
+  },
+  inactive: {
+    fontWeight: '400',
+  },
+});
+
+export const LogoBox = style({
+  cursor: 'pointer',
 });
