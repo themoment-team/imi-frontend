@@ -39,7 +39,7 @@ export const IntroduceBox = style({
 export const Contact = style({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'end',
+  alignItems: 'flex-end',
   justifyContent: 'center',
   width: '13.875rem',
   height: '6.875rem',
