@@ -30,7 +30,7 @@ export default function Footer() {
               </a>
               <a
                 className={S.TextLink}
-                href="https://www.instagram.com/j_.yx0n_?igsh=dG90em10d2dwajJm"
+                href="https://www.instagram.com/j_.yx0n_/"
                 target="_blank"
               >
                 <Insta />
