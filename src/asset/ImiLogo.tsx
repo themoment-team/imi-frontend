@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ImiLogo = () => {
+const ImiLogo: React.FC = () => {
   return (
     <svg
       width="53"
