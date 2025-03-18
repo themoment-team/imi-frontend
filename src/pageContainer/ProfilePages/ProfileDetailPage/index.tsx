@@ -1,11 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import { BackBtn } from '@/asset';
 import EmptyProfile from '@/components/EmptyProfile';
 
-import BackBtn from '../../../asset/BackBtn.png';
 import * as T from '../profile.css';
 import * as S from './profileDetail.css';
 
@@ -22,41 +21,39 @@ const profile = {
 export default function ProfileDetailPage() {
   const router = useRouter();
 
+  if (!profile) return <EmptyProfile />;
+
   return (
     <div>
-      {profile ? (
-        <div className={S.ProfileDetailContainer}>
-          <div className={S.BackBtn} onClick={() => router.back()}>
-            <Image src={BackBtn} alt="Back" width={16} height={30} />
+      <div className={S.ProfileDetailContainer}>
+        <div className={S.BackBtn} onClick={() => router.back()}>
+          <BackBtn />
+        </div>
+        <h1 className={S.Name}>{profile.name}</h1>
+        <div className={S.ContentContainer}>
+          <a className={S.EditBtn} onClick={() => router.push(`/write`)}>
+            수정하기
+          </a>
+          <div className={T.TextContainer}>
+            <p className={T.Tag}>관심 분야</p>
+            <p className={T.Content}>{profile.major}</p>
           </div>
-          <h1 className={S.Name}>{profile.name}</h1>
-          <div className={S.ContentContainer}>
-            <a className={S.EditBtn} onClick={() => router.push(`/write`)}>
-              수정하기
-            </a>
-            <div className={T.TextContainer}>
-              <p className={T.Tag}>관심 분야</p>
-              <p className={T.Content}>{profile.major}</p>
-            </div>
-            <div className={T.TextContainer}>
-              <p className={T.Tag}>희망 동아리</p>
-              <p className={T.Content}>
-                {Array.isArray(profile.wanted)
-                  ? profile.wanted.join(', ')
-                  : profile.wanted}
-              </p>
-            </div>
-
-            <p className={S.Content}>
-              {profile.content.trim()
-                ? profile.content
-                : '자기소개서가 아직 작성되지 않았습니다.'}
+          <div className={T.TextContainer}>
+            <p className={T.Tag}>희망 동아리</p>
+            <p className={T.Content}>
+              {Array.isArray(profile.wanted)
+                ? profile.wanted.join(', ')
+                : profile.wanted}
             </p>
           </div>
+
+          <p className={S.Content}>
+            {profile.content?.trim()
+              ? profile.content
+              : '자기소개서가 아직 작성되지 않았습니다.'}
+          </p>
         </div>
-      ) : (
-        <EmptyProfile />
-      )}
+      </div>
     </div>
   );
 }
