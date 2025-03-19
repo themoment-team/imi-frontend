@@ -45,7 +45,7 @@ export const CardContainer = style({
 
 export const Card = style({
   width: '100%',
-  maxWidth: '18.75rem',
+  maxWidth: '30rem',
   height: '11.25rem',
   padding: '1.5rem 2rem',
   borderRadius: '1rem',
