@@ -2,8 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import { Discord, Insta } from '@/asset';
-import Github from '@/asset/Github';
+import { Discord, Github, Insta } from '@/asset';
 
 import { useEffect, useState } from 'react';
 
