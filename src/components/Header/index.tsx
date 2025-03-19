@@ -20,7 +20,7 @@ export default function Header() {
 
   const [display, setDisplay] = useState<boolean>(false);
 
-  const AntiPath = ['/signin', '/signout'];
+  const ProPath = ['/', '/write', '/profile/list', '/clubs', '/profile/[id]'];
 
   const handleNavigation = (path: string) => {
     setActivePath(path);
@@ -30,8 +30,9 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!AntiPath.includes(pathname)) {
-      setDisplay((x) => !x);
+    setDisplay(true);
+    if (!ProPath.includes(pathname)) {
+      setDisplay(() => false);
     }
     setActivePath(pathname);
   }, [pathname]);
