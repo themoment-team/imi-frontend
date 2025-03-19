@@ -33,7 +33,7 @@ const SignInPage = () => {
   return (
     <div className={S.SigninContainer}>
       <div className={S.LogoContainer}>
-        <ImiLogo width="4.125rem" height="3rem" />
+        <ImiLogo />
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={S.InputContainer}>
         <div className={S.InputEmailContainer}>
@@ -68,10 +68,6 @@ const SignInPage = () => {
                 minLength: {
                   value: 8,
                   message: '8~16자의 영문, 숫자를 포함해야합니다.',
-                },
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@gsm\.hs\.kr$/,
-                  message: '학교 이메일(@gsm.hs.kr)만 사용 가능합니다.',
                 },
               })}
             />
