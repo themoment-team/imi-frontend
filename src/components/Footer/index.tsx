@@ -2,6 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 
+import { Discord, Insta } from '@/asset';
+import Github from '@/asset/Github';
+
 import * as S from './footer.css';
 
 export default function Footer() {
@@ -12,45 +15,37 @@ export default function Footer() {
       <div className={S.FooterBox}>
         <div className={S.UpperBox}>
           <div className={S.IntroduceBox}>
-            <h1 className={S.Text}>IMI</h1>
+            <h3 className={S.TitleText}>IMI</h3>
             <p className={S.Text}>당신의 열정과 재능을 보여주세요!</p>
           </div>
-          <div className={S.QuickLink}>
-            <h1 className={S.Text}>Quick Link</h1>
-            <p
-              className={S.TextLink}
-              onClick={() => {
-                router.push('/clubs');
-              }}
-            >
-              동아리
-            </p>
-            <p
-              className={S.TextLink}
-              onClick={() => {
-                router.push('/profil/list');
-              }}
-            >
-              자기소개서 작성
-            </p>
-            <p
-              className={S.TextLink}
-              onClick={() => {
-                router.push('/profil/[id]');
-              }}
-            >
-              소개서 목록
-            </p>
-          </div>
           <div className={S.Contact}>
-            <h1 className={S.Text}>Contant</h1>
-            <p className={S.Text}>email:s24070@gsm.hs.kr</p>
-            <p className={S.Text}>insta:j_.yx0n_</p>
-            <p className={S.Text}>discord:junjuny0227</p>
+            <div className={S.SvgContainer}>
+              <a
+                className={S.TextLink}
+                href="https://github.com/themoment-team/imi-frontend"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github />
+              </a>
+              <a
+                className={S.TextLink}
+                href="https://www.instagram.com/j_.yx0n_/"
+                target="_blank"
+              >
+                <Insta />
+              </a>
+              <a
+                className={S.TextLink}
+                href="https://discord.com/users/junjuny0227"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Discord />
+              </a>
+            </div>
+            <p className={S.Text}>© 2025 IMI. All rights reserved.</p>
           </div>
-        </div>
-        <div className={S.UnderBox}>
-          <p className={S.Text}>© 2025 IMI. All rights reserved.</p>
         </div>
       </div>
     </div>
