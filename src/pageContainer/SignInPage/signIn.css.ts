@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
 import { vars } from '@/styles/theme.css';
 
@@ -39,14 +39,58 @@ export const InputEmailContainer = style({
   alignItems: 'start',
 });
 
-export const InputEmail = style({
+export const InputPassword = style({
   display: 'flex',
   alignItems: 'center',
-  border: `2px solid ${vars.color.primary} `,
+  border: `2px solid ${vars.color.primary}`,
   borderRadius: '8px',
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
+});
+
+// 오류 스타일 정의
+export const inputPasswordError = style({
+  display: 'flex',
+  alignItems: 'center',
+  borderRadius: '8px',
+  padding: '1rem',
+  justifyContent: 'space-between',
+  width: '30.125rem',
+  border: '2px solid red',
+});
+
+// 스타일 관리
+export const inputPasswordVariants = styleVariants({
+  default: [InputPassword],
+  error: [inputPasswordError],
+});
+
+export const InputEmail = style({
+  display: 'flex',
+  alignItems: 'center',
+  border: `2px solid ${vars.color.primary}`,
+  borderRadius: '8px',
+  padding: '1rem',
+  justifyContent: 'space-between',
+  width: '30.125rem',
+});
+
+// 오류 스타일 정의
+export const inputEmailError = style({
+  display: 'flex',
+  alignItems: 'center',
+  borderRadius: '8px',
+  padding: '1rem',
+  justifyContent: 'space-between',
+  width: '30.125rem',
+  border: '2px solid red',
+});
+
+// 스타일 관리
+export const inputEmailVariants = styleVariants({
+  default: [InputEmail],
+  error: [inputEmailError],
 });
 
 export const InputBox = style({

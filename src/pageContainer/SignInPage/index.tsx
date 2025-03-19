@@ -38,7 +38,13 @@ const SignInPage = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={S.InputContainer}>
         <div className={S.InputEmailContainer}>
           <p className={S.Text}>Email</p>
-          <div className={S.InputEmail}>
+          <div
+            className={
+              errors.email
+                ? S.inputEmailVariants.error
+                : S.inputEmailVariants.default
+            }
+          >
             <input
               placeholder="이메일을 입력해주세요"
               className={S.InputBox}
@@ -58,7 +64,14 @@ const SignInPage = () => {
         </div>
         <div className={S.InputEmailContainer}>
           <p className={S.Text}>Password</p>
-          <div className={S.InputEmail}>
+          <div
+            key={'password'}
+            className={
+              errors.password
+                ? S.inputPasswordVariants.error
+                : S.inputPasswordVariants.default
+            }
+          >
             <input
               type={isOpen ? 'text' : 'password'}
               placeholder="비밀번호를 입력해주세요"
