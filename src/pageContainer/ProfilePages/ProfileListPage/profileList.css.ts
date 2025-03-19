@@ -40,6 +40,7 @@ export const CardContainer = style({
   gap: '3rem',
   justifyContent: 'center',
   width: '100%',
+  justifyItems: 'center',
 });
 
 export const Card = style({
