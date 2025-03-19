@@ -18,6 +18,10 @@ export default function Header() {
 
   const [activePath, setActivePath] = useState<string>('');
 
+  const [display, setDisplay] = useState<boolean>(false);
+
+  const ProPath = ['/', '/write', '/profile/list', '/clubs', '/profile/[id]'];
+
   const handleNavigation = (path: string) => {
     setActivePath(path);
     router.push(path);
@@ -26,6 +30,10 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
+    setDisplay(true);
+    if (!ProPath.includes(pathname)) {
+      setDisplay(() => false);
+    }
     setActivePath(pathname);
   }, [pathname]);
 
@@ -42,55 +50,60 @@ export default function Header() {
   const login = true;
 
   return (
-    <div className={S.HeaderBox}>
-      <div className={S.HeaderWrapper}>
-        <div className={S.RightItems}>
-          <div onClick={() => handleNavigation('/')} className={S.LogoBox}>
-            <ImiLogo />
-          </div>
-          <div className={S.Navigation}>
-            {NavigationArray.map((value) => {
-              return (
-                <div
-                  key={value.name}
-                  className={`${S.NavigationBtn} ${
-                    S.BoldVariants[
-                      activePath === value.path ? 'active' : 'inactive'
-                    ]
-                  } `}
-                  onClick={() => handleNavigation(value.path)}
-                >
-                  {value.name}
+    display && (
+      <div className={S.HeaderBox}>
+        <div className={S.HeaderWrapper}>
+          <div className={S.RightItems}>
+            <div onClick={() => handleNavigation('/')} className={S.LogoBox}>
+              <ImiLogo />
+            </div>
+            <div className={S.Navigation}>
+              {NavigationArray.map((value) => {
+                return (
                   <div
-                    className={`${S.Underline} ${
-                      S.UnderlineVariants[
+                    key={value.name}
+                    className={`${S.NavigationBtn} ${
+                      S.BoldVariants[
                         activePath === value.path ? 'active' : 'inactive'
                       ]
-                    } ${S.UnderlineVariants}`}
-                  />
+                    } `}
+                    onClick={() => handleNavigation(value.path)}
+                  >
+                    {value.name}
+                    <div
+                      className={`${S.Underline} ${
+                        S.UnderlineVariants[
+                          activePath === value.path ? 'active' : 'inactive'
+                        ]
+                      } ${S.UnderlineVariants}`}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className={S.LoginSignupBox}>
+            {login ? (
+              <div className={S.Logout}>로그아웃</div>
+            ) : (
+              <>
+                <div
+                  className={S.LoginBtn}
+                  onClick={() => router.push('/signin')}
+                >
+                  로그인
                 </div>
-              );
-            })}
+                <div
+                  className={S.Signup}
+                  onClick={() => router.push('/signup')}
+                >
+                  회원가입
+                </div>
+              </>
+            )}
           </div>
         </div>
-        <div className={S.LoginSignupBox}>
-          {login ? (
-            <div className={S.Logout}>로그아웃</div>
-          ) : (
-            <>
-              <div
-                className={S.LoginBtn}
-                onClick={() => router.push('/signin')}
-              >
-                로그인
-              </div>
-              <div className={S.Signup} onClick={() => router.push('/signup')}>
-                회원가입
-              </div>
-            </>
-          )}
-        </div>
       </div>
-    </div>
+    )
   );
 }

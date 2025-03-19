@@ -23,7 +23,8 @@ export const UpperBox = style({
   height: '12.75rem',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-around',
+  justifyContent: 'space-between',
+  padding: '0 3rem 0 3rem',
 });
 
 export const IntroduceBox = style({
