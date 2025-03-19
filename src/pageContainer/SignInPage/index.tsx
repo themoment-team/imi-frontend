@@ -33,7 +33,7 @@ const SignInPage = () => {
   return (
     <div className={S.SigninContainer}>
       <div className={S.LogoContainer}>
-        <ImiLogo />
+        <ImiLogo width="4.125rem" height="3rem" />
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className={S.InputContainer}>
         <div className={S.InputEmailContainer}>
