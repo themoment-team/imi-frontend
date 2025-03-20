@@ -65,7 +65,7 @@ const SignInPage = () => {
             )}
           </div>
         </div>
-        <div className={S.InputEmailContainer}>
+        <div className={S.InputPasswordContainer}>
           <p className={S.Text}>Password</p>
           <div
             key={'password'}
@@ -107,7 +107,7 @@ const SignInPage = () => {
         </button>
       </form>
       <div className={S.SignupBox}>
-        <p className={S.Text}>계정이 없으신가요?</p>
+        <p className={S.UnderText}>계정이 없으신가요?</p>
         <p className={S.GrayText} onClick={() => router.push('/signup')}>
           회원가입
         </p>

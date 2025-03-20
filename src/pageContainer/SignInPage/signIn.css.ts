@@ -28,7 +28,7 @@ export const InputContainer = style({
   width: '30rem',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '1rem',
+  position: 'relative',
 });
 
 export const InputEmailContainer = style({
@@ -36,7 +36,15 @@ export const InputEmailContainer = style({
   width: '30.125rem',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  alignItems: 'start',
+  alignItems: 'flex-start',
+});
+
+export const InputPasswordContainer = style({
+  display: 'flex',
+  width: '30.125rem',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'flex-start',
 });
 
 export const InputPassword = style({
@@ -47,9 +55,9 @@ export const InputPassword = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
+  height: '3.125rem',
 });
 
-// 오류 스타일 정의
 export const inputPasswordError = style({
   display: 'flex',
   alignItems: 'center',
@@ -58,9 +66,9 @@ export const inputPasswordError = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   border: '1px solid red',
+  height: '3.125rem',
 });
 
-// 스타일 관리
 export const inputPasswordVariants = styleVariants({
   default: [InputPassword],
   error: [inputPasswordError],
@@ -74,9 +82,9 @@ export const InputEmail = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
+  height: '3.125rem',
 });
 
-// 오류 스타일 정의
 export const inputEmailError = style({
   display: 'flex',
   alignItems: 'center',
@@ -84,10 +92,9 @@ export const inputEmailError = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
-  border: '1px solid red',
+  border: `1px solid #FF6B6B`,
 });
 
-// 스타일 관리
 export const inputEmailVariants = styleVariants({
   default: [InputEmail],
   error: [inputEmailError],
@@ -125,6 +132,13 @@ export const Text = style({
   color: ' #1E1E1E',
   textAlign: 'center',
   fontSize: '1rem',
+  padding: '0 0 0.25rem 0.58rem',
+});
+
+export const UnderText = style({
+  color: ' #1E1E1E',
+  textAlign: 'center',
+  fontSize: '1rem',
 });
 
 export const SignoutText = style({
@@ -157,6 +171,7 @@ export const IconBox = style({
 export const LoginBtn = style({
   width: '30rem',
   height: '2.4374rem',
+  marginTop: '0.74rem',
   background: vars.color.primary,
   borderRadius: '0.5rem',
   display: 'flex',
@@ -175,12 +190,15 @@ export const SignupBox = style({
 });
 
 export const ErrorText = style({
-  color: 'red',
+  color: '#FF6B6B',
+  fontSize: '0.9375rem',
 });
 
 export const ErrorBox = style({
   width: '100%',
+  height: '1.125rem',
   marginTop: '0.45rem',
   display: 'flex',
   justifyContent: 'space-between',
+  alignContent: 'flex-end',
 });
