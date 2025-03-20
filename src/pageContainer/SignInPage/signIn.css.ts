@@ -42,7 +42,7 @@ export const InputEmailContainer = style({
 export const InputPassword = style({
   display: 'flex',
   alignItems: 'center',
-  border: `2px solid ${vars.color.primary}`,
+  border: `1px solid ${vars.color.primary}`,
   borderRadius: '8px',
   padding: '1rem',
   justifyContent: 'space-between',
@@ -57,7 +57,7 @@ export const inputPasswordError = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
-  border: '2px solid red',
+  border: '1px solid red',
 });
 
 // 스타일 관리
@@ -69,7 +69,7 @@ export const inputPasswordVariants = styleVariants({
 export const InputEmail = style({
   display: 'flex',
   alignItems: 'center',
-  border: `2px solid ${vars.color.primary}`,
+  border: `1px solid ${vars.color.primary}`,
   borderRadius: '8px',
   padding: '1rem',
   justifyContent: 'space-between',
@@ -84,7 +84,7 @@ export const inputEmailError = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
-  border: '2px solid red',
+  border: '1px solid red',
 });
 
 // 스타일 관리
