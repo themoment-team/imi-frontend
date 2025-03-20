@@ -8,5 +8,6 @@ export const [themeClass, vars] = createTheme({
     text: '#1C1C1E', // black
     gray: '#A0A3A8',
     white: '#FAFAFA',
+    red: '#FF6B6B',
   },
 });
