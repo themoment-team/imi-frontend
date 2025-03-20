@@ -144,6 +144,7 @@ export const GrayText = style({
 export const InputText = style({
   color: vars.color.gray,
   background: 'none',
+  fontWeight: '300',
 });
 
 export const IconBox = style({
