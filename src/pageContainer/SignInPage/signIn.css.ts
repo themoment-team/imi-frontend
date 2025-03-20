@@ -20,6 +20,7 @@ export const LogoContainer = style({
   height: '9.375rem',
   background: vars.color.white,
   borderRadius: '50%',
+  marginBottom: '2.5rem',
 });
 
 export const InputContainer = style({
