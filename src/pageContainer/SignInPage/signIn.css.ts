@@ -33,7 +33,6 @@ export const InputContainer = style({
 export const InputEmailContainer = style({
   display: 'flex',
   width: '30.125rem',
-  padding: '1rem 1rem 1rem 0',
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'start',
@@ -151,6 +150,7 @@ export const IconBox = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  cursor: 'pointer',
 });
 
 export const LoginBtn = style({
@@ -161,7 +161,6 @@ export const LoginBtn = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginTop: '2.94rem',
 });
 
 export const SignupBox = style({
@@ -176,4 +175,11 @@ export const SignupBox = style({
 
 export const ErrorText = style({
   color: 'red',
+});
+
+export const ErrorBox = style({
+  width: '100%',
+  marginTop: '0.45rem',
+  display: 'flex',
+  justifyContent: 'space-between',
 });

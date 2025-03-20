@@ -58,9 +58,12 @@ const SignInPage = () => {
             />
             <p className={S.InputText}>@gsm.hs.kr</p>
           </div>
-          {errors.email && (
-            <p className={S.ErrorText}>{errors.email.message}</p>
-          )}
+          <div className={S.ErrorBox}>
+            <div></div>
+            {errors.email && (
+              <p className={S.ErrorText}>{errors.email.message}</p>
+            )}
+          </div>
         </div>
         <div className={S.InputEmailContainer}>
           <p className={S.Text}>Password</p>
@@ -80,7 +83,11 @@ const SignInPage = () => {
                 required: '비밀번호를 입력해주세요.',
                 minLength: {
                   value: 8,
-                  message: '8~16자의 영문, 숫자를 포함해야합니다.',
+                  message: '8글자 이상 입력해야 합니다',
+                },
+                maxLength: {
+                  value: 16,
+                  message: '16글자 이하로 입력해야 합니다',
                 },
               })}
             />
@@ -88,9 +95,12 @@ const SignInPage = () => {
               {isOpen ? <OpenEyes /> : <CloseEyes />}
             </div>
           </div>
-          {errors.password && (
-            <p className={S.ErrorText}>{errors.password.message}</p>
-          )}
+          <div className={S.ErrorBox}>
+            <div></div>
+            {errors.password && (
+              <p className={S.ErrorText}>{errors.password.message}</p>
+            )}
+          </div>
         </div>
         <button type="submit" className={S.LoginBtn}>
           로그인
