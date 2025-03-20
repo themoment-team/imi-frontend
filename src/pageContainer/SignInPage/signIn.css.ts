@@ -92,7 +92,7 @@ export const inputEmailError = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
-  border: `1px solid #FF6B6B`,
+  border: `1px solid ${vars.color.red}`,
 });
 
 export const inputEmailVariants = styleVariants({
@@ -190,7 +190,7 @@ export const SignupBox = style({
 });
 
 export const ErrorText = style({
-  color: '#FF6B6B',
+  color: vars.color.red,
   fontSize: '0.9375rem',
 });
 
