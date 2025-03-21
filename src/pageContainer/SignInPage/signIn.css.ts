@@ -153,6 +153,11 @@ export const GrayText = style({
   fontSize: '1rem',
   marginLeft: '0.5rem',
   cursor: 'pointer',
+  selectors: {
+    '&:hover': {
+      fontWeight: '600',
+    },
+  },
 });
 
 export const InputText = style({
