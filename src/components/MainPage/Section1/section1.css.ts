@@ -7,7 +7,7 @@ export const SectionContainer = style({
   position: 'relative',
   display: 'flex',
   justifyContent: 'center',
-  padding: '17.2rem 0 0',
+  alignItems: 'center',
 });
 
 export const ContentContainer = style({
