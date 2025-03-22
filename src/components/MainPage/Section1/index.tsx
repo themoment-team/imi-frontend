@@ -6,7 +6,7 @@ import * as S from './section1.css';
 
 const Section1 = () => {
   return (
-    <div className={S.SectionContainer}>
+    <section className={S.SectionContainer}>
       <div className={S.ContentContainer}>
         <div className={S.IntroBox}>
           <h1 className={S.IntroText}>자신을 소개하고 동아리에 지원하세요!</h1>
@@ -22,7 +22,7 @@ const Section1 = () => {
       <div className={S.AnimatedArrow}>
         <DownArrow />
       </div>
-    </div>
+    </section>
   );
 };
 
