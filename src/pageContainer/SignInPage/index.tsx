@@ -1,11 +1,12 @@
 'use client';
 
+import { clear } from 'console';
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
 
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 
 import * as S from './signIn.css';
 
@@ -21,13 +22,38 @@ const SignInPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    mode: 'onChange',
-  });
+    formState: { errors, isValid },
+    setError,
+    clearErrors,
+  } = useForm<FormValues>({ mode: 'onBlur' });
 
   const onSubmit = (data: FormValues) => {
+    if (data.email.length === 0 || data.password.length === 0) {
+      return 0;
+    }
+    if (data.email.length === 6) {
+      data.email = data.email + '@gsm.hs.kr';
+    }
     console.log('로그인 정보:', data);
+    //api
+    if (true) {
+      setError('email', {
+        type: 'server',
+        message: '',
+      });
+      setError('password', {
+        type: 'server',
+        message: '이메일 또는 비밀번호가 일치하지 않습니다.',
+      });
+    }
+  };
+
+  const onError = (errors: FieldErrors) => {
+    console.error(errors);
+  };
+
+  const ClearError = () => {
+    clearErrors('email'), clearErrors('password');
   };
 
   return (
@@ -35,7 +61,10 @@ const SignInPage = () => {
       <div className={S.LogoContainer}>
         <ImiLogo width="4.125rem" height="3rem" />
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className={S.InputContainer}>
+      <form
+        onSubmit={handleSubmit(onSubmit, onError)}
+        className={S.InputContainer}
+      >
         <div className={S.InputEmailContainer}>
           <p className={S.Text}>Email</p>
           <div
@@ -46,13 +75,23 @@ const SignInPage = () => {
             }
           >
             <input
-              placeholder="이메일을 입력해주세요"
+              placeholder="이메일을 입력해주세요."
               className={S.InputBox}
+              onFocus={() => ClearError()}
               {...register('email', {
-                required: '이메일을 입력해주세요.',
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@gsm\.hs\.kr$/,
-                  message: '학교 이메일(@gsm.hs.kr)만 사용 가능합니다.',
+                validate: (value) => {
+                  if (value.length === 0) {
+                    return undefined;
+                  }
+                  if (
+                    (/^[sS]\d{2}0\d{2}$/.test(value) ||
+                      /^[sS]\d{2}0\d{2}@gsm\.hs\.kr$/.test(value)) &&
+                    value.length > 0
+                  ) {
+                    console.log('email');
+                    return true;
+                  }
+                  return '';
                 },
               })}
             />
@@ -77,17 +116,19 @@ const SignInPage = () => {
           >
             <input
               type={isOpen ? 'text' : 'password'}
-              placeholder="비밀번호를 입력해주세요"
+              placeholder="비밀번호를 입력해주세요."
               className={S.InputBox}
+              onFocus={() => ClearError()}
               {...register('password', {
-                required: '비밀번호를 입력해주세요.',
-                minLength: {
-                  value: 8,
-                  message: '8글자 이상 입력해야 합니다',
-                },
-                maxLength: {
-                  value: 16,
-                  message: '16글자 이하로 입력해야 합니다',
+                validate: (value) => {
+                  if (value.length === 0) {
+                    return undefined;
+                  }
+                  if (value.length >= 8 && value.length <= 16) {
+                    console.log('password');
+                    return true;
+                  }
+                  return '';
                 },
               })}
             />
@@ -102,7 +143,11 @@ const SignInPage = () => {
             )}
           </div>
         </div>
-        <button type="submit" className={S.LoginBtn}>
+        <button
+          type="submit"
+          className={!isValid ? S.LoginBtn : S.BlockLoginBtn}
+          disabled={!isValid}
+        >
           로그인
         </button>
       </form>

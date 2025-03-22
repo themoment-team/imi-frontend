@@ -92,6 +92,7 @@ export const inputEmailError = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
+  height: '3.125rem',
   border: `1px solid ${vars.color.red}`,
 });
 
@@ -206,4 +207,15 @@ export const ErrorBox = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignContent: 'flex-end',
+});
+
+export const BlockLoginBtn = style({
+  width: '30rem',
+  height: '2.4374rem',
+  marginTop: '0.74rem',
+  background: '#F0F4FD',
+  borderRadius: '0.5rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 });
