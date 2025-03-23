@@ -218,4 +218,5 @@ export const BlockLoginBtn = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  border: `1px solid ${vars.color.primary}`,
 });
