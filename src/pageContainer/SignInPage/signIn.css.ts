@@ -219,4 +219,5 @@ export const BlockLoginBtn = style({
   alignItems: 'center',
   justifyContent: 'center',
   border: `1px solid ${vars.color.primary}`,
+  cursor: 'not-allowed',
 });
