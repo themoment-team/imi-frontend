@@ -25,22 +25,51 @@ export const IntroBox = style({
 });
 
 export const IntroText = style({
+  textAlign: 'center',
   fontSize: '3rem',
   fontWeight: 600,
+  '@media': {
+    'screen and (max-width: 750px)': {
+      fontSize: '2.4rem',
+    },
+    'screen and (max-width: 600px)': {
+      fontSize: '2rem',
+    },
+    'screen and (max-width: 500px)': {
+      fontSize: '1.5rem',
+    },
+    'screen and (max-width: 450px)': {
+      fontSize: '1.2rem',
+    },
+  },
 });
 
 export const DescriptionText = style({
+  textAlign: 'center',
   fontSize: '1.5rem',
   fontWeight: 400,
+  '@media': {
+    'screen and (max-width: 500px)': {
+      fontSize: '1.2rem',
+    },
+    'screen and (max-width: 450px)': {
+      fontSize: '1rem',
+    },
+  },
 });
 
 export const ActionButton = style({
-  fontSize: '1.25rem',
   fontWeight: 400,
   padding: '0.75rem 2.05rem',
   backgroundColor: vars.color.primary,
   borderRadius: '2rem',
   boxShadow: '0px 0px 20px 0px rgba(0, 0, 0, 0.10)',
+  fontSize: '1.25rem',
+  '@media': {
+    'screen and (max-width: 600px)': {
+      fontSize: '1rem',
+    },
+  },
 });
 
 const bounceAnimation = keyframes({
