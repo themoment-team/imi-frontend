@@ -2,43 +2,62 @@ import { style, styleVariants } from '@vanilla-extract/css';
 
 import { vars } from '@/styles/theme.css';
 
-export const SignupContainer = style({
+export const SignUpContainer = style({
   display: 'flex',
   alignItems: 'center',
-  flexDirection: 'column',
   justifyContent: 'center',
-  background: vars.color.background,
+  flexDirection: 'column',
   width: '100%',
   height: '100vh',
+  background: vars.color.background,
 });
 
-export const LogoWrapper = style({
-  width: '9.375rem',
-  height: '9.375rem',
+export const LogoContainer = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  width: '9.375rem',
+  height: '9.375rem',
   background: vars.color.white,
   borderRadius: '50%',
   marginBottom: '2.5rem',
 });
 
-export const InputWrapper = style({
+export const InputContainer = style({
+  display: 'flex',
   width: '30rem',
-  height: '22.375rem',
+  flexDirection: 'column',
+  alignItems: 'center',
+  position: 'relative',
+});
+
+export const InputEmailContainer = style({
+  display: 'flex',
+  width: '30.125rem',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'flex-start',
+});
+
+export const InputPasswordContainer = style({
+  display: 'flex',
+  width: '30.125rem',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'flex-start',
 });
 
 export const InputPassword = style({
   display: 'flex',
   alignItems: 'center',
-  border: `2px solid ${vars.color.primary}`,
+  border: `1px solid ${vars.color.primary}`,
   borderRadius: '8px',
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
+  height: '3.125rem',
 });
 
-// 오류 스타일 정의
 export const inputPasswordError = style({
   display: 'flex',
   alignItems: 'center',
@@ -46,11 +65,38 @@ export const inputPasswordError = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
-  border: '2px solid red',
+  border: '1px solid red',
+  height: '3.125rem',
 });
 
-// 스타일 관리
 export const inputPasswordVariants = styleVariants({
+  default: [InputPassword],
+  error: [inputPasswordError],
+});
+
+export const ReInputPassword = style({
+  display: 'flex',
+  alignItems: 'center',
+  border: `1px solid ${vars.color.primary}`,
+  borderRadius: '8px',
+  padding: '1rem',
+  justifyContent: 'space-between',
+  width: '30.125rem',
+  height: '3.125rem',
+});
+
+export const ReinputPasswordError = style({
+  display: 'flex',
+  alignItems: 'center',
+  borderRadius: '8px',
+  padding: '1rem',
+  justifyContent: 'space-between',
+  width: '30.125rem',
+  border: '1px solid red',
+  height: '3.125rem',
+});
+
+export const ReinputPasswordVariants = styleVariants({
   default: [InputPassword],
   error: [inputPasswordError],
 });
@@ -58,14 +104,14 @@ export const inputPasswordVariants = styleVariants({
 export const InputEmail = style({
   display: 'flex',
   alignItems: 'center',
-  border: `2px solid ${vars.color.primary} `,
+  border: `1px solid ${vars.color.primary}`,
   borderRadius: '8px',
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
+  height: '3.125rem',
 });
 
-// 오류 스타일 정의
 export const inputEmailError = style({
   display: 'flex',
   alignItems: 'center',
@@ -73,10 +119,10 @@ export const inputEmailError = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
-  border: '2px solid red',
+  height: '3.125rem',
+  border: `1px solid ${vars.color.red}`,
 });
 
-// 스타일 관리
 export const inputEmailVariants = styleVariants({
   default: [InputEmail],
   error: [inputEmailError],
@@ -114,6 +160,13 @@ export const Text = style({
   color: ' #1E1E1E',
   textAlign: 'center',
   fontSize: '1rem',
+  padding: '0 0 0.25rem 0.58rem',
+});
+
+export const UnderText = style({
+  color: ' #1E1E1E',
+  textAlign: 'center',
+  fontSize: '1rem',
 });
 
 export const SignoutText = style({
@@ -128,31 +181,38 @@ export const GrayText = style({
   fontSize: '1rem',
   marginLeft: '0.5rem',
   cursor: 'pointer',
+  selectors: {
+    '&:hover': {
+      fontWeight: '600',
+    },
+  },
 });
 
 export const InputText = style({
   color: vars.color.gray,
   background: 'none',
+  fontWeight: '300',
 });
 
 export const IconBox = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  cursor: 'pointer',
 });
 
-export const LoginBtn = style({
+export const SignUpBtn = style({
   width: '30rem',
   height: '2.4374rem',
+  marginTop: '0.74rem',
   background: vars.color.primary,
   borderRadius: '0.5rem',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginTop: '2.94rem',
 });
 
-export const SignupBox = style({
+export const SigninBox = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -163,5 +223,28 @@ export const SignupBox = style({
 });
 
 export const ErrorText = style({
-  color: 'red',
+  color: vars.color.red,
+  fontSize: '0.9375rem',
+});
+
+export const ErrorBox = style({
+  width: '100%',
+  height: '1.125rem',
+  marginTop: '0.45rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignContent: 'flex-end',
+});
+
+export const BlockSignUpBtn = style({
+  width: '30rem',
+  height: '2.4374rem',
+  marginTop: '0.74rem',
+  background: '#F0F4FD',
+  borderRadius: '0.5rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  border: `1px solid ${vars.color.primary}`,
+  cursor: 'not-allowed',
 });
