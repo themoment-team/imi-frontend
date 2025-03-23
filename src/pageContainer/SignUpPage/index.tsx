@@ -188,7 +188,7 @@ const SignUpPage = () => {
             !isValid || !allFieldsFilled || Object.keys(errors).length > 0
           }
         >
-          회원가입
+          다음
         </button>
       </form>
       <div className={S.SigninBox}>
