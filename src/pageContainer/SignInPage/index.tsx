@@ -1,6 +1,5 @@
 'use client';
 
-import { clear } from 'console';
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
@@ -25,7 +24,8 @@ const SignInPage = () => {
     formState: { errors, isValid },
     setError,
     clearErrors,
-  } = useForm<FormValues>({ mode: 'onBlur' });
+    watch,
+  } = useForm<FormValues>({ mode: 'onBlur', reValidateMode: 'onBlur' });
 
   const onSubmit = (data: FormValues) => {
     if (data.email.length === 0 || data.password.length === 0) {
@@ -47,6 +47,8 @@ const SignInPage = () => {
       });
     }
   };
+
+  const allFieldsFilled = Object.values(watch()).every((value) => value !== '');
 
   const onError = (errors: FieldErrors) => {
     console.error(errors);
@@ -77,7 +79,7 @@ const SignInPage = () => {
             <input
               placeholder="이메일을 입력해주세요."
               className={S.InputBox}
-              onFocus={() => ClearError()}
+              onClick={() => ClearError()}
               {...register('email', {
                 validate: (value) => {
                   if (value.length === 0) {
@@ -88,7 +90,6 @@ const SignInPage = () => {
                       /^[sS]\d{2}0\d{2}@gsm\.hs\.kr$/.test(value)) &&
                     value.length > 0
                   ) {
-                    console.log('email');
                     return true;
                   }
                   return '';
@@ -118,14 +119,13 @@ const SignInPage = () => {
               type={isOpen ? 'text' : 'password'}
               placeholder="비밀번호를 입력해주세요."
               className={S.InputBox}
-              onFocus={() => ClearError()}
+              onClick={() => ClearError()}
               {...register('password', {
                 validate: (value) => {
                   if (value.length === 0) {
                     return undefined;
                   }
                   if (value.length >= 8 && value.length <= 16) {
-                    console.log('password');
                     return true;
                   }
                   return '';
@@ -145,8 +145,10 @@ const SignInPage = () => {
         </div>
         <button
           type="submit"
-          className={!isValid ? S.LoginBtn : S.BlockLoginBtn}
-          disabled={!isValid}
+          className={isValid && allFieldsFilled ? S.LoginBtn : S.BlockLoginBtn}
+          disabled={
+            !isValid || !allFieldsFilled || Object.keys(errors).length > 0
+          }
         >
           로그인
         </button>
