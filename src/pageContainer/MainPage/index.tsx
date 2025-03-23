@@ -1,4 +1,4 @@
-import { Section1 } from '@/components';
+import { Section1, Section2 } from '@/components';
 
 import * as S from './main.css';
 
@@ -6,6 +6,7 @@ const MainPage = () => {
   return (
     <>
       <Section1 />
+      <Section2 />
     </>
   );
 };
