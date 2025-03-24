@@ -23,7 +23,7 @@ const Section2 = () => {
           </p>
         </div>
         <div className={S.LogoBox}>
-          <ImiLogo />
+          <ImiLogo width="216" height="151.6" />
         </div>
       </div>
     </section>
