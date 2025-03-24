@@ -73,9 +73,9 @@ export const ActionButton = style({
 });
 
 const bounceAnimation = keyframes({
-  '0%': { transform: 'translateY(-25px)' },
-  '50%': { transform: 'translateY(25px)' },
-  '100%': { transform: 'translateY(-25px)' },
+  '0%': { transform: 'translateY(0px)' },
+  '50%': { transform: 'translateY(-25px)' },
+  '100%': { transform: 'translateY(0px)' },
 });
 
 export const AnimatedArrow = style({
