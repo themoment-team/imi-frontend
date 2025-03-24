@@ -63,7 +63,7 @@ export const ActionButton = style({
   padding: '0.75rem 2.05rem',
   backgroundColor: vars.color.primary,
   borderRadius: '2rem',
-  boxShadow: '0px 0px 20px 0px rgba(0, 0, 0, 0.10)',
+  boxShadow: `0px 0px 20px 0px ${vars.color.primary}`,
   fontSize: '1.25rem',
   '@media': {
     'screen and (max-width: 600px)': {

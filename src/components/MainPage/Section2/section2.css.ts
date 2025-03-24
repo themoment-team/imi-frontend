@@ -5,18 +5,17 @@ import { vars } from '@/styles/theme.css';
 export const SectionContainer = style({
   height: '100vh',
   backgroundColor: vars.color.white,
-  marginBottom: '4rem',
   display: 'flex',
   alignItems: 'center',
-  padding: '0 15.45rem',
+  padding: '0 17.5rem',
   '@media': {
     'screen and (max-width: 1728px)': {
-      padding: '0 7rem',
+      padding: '0 4rem',
     },
     'screen and (max-width: 1440px)': {
       padding: '0 2.5rem',
     },
-    'screen and (max-width: 600px)': {
+    'screen and (max-width: 500px)': {
       padding: '0 1.5rem',
     },
   },
@@ -42,7 +41,7 @@ export const IntroduceBox = style({
 });
 
 export const Title = style({
-  fontSize: '4rem',
+  fontSize: '3.5rem',
   fontWeight: 600,
   '@media': {
     'screen and (max-width: 1200px)': {
@@ -63,7 +62,7 @@ export const Title = style({
 export const Description = style({
   fontSize: '1.5rem',
   fontWeight: 200,
-  lineHeight: '2rem',
+  lineHeight: '2.5rem',
   '@media': {
     'screen and (max-width: 1200px)': {
       textAlign: 'center',
@@ -81,10 +80,10 @@ export const Highlight = style({
 });
 
 export const LogoBox = style({
-  width: '23.125rem',
-  height: '23.125rem',
+  width: '20.625rem',
+  height: '20.625rem',
   backgroundColor: vars.color.background,
-  boxShadow: '0px 0px 20px 0px rgba(0, 0, 0, 0.10)',
+  boxShadow: `0px 0px 10px 0px ${vars.color.primary}`,
   borderRadius: '100%',
   display: 'flex',
   justifyContent: 'center',
