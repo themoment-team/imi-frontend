@@ -9,19 +9,25 @@ export const ProfileDetailContainer = style({
 
   '@media': {
     'screen and (max-width: 1728px)': {
-      padding: '6.5rem 16rem',
+      padding: '6.5rem 15rem',
+    },
+    'screen and (max-width: 1600px)': {
+      padding: '6.5rem 12rem',
     },
     'screen and (max-width: 1440px)': {
-      padding: '6.5rem 11rem',
+      padding: '6.5rem 9rem',
     },
     'screen and (max-width: 1200px)': {
-      padding: '6.5rem 6rem',
+      padding: '6.5rem 7rem',
+    },
+    'screen and (max-width: 1024px)': {
+      padding: '6.4rem 4rem',
     },
     'screen and (max-width: 768px)': {
-      padding: '6.5rem 5rem',
+      padding: '6.5rem 2.5rem',
     },
     'screen and (max-width: 480px)': {
-      padding: '6.5rem 2.5rem',
+      padding: '6.5rem 1.5rem',
     },
   },
 });

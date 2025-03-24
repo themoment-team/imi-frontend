@@ -11,19 +11,14 @@ export default function ClubSelector({
 }: ClubSelectorProps) {
   const clubs = [
     '더모먼트',
-    'MSG',
-    '앰퍼샌드',
-    '마인드웨이',
-    '잡탕',
-    'S/ASH',
-    '인력사무소',
-    '깨소금',
-    '맛소금',
-    '아티',
-    '마사삭',
+    '스타트업',
+    '인큐브',
     '코디',
-    '아잉',
-    '콩보리',
+    '미술하는친구들',
+    'NAVY',
+    'Gamism',
+    'air up',
+    'SLASH',
   ];
 
   return (
