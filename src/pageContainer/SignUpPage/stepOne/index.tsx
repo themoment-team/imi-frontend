@@ -15,7 +15,17 @@ type FormValues = {
   repassword: string;
 };
 
-const SignUpOnePage = () => {
+type SignUpOnePageProps = {
+  formData: { email: string; password: string };
+  setFormData: (data: any) => void;
+  onNext: () => void;
+};
+
+const SignUpOnePage = ({
+  formData,
+  setFormData,
+  onNext,
+}: SignUpOnePageProps) => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
   const [reIsOpen, setReOpen] = useState(false);
@@ -27,19 +37,30 @@ const SignUpOnePage = () => {
     setError,
     clearErrors,
     watch,
-  } = useForm<FormValues>({ mode: 'onBlur', reValidateMode: 'onBlur' });
+  } = useForm<FormValues>({
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    defaultValues: {
+      email: formData.email || '',
+      password: formData.password || '',
+      repassword: formData.password || '',
+    },
+  });
 
   const onSubmit = (data: FormValues) => {
     if (data.email.length === 6) {
       data.email = data.email + '@gsm.hs.kr';
     }
+    setFormData(data);
 
     //api
-    if (true) {
+    if (false) {
       setError('email', {
         type: 'server',
         message: '이미 존재하는 이메일입니다',
       });
+    } else {
+      onNext();
     }
   };
 
