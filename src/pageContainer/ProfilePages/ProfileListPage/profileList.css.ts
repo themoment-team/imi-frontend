@@ -9,20 +9,23 @@ export const ProfileListContainer = style({
       padding: '6.4rem 20rem',
     },
     'screen and (max-width: 1600px)': {
-      padding: '6.4rem 18rem',
+      padding: '6.4rem 17rem',
     },
     'screen and (max-width: 1440px)': {
-      padding: '6.4rem 10rem',
+      padding: '6.4rem 9rem',
     },
     'screen and (max-width: 1200px)': {
-      padding: '6.4rem 4rem',
+      padding: '6.4rem 8rem',
+    },
+    'screen and (max-width: 1024px)': {
+      padding: '6.4rem 5rem',
     },
     'screen and (max-width: 768px)': {
       padding: '6.4rem 2.5rem',
       justifyItems: 'center',
     },
     'screen and (max-width: 480px)': {
-      padding: '6.4rem 2.5rem',
+      padding: '6.4rem 2rem',
       justifyItems: 'center',
     },
   },
