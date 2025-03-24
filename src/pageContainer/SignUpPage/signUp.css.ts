@@ -65,7 +65,7 @@ export const inputPasswordError = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
-  border: '1px solid red',
+  border: `1px solid ${vars.color.red}`,
   height: '3.125rem',
 });
 
@@ -92,7 +92,7 @@ export const ReinputPasswordError = style({
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
-  border: '1px solid red',
+  border: `1px solid ${vars.color.red}`,
   height: '3.125rem',
 });
 
