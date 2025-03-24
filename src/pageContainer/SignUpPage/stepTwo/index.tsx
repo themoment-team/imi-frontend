@@ -48,6 +48,12 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
     clearErrors('gradeNumber');
   };
 
+  const GoPrev = () => {
+    if (confirm('이동하면 현재 작성한 정보가 저장되지 않을 수 있습니다')) {
+      onPrev();
+    }
+  };
+
   return (
     <div className={S.SignUpContainer}>
       <div className={S.LogoContainer}>
@@ -125,7 +131,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
           </div>
         </div>
         <div className={S.BtnWrapper}>
-          <button onClick={onPrev} className={S.PrevBtn}>
+          <button type="button" onClick={GoPrev} className={S.PrevBtn}>
             이전
           </button>
           <button
