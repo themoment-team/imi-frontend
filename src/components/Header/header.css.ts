@@ -104,6 +104,15 @@ export const Underline = style({
       transition: 'width 0.3s ease',
     },
   },
+  '@media': {
+    'screen and (max-width: 375px)': {
+      selectors: {
+        '&::after': {
+          display: 'none',
+        },
+      },
+    },
+  },
 });
 
 export const UnderlineVariants = styleVariants({
