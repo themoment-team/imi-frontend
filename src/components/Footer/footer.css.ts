@@ -9,6 +9,14 @@ export const Container = style({
   height: '12.75rem',
 });
 
+export const WhiteContainer = style({
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100%',
+  height: '12.75rem',
+  background: vars.color.white,
+});
+
 export const FooterBox = style({
   display: 'flex',
   alignItems: 'center',
