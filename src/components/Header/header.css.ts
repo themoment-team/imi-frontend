@@ -3,11 +3,7 @@ import { style, styleVariants } from '@vanilla-extract/css';
 import { vars } from '@/styles/theme.css';
 
 export const HeaderBox = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  height: '72px',
+  padding: '1rem 17.5rem',
   background: vars.color.white,
 });
 
@@ -15,71 +11,21 @@ export const HeaderWrapper = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  width: '1280px',
-  height: '40px',
-  background: vars.color.white,
 });
 
 export const RightItems = style({
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  width: '359.97px',
-  height: '40px',
-  background: vars.color.white,
+  gap: '4rem',
+});
+
+export const LogoBox = style({
+  cursor: 'pointer',
 });
 
 export const Navigation = style({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
-  width: '248px',
-  height: '22px',
-  background: vars.color.white,
-});
-
-export const LoginSignupBox = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  width: '173px',
-  height: '32px',
-  background: vars.color.white,
-});
-
-export const LoginBtn = style({
-  width: '80px',
-  height: '32px',
-  background: vars.color.primary,
-  borderRadius: '8px',
-  color: vars.color.white,
-  fontWeight: 'bolder',
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
-
-export const Signup = style({
-  width: '80px',
-  height: '32px',
-  border: `2px solid ${vars.color.primary}`,
-  borderRadius: '8px',
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
-
-export const Logout = style({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '80px',
-  height: '32px',
-  border: `2px solid ${vars.color.primary}`,
-  borderRadius: '8px',
-  cursor: 'pointer',
+  gap: '0.8125rem',
 });
 
 export const NavigationBtn = style({
@@ -88,7 +34,6 @@ export const NavigationBtn = style({
   alignItems: 'center',
   position: 'relative',
   cursor: 'pointer',
-  background: vars.color.white,
 });
 
 export const Underline = style({
@@ -97,9 +42,9 @@ export const Underline = style({
       content: '',
       position: 'absolute',
       left: 0,
-      top: '43px',
+      top: '2.8rem',
       width: '0',
-      height: '2px',
+      height: '0.125rem',
       backgroundColor: vars.color.primary,
       transition: 'width 0.3s ease',
     },
@@ -132,6 +77,29 @@ export const BoldVariants = styleVariants({
   },
 });
 
-export const LogoBox = style({
+export const LoginSignupBox = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.8rem',
+});
+
+export const LoginBtn = style({
+  padding: '0.3125rem 1.19rem',
+  background: vars.color.primary,
+  borderRadius: '0.5rem',
+  cursor: 'pointer',
+});
+
+export const Signup = style({
+  padding: '0.3125rem 0.5625rem',
+  border: `0.125rem solid ${vars.color.primary}`,
+  borderRadius: '0.5rem',
+  cursor: 'pointer',
+});
+
+export const Logout = style({
+  padding: '0.3125rem 0.5625rem',
+  border: `0.125rem solid ${vars.color.primary}`,
+  borderRadius: '0.5rem',
   cursor: 'pointer',
 });
