@@ -15,7 +15,7 @@ type FormValues = {
   repassword: string;
 };
 
-const SignUpPage = () => {
+const SignUpOnePage = () => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
   const [reIsOpen, setReOpen] = useState(false);
@@ -201,4 +201,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUpOnePage;
