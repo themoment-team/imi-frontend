@@ -1,7 +1,14 @@
+import { Section1, Section2 } from '@/components';
+
 import * as S from './main.css';
 
 const MainPage = () => {
-  return <div>Main</div>;
+  return (
+    <>
+      <Section1 />
+      <Section2 />
+    </>
+  );
 };
 
 export default MainPage;
