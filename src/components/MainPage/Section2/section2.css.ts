@@ -16,9 +16,8 @@ export const SectionContainer = style({
     'screen and (max-width: 1440px)': {
       padding: '0 2.5rem',
     },
-    'screen and (max-width: 1200px)': {
-      flexDirection: 'column-reverse',
-      justifyContent: 'center',
+    'screen and (max-width: 600px)': {
+      padding: '0 1.5rem',
     },
   },
 });
@@ -54,6 +53,9 @@ export const Title = style({
     },
     'screen and (max-width: 600px)': {
       fontSize: '2rem',
+    },
+    'screen and (max-width: 500px)': {
+      fontSize: '1.5rem',
     },
   },
 });
