@@ -16,6 +16,9 @@ export const ContentContainer = style({
   alignItems: 'center',
   gap: '6.95rem',
   '@media': {
+    'screen and (max-width: 750px)': {
+      gap: '6rem',
+    },
     'screen and (max-width: 600px)': {
       gap: '5rem',
     },
