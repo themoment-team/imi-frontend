@@ -54,7 +54,7 @@ const SignUpOnePage = ({
     setFormData(data);
 
     //api
-    if (false) {
+    if (true) {
       setError('email', {
         type: 'server',
         message: '이미 존재하는 이메일입니다',
@@ -128,7 +128,7 @@ const SignUpOnePage = ({
           <div
             key={'password'}
             className={
-              errors.password
+              errors.password || errors.repassword
                 ? S.inputPasswordVariants.error
                 : S.inputPasswordVariants.default
             }
