@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import ClubSelector from '@/components/ClubSelector';
+import { ClubSelector } from '@/components';
 
 import { useState } from 'react';
 

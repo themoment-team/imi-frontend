@@ -1,10 +1,20 @@
 'use client';
 
-import { ClubToggle } from '@/components';
+import { ClubSelector } from '@/components';
+
+import { useState } from 'react';
 
 import * as S from './write.css';
 
 const WritePage = () => {
+  const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
+
+  const toggleClub = (club: string) => {
+    setSelectedClubs((prev) =>
+      prev.includes(club) ? prev.filter((c) => c !== club) : [...prev, club]
+    );
+  };
+
   return (
     <div className={S.WritePageContainer}>
       <p className={S.Title}>자기소개서 작성</p>
@@ -21,7 +31,7 @@ const WritePage = () => {
           <p className={S.SectionSubtitle}>희망 동아리를 선택해주세요.</p>
         </div>
         <div className={S.ToggleGroup}>
-          <ClubToggle />
+          <ClubSelector selectedClubs={selectedClubs} toggleClub={toggleClub} />
         </div>
       </div>
       <div className={S.Section}>
