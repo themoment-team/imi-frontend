@@ -11,6 +11,8 @@ import * as S from './footer.css';
 export default function Footer() {
   const [display, setDisplay] = useState<boolean>(false);
 
+  const [isHome, setHome] = useState<boolean>(false);
+
   const ProPath = ['/', '/profile/list', '/clubs', '/profile/[id]'];
 
   const pathname = usePathname();
@@ -20,11 +22,16 @@ export default function Footer() {
     if (!ProPath.includes(pathname)) {
       setDisplay(() => false);
     }
+    if (pathname === '/') {
+      setHome(true);
+    } else {
+      setHome(false);
+    }
   }, [pathname]);
 
   return (
     display && (
-      <div className={S.Container}>
+      <div className={isHome ? S.WhiteContainer : S.Container}>
         <div className={S.FooterBox}>
           <div className={S.UpperBox}>
             <div className={S.IntroduceBox}>
