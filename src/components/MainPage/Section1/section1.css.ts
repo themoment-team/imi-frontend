@@ -13,15 +13,40 @@ export const SectionContainer = style({
 export const ContentContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '6.95rem',
   alignItems: 'center',
+  gap: '6.95rem',
+  '@media': {
+    'screen and (max-width: 600px)': {
+      gap: '5rem',
+    },
+    'screen and (max-width: 500px)': {
+      gap: '4rem',
+    },
+    'screen and (max-width: 450px)': {
+      gap: '2rem',
+    },
+  },
 });
 
 export const IntroBox = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2.3rem',
   alignItems: 'center',
+  gap: '2.3rem',
+  '@media': {
+    'screen and (max-width: 750px)': {
+      gap: '1.5rem',
+    },
+    'screen and (max-width: 600px)': {
+      gap: '1.2rem',
+    },
+    'screen and (max-width: 500px)': {
+      gap: '0.9rem',
+    },
+    'screen and (max-width: 450px)': {
+      gap: '0.6rem',
+    },
+  },
 });
 
 export const IntroText = style({
@@ -68,6 +93,9 @@ export const ActionButton = style({
   '@media': {
     'screen and (max-width: 600px)': {
       fontSize: '1rem',
+    },
+    'screen and (max-width: 500px)': {
+      fontSize: '0.9rem',
     },
   },
 });

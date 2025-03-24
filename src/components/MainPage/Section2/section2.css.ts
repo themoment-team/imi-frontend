@@ -18,6 +18,9 @@ export const SectionContainer = style({
     'screen and (max-width: 500px)': {
       padding: '0 1.5rem',
     },
+    'screen and (max-width: 450px)': {
+      padding: '0 1rem',
+    },
   },
 });
 
@@ -38,15 +41,23 @@ export const IntroduceBox = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '3.2rem',
+  '@media': {
+    'screen and (max-width: 850px)': {
+      gap: '2.4rem',
+    },
+    'screen and (max-width: 600px)': {
+      gap: '1.8rem',
+    },
+    'screen and (max-width: 500px)': {
+      gap: '1.2rem',
+    },
+  },
 });
 
 export const Title = style({
   fontSize: '3.5rem',
   fontWeight: 600,
   '@media': {
-    'screen and (max-width: 1200px)': {
-      textAlign: 'center',
-    },
     'screen and (max-width: 850px)': {
       fontSize: '2.5rem',
     },
@@ -64,11 +75,9 @@ export const Description = style({
   fontWeight: 200,
   lineHeight: '2.5rem',
   '@media': {
-    'screen and (max-width: 1200px)': {
-      textAlign: 'center',
-    },
     'screen and (max-width: 850px)': {
       fontSize: '1rem',
+      lineHeight: '1.5rem',
     },
   },
 });
@@ -88,4 +97,9 @@ export const LogoBox = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  '@media': {
+    'screen and (max-width: 850px)': {
+      display: 'none',
+    },
+  },
 });
