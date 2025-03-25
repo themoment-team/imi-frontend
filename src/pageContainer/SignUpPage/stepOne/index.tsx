@@ -54,7 +54,7 @@ const SignUpOnePage = ({
     setFormData(data);
 
     //api
-    if (true) {
+    if (false) {
       setError('email', {
         type: 'server',
         message: '이미 존재하는 이메일입니다',
@@ -110,7 +110,7 @@ const SignUpOnePage = ({
                   ) {
                     return true;
                   }
-                  return '';
+                  return '이메일 형식에 맞지 않습니다';
                 },
               })}
             />
