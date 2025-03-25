@@ -4,6 +4,9 @@ import { vars } from '@/styles/theme.css';
 
 export const ProfileListContainer = style({
   padding: '6.4rem 25rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '3.7rem',
   '@media': {
     'screen and (max-width: 1728px)': {
       padding: '6.4rem 20rem',
