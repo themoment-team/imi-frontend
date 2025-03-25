@@ -82,9 +82,6 @@ export const TextareaField = style({
   fontWeight: 400,
   borderRadius: '1rem',
   minHeight: '15.8rem',
-  '::-webkit-scrollbar': {
-    display: 'none',
-  },
   border: `1px solid ${vars.color.primary}`,
   ':focus': {
     outline: `1.5px solid ${vars.color.primary}`,
