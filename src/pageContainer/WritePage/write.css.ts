@@ -7,7 +7,21 @@ export const WritePageContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '2.48rem',
-  padding: '6.85rem 24.55rem 0',
+  padding: '6.85rem 24.55rem 2.5rem',
+  '@media': {
+    'screen and (max-width: 1728px)': {
+      padding: '6.85rem 14rem 2.5rem',
+    },
+    'screen and (max-width: 1440px)': {
+      padding: '6.85rem 10rem 2.5rem',
+    },
+    'screen and (max-width: 850px)': {
+      padding: '6.85rem 4.5rem 2.5rem',
+    },
+    'screen and (max-width: 750px)': {
+      padding: '6.85rem 2rem 2.5rem',
+    },
+  },
 });
 
 export const Title = style({
@@ -51,7 +65,7 @@ export const InputField = style({
   borderRadius: '1rem',
   border: `1px solid ${vars.color.primary}`,
   ':focus': {
-    outline: `2px solid ${vars.color.primary}`,
+    outline: `1.5px solid ${vars.color.primary}`,
   },
 });
 
@@ -63,6 +77,7 @@ export const ToggleGroup = style({
 
 export const TextareaField = style({
   padding: '1.1rem',
+  resize: 'none',
   fontSize: '1.25rem',
   fontWeight: 400,
   borderRadius: '1rem',
@@ -72,7 +87,7 @@ export const TextareaField = style({
   },
   border: `1px solid ${vars.color.primary}`,
   ':focus': {
-    outline: `2px solid ${vars.color.primary}`,
+    outline: `1.5px solid ${vars.color.primary}`,
   },
 });
 
@@ -83,12 +98,22 @@ export const SaveButton = style({
   color: vars.color.white,
   backgroundColor: vars.color.gray,
   borderRadius: '1rem',
+  '@media': {
+    'screen and (max-width: 375px)': {
+      padding: '0.65rem 2rem',
+    },
+  },
 });
 
 export const SubmitButton = style({
-  padding: '0.65rem 2.5rem',
   fontSize: '1rem',
   fontWeight: 400,
   backgroundColor: vars.color.primary,
   borderRadius: '1rem',
+  padding: '0.65rem 2.5rem',
+  '@media': {
+    'screen and (max-width: 375px)': {
+      padding: '0.65rem 2rem',
+    },
+  },
 });
