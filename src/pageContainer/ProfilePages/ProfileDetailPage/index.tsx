@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { BackBtn } from '@/asset';
-import EmptyProfile from '@/components/EmptyProfile';
+import { EmptyProfile } from '@/components';
 
 import * as T from '../profile.css';
 import * as S from './profileDetail.css';
