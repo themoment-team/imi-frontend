@@ -70,12 +70,6 @@ const SignUpOnePage = ({
     console.error(errors);
   };
 
-  const ClearError = () => {
-    clearErrors('email');
-    clearErrors('password');
-    clearErrors('repassword');
-  };
-
   return (
     <div className={S.SignUpContainer}>
       <div className={S.LogoContainer}>
@@ -97,7 +91,6 @@ const SignUpOnePage = ({
             <input
               placeholder="이메일을 입력해주세요."
               className={S.InputBox}
-              onClick={() => ClearError()}
               {...register('email', {
                 validate: (value) => {
                   if (value.length === 0) {
@@ -137,7 +130,6 @@ const SignUpOnePage = ({
               type={isOpen ? 'text' : 'password'}
               placeholder="비밀번호를 입력해주세요."
               className={S.InputBox}
-              onClick={() => ClearError()}
               {...register('password', {
                 validate: (value) => {
                   if (value.length === 0) {
@@ -178,7 +170,6 @@ const SignUpOnePage = ({
               type={reIsOpen ? 'text' : 'password'}
               placeholder="비밀번호를 재입력해주세요."
               className={S.InputBox}
-              onClick={() => ClearError()}
               {...register('repassword', {
                 validate: (value) => {
                   if (value.length === 0) {
