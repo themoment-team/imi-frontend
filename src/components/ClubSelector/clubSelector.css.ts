@@ -6,9 +6,6 @@ export const ClubsContainer = style({
   display: 'flex',
   flexWrap: 'wrap',
   gap: '0.625rem',
-  marginTop: '4.4rem',
-  marginBottom: '4.1rem',
-
   paddingLeft: '1rem',
   borderLeft: 'solid 4px',
   borderColor: vars.color.primary,
