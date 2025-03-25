@@ -144,7 +144,9 @@ const SignUpOnePage = ({
                     return undefined;
                   }
                   if (
-                    /^[A-Za-z0-9]+$/.test(value) &&
+                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(
+                      value
+                    ) &&
                     value.length >= 8 &&
                     value.length <= 16
                   ) {
