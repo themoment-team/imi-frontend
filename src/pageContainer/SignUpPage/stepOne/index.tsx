@@ -214,7 +214,7 @@ const SignUpOnePage = ({
       </form>
       <div className={S.SigninBox}>
         <p className={S.UnderText}>계정이 이미있으신가요?</p>
-        <p className={S.GrayText} onClick={() => router.push('/signip')}>
+        <p className={S.GrayText} onClick={() => router.push('/signin')}>
           로그인
         </p>
       </div>

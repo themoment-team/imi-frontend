@@ -10,7 +10,7 @@ import * as S from './signUpTwo.css';
 
 type FormValues = {
   name: string;
-  gradeNumber: string;
+  gradeNumber: number;
 };
 
 type SignUpTwoPageProps = {
@@ -34,7 +34,8 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
 
   const onSubmit = (data: FormValues) => {
     console.log(data, formData);
-    router.push('/signin');
+
+    router.push('/');
   };
 
   const allFieldsFilled = Object.values(watch()).every((value) => value !== '');
@@ -49,7 +50,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
   };
 
   const GoPrev = () => {
-    if (confirm('이동하면 현재 작성한 정보가 저장되지 않을 수 있습니다')) {
+    if (confirm('현재 변경사항이 저장되지 않았습니다. 계속하시겠습니까')) {
       onPrev();
     }
   };
@@ -112,10 +113,13 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
               onClick={() => ClearError()}
               {...register('gradeNumber', {
                 validate: (value) => {
-                  if (value.length === 0) {
+                  if (!value) {
                     return undefined;
                   }
-                  if (/^\d{4}$/.test(value) && value.length === 4) {
+
+                  const stringValue = value.toString();
+
+                  if (/^\d{4}$/.test(stringValue)) {
                     return true;
                   }
                   return '학번 형식이 올바르지 않습니다.';
@@ -149,7 +153,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
       </form>
       <div className={S.SigninBox}>
         <p className={S.UnderText}>계정이 이미있으신가요?</p>
-        <p className={S.GrayText} onClick={() => router.push('/signip')}>
+        <p className={S.GrayText} onClick={() => router.push('/signin')}>
           로그인
         </p>
       </div>
