@@ -39,6 +39,11 @@ const WritePage = () => {
         <textarea
           placeholder="나의 장단점, 각오, 현재하고 있는 공부 등을 자유롭게 작성해보세요."
           className={S.TextareaField}
+          onInput={(e) => {
+            const target = e.target as HTMLTextAreaElement;
+            target.style.height = 'auto';
+            target.style.height = `${target.scrollHeight + 1.5}px`;
+          }}
         />
       </div>
       <div className={S.ButtonGroup}>
