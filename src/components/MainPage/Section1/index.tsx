@@ -1,10 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 
 import { DownArrow } from '@/asset';
 
 import * as S from './section1.css';
 
-const Section1 = () => {
+const Section1 = ({ scrollToSection2 }: { scrollToSection2: () => void }) => {
   return (
     <section className={S.SectionContainer}>
       <div className={S.ContentContainer}>
@@ -19,7 +21,7 @@ const Section1 = () => {
           {/* 로그인 여부에 따라 바로가기 or 로그인 버튼 표시 필요 */}
         </button>
       </div>
-      <div className={S.AnimatedArrow}>
+      <div className={S.AnimatedArrow} onClick={scrollToSection2}>
         <DownArrow />
       </div>
     </section>
