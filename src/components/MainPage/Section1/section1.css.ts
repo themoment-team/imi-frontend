@@ -113,4 +113,5 @@ export const AnimatedArrow = style({
   position: 'absolute',
   top: '46.5rem',
   animation: `${bounceAnimation} 2s infinite ease-in-out`,
+  cursor: 'pointer',
 });
