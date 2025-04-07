@@ -23,7 +23,6 @@ const SignInPage = () => {
     handleSubmit,
     formState: { errors, isValid },
     setError,
-    clearErrors,
     watch,
   } = useForm<FormValues>({ mode: 'onBlur', reValidateMode: 'onBlur' });
 
