@@ -1,10 +1,14 @@
+'use client';
+
 import { ImiLogo } from '@/asset';
+
+import { forwardRef } from 'react';
 
 import * as S from './section2.css';
 
-const Section2 = () => {
+const Section2 = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <section className={S.SectionContainer}>
+    <section className={S.SectionContainer} ref={ref}>
       <div className={S.ContentContainer}>
         <div className={S.IntroduceBox}>
           <h1 className={S.Title}>
@@ -28,6 +32,6 @@ const Section2 = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Section2;
