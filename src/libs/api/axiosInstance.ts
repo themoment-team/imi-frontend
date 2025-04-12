@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: '', // 서버 배포 후 URL 입력 필요
+  baseURL: '/api',
   withCredentials: true,
 });
 
