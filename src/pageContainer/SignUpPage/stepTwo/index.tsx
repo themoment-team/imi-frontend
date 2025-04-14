@@ -147,7 +147,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
               !isValid || !allFieldsFilled || Object.keys(errors).length > 0
             }
           >
-            다음
+            회원가입
           </button>
         </div>
       </form>
