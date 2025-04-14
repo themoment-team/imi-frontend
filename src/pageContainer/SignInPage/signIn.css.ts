@@ -29,6 +29,11 @@ export const InputContainer = style({
   flexDirection: 'column',
   alignItems: 'center',
   position: 'relative',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+  },
 });
 
 export const InputEmailContainer = style({
@@ -37,6 +42,11 @@ export const InputEmailContainer = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'flex-start',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+  },
 });
 
 export const InputPasswordContainer = style({
@@ -45,6 +55,11 @@ export const InputPasswordContainer = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'flex-start',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+  },
 });
 
 export const InputPassword = style({
@@ -56,6 +71,11 @@ export const InputPassword = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   height: '3.125rem',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+  },
 });
 
 export const inputPasswordError = style({
@@ -67,6 +87,11 @@ export const inputPasswordError = style({
   width: '30.125rem',
   border: '1px solid red',
   height: '3.125rem',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+  },
 });
 
 export const inputPasswordVariants = styleVariants({
@@ -83,6 +108,11 @@ export const InputEmail = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   height: '3.125rem',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+  },
 });
 
 export const inputEmailError = style({
@@ -94,6 +124,11 @@ export const inputEmailError = style({
   width: '30.125rem',
   height: '3.125rem',
   border: `1px solid ${vars.color.red}`,
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+  },
 });
 
 export const inputEmailVariants = styleVariants({
@@ -119,14 +154,11 @@ export const InputBox = style({
       border: 'none',
     },
   },
-});
-
-export const InputPW = style({
-  display: 'flex',
-  width: '30rem',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '1rem',
+  '@media': {
+    'screen and ((max-width: 481px))': {
+      width: '100vw',
+    },
+  },
 });
 
 export const Text = style({
@@ -183,6 +215,11 @@ export const LoginBtn = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+  },
 });
 
 export const SignupBox = style({
@@ -220,4 +257,9 @@ export const BlockLoginBtn = style({
   justifyContent: 'center',
   border: `1px solid ${vars.color.primary}`,
   cursor: 'not-allowed',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+  },
 });
