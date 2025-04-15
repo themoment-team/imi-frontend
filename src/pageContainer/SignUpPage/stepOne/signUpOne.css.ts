@@ -33,6 +33,9 @@ export const InputContainer = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -46,6 +49,9 @@ export const InputEmailContainer = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -58,6 +64,9 @@ export const InputPasswordContainer = style({
   '@media': {
     'screen and (max-width:481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -75,6 +84,9 @@ export const InputPassword = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -90,6 +102,9 @@ export const inputPasswordError = style({
   '@media': {
     'screen and (max-width:481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -112,6 +127,9 @@ export const ReInputPassword = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -127,6 +145,9 @@ export const ReinputPasswordError = style({
   '@media': {
     'screen and (max-width:481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -149,6 +170,9 @@ export const InputEmail = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -164,6 +188,9 @@ export const inputEmailError = style({
   '@media': {
     'screen and (max-width:481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -192,8 +219,11 @@ export const InputBox = style({
     },
   },
   '@media': {
-    'screen and (max-width:481px)': {
+    'screen and (max-width: 481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -256,6 +286,9 @@ export const SignUpBtn = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -297,6 +330,9 @@ export const BlockSignUpBtn = style({
   '@media': {
     'screen and (max-width:481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });

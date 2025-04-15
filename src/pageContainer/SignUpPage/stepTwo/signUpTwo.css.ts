@@ -33,6 +33,9 @@ export const InputContainer = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -46,6 +49,9 @@ export const InputNameContainer = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -58,6 +64,9 @@ export const InputGradeNumberContainer = style({
   '@media': {
     'screen and (max-width:481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -75,6 +84,9 @@ export const InputGradeNumber = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -90,6 +102,9 @@ export const inputGradeNumberError = style({
   '@media': {
     'screen and (max-width:481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -112,6 +127,9 @@ export const InputName = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -127,6 +145,9 @@ export const inputNameError = style({
   '@media': {
     'screen and (max-width:481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -157,6 +178,9 @@ export const InputBox = style({
   '@media': {
     'screen and (max-width:481px)': {
       width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -206,6 +230,9 @@ export const SignUpBtn = style({
     'screen and (max-width:400px)': {
       width: '100vw',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -222,6 +249,9 @@ export const PrevBtn = style({
   '@media': {
     'screen and (max-width:400px)': {
       width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
@@ -252,6 +282,9 @@ export const ErrorBox = style({
     'screen and (max-width:481px)': {
       width: '100%',
     },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
   },
 });
 
@@ -269,6 +302,9 @@ export const BlockSignUpBtn = style({
   '@media': {
     'screen and (max-width:400px)': {
       width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
     },
   },
 });
