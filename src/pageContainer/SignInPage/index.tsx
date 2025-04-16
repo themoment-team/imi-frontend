@@ -14,6 +14,8 @@ type FormValues = {
   password: string;
 };
 
+type FormName = 'email' | 'password';
+
 const SignInPage = () => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
@@ -23,8 +25,8 @@ const SignInPage = () => {
     handleSubmit,
     formState: { errors, isValid },
     setError,
-    clearErrors,
     watch,
+    setFocus,
   } = useForm<FormValues>({ mode: 'onBlur', reValidateMode: 'onBlur' });
 
   const onSubmit = (data: FormValues) => {
@@ -48,14 +50,14 @@ const SignInPage = () => {
     }
   };
 
+  const handleFocus = (id: FormName) => {
+    setFocus(id);
+  };
+
   const allFieldsFilled = Object.values(watch()).every((value) => value !== '');
 
   const onError = (errors: FieldErrors) => {
     console.error(errors);
-  };
-
-  const ClearError = () => {
-    clearErrors('email'), clearErrors('password');
   };
 
   return (
@@ -75,11 +77,11 @@ const SignInPage = () => {
                 ? S.inputEmailVariants.error
                 : S.inputEmailVariants.default
             }
+            onClick={() => handleFocus('email')}
           >
             <input
               placeholder="이메일을 입력해주세요."
               className={S.InputBox}
-              onClick={() => ClearError()}
               {...register('email', {
                 validate: (value) => {
                   if (value.length === 0) {
@@ -114,12 +116,12 @@ const SignInPage = () => {
                 ? S.inputPasswordVariants.error
                 : S.inputPasswordVariants.default
             }
+            onClick={() => handleFocus('password')}
           >
             <input
               type={isOpen ? 'text' : 'password'}
               placeholder="비밀번호를 입력해주세요."
               className={S.InputBox}
-              onClick={() => ClearError()}
               {...register('password', {
                 validate: (value) => {
                   if (value.length === 0) {

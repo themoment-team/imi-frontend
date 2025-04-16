@@ -28,7 +28,15 @@ export const InputContainer = style({
   width: '30rem',
   flexDirection: 'column',
   alignItems: 'center',
-  position: 'relative',
+
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const InputEmailContainer = style({
@@ -37,6 +45,15 @@ export const InputEmailContainer = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'flex-start',
+
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const InputPasswordContainer = style({
@@ -45,6 +62,15 @@ export const InputPasswordContainer = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'flex-start',
+
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const InputPassword = style({
@@ -56,6 +82,14 @@ export const InputPassword = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   height: '3.125rem',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const inputPasswordError = style({
@@ -66,7 +100,16 @@ export const inputPasswordError = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   border: '1px solid red',
+  position: 'relative',
   height: '3.125rem',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const inputPasswordVariants = styleVariants({
@@ -83,6 +126,15 @@ export const InputEmail = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   height: '3.125rem',
+  position: 'relative',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const inputEmailError = style({
@@ -94,6 +146,15 @@ export const inputEmailError = style({
   width: '30.125rem',
   height: '3.125rem',
   border: `1px solid ${vars.color.red}`,
+
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const inputEmailVariants = styleVariants({
@@ -119,14 +180,14 @@ export const InputBox = style({
       border: 'none',
     },
   },
-});
-
-export const InputPW = style({
-  display: 'flex',
-  width: '30rem',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '1rem',
+  '@media': {
+    'screen and ((max-width: 481px))': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const Text = style({
@@ -165,6 +226,8 @@ export const InputText = style({
   color: vars.color.gray,
   background: 'none',
   fontWeight: '300',
+  position: 'absolute',
+  right: '1rem',
 });
 
 export const IconBox = style({
@@ -183,6 +246,14 @@ export const LoginBtn = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const SignupBox = style({
@@ -220,4 +291,12 @@ export const BlockLoginBtn = style({
   justifyContent: 'center',
   border: `1px solid ${vars.color.primary}`,
   cursor: 'not-allowed',
+  '@media': {
+    'screen and (max-width: 481px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
