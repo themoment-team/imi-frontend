@@ -14,6 +14,8 @@ type FormValues = {
   password: string;
 };
 
+type FormName = 'email' | 'password';
+
 const SignInPage = () => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
@@ -24,6 +26,7 @@ const SignInPage = () => {
     formState: { errors, isValid },
     setError,
     watch,
+    setFocus,
   } = useForm<FormValues>({ mode: 'onBlur', reValidateMode: 'onBlur' });
 
   const onSubmit = (data: FormValues) => {
@@ -45,6 +48,10 @@ const SignInPage = () => {
         message: '이메일 또는 비밀번호가 일치하지 않습니다.',
       });
     }
+  };
+
+  const handleFocus = (id: FormName) => {
+    setFocus(id);
   };
 
   const allFieldsFilled = Object.values(watch()).every((value) => value !== '');
@@ -70,6 +77,7 @@ const SignInPage = () => {
                 ? S.inputEmailVariants.error
                 : S.inputEmailVariants.default
             }
+            onClick={() => handleFocus('email')}
           >
             <input
               placeholder="이메일을 입력해주세요."
@@ -108,6 +116,7 @@ const SignInPage = () => {
                 ? S.inputPasswordVariants.error
                 : S.inputPasswordVariants.default
             }
+            onClick={() => handleFocus('password')}
           >
             <input
               type={isOpen ? 'text' : 'password'}
