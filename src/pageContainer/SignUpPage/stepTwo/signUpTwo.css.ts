@@ -29,6 +29,14 @@ export const InputContainer = style({
   flexDirection: 'column',
   alignItems: 'center',
   position: 'relative',
+  '@media': {
+    'screen and (max-width:481px)': {
+      width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const InputNameContainer = style({
@@ -37,6 +45,14 @@ export const InputNameContainer = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'flex-start',
+  '@media': {
+    'screen and (max-width:481px)': {
+      width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const InputGradeNumberContainer = style({
@@ -45,6 +61,14 @@ export const InputGradeNumberContainer = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'flex-start',
+  '@media': {
+    'screen and (max-width:481px)': {
+      width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const InputGradeNumber = style({
@@ -56,6 +80,14 @@ export const InputGradeNumber = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   height: '3.125rem',
+  '@media': {
+    'screen and (max-width:481px)': {
+      width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const inputGradeNumberError = style({
@@ -67,6 +99,14 @@ export const inputGradeNumberError = style({
   width: '30.125rem',
   border: `1px solid ${vars.color.red}`,
   height: '3.125rem',
+  '@media': {
+    'screen and (max-width:481px)': {
+      width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const inputGradeNumberVariants = styleVariants({
@@ -83,6 +123,14 @@ export const InputName = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   height: '3.125rem',
+  '@media': {
+    'screen and (max-width:481px)': {
+      width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const inputNameError = style({
@@ -94,6 +142,14 @@ export const inputNameError = style({
   width: '30.125rem',
   height: '3.125rem',
   border: `1px solid ${vars.color.red}`,
+  '@media': {
+    'screen and (max-width:481px)': {
+      width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const inputNameVariants = styleVariants({
@@ -119,14 +175,14 @@ export const InputBox = style({
       border: 'none',
     },
   },
-});
-
-export const InputPW = style({
-  display: 'flex',
-  width: '30rem',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '1rem',
+  '@media': {
+    'screen and (max-width:481px)': {
+      width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const Text = style({
@@ -170,6 +226,14 @@ export const SignUpBtn = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  '@media': {
+    'screen and (max-width:400px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const PrevBtn = style({
@@ -182,6 +246,14 @@ export const PrevBtn = style({
   alignItems: 'center',
   justifyContent: 'center',
   color: vars.color.white,
+  '@media': {
+    'screen and (max-width:400px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const SigninBox = style({
@@ -206,6 +278,14 @@ export const ErrorBox = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignContent: 'flex-end',
+  '@media': {
+    'screen and (max-width:481px)': {
+      width: '100%',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const BlockSignUpBtn = style({
@@ -219,6 +299,14 @@ export const BlockSignUpBtn = style({
   justifyContent: 'center',
   border: `1px solid ${vars.color.primary}`,
   cursor: 'not-allowed',
+  '@media': {
+    'screen and (max-width:400px)': {
+      width: '100vw',
+    },
+    'screen and (max-width: 580px)': {
+      width: 'calc(100vw - 5rem)',
+    },
+  },
 });
 
 export const BtnWrapper = style({
@@ -226,4 +314,9 @@ export const BtnWrapper = style({
   display: 'flex',
   flexDirection: 'row',
   gap: '1.31rem',
+  '@media': {
+    'screen and (max-width:400px)': {
+      flexDirection: 'column',
+    },
+  },
 });

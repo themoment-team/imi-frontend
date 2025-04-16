@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 
 import * as S from './signUpOne.css';
@@ -14,6 +14,8 @@ type FormValues = {
   password: string;
   repassword: string;
 };
+
+type FormName = 'email' | 'password' | 'repassword';
 
 type SignUpOnePageProps = {
   formData: { email: string; password: string };
@@ -30,13 +32,17 @@ const SignUpOnePage = ({
   const [isOpen, setOpen] = useState(false);
   const [reIsOpen, setReOpen] = useState(false);
 
+  const handleFocus = (id: FormName) => {
+    setFocus(id);
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     setError,
-    clearErrors,
     watch,
+    setFocus,
   } = useForm<FormValues>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -87,6 +93,7 @@ const SignUpOnePage = ({
                 ? S.inputEmailVariants.error
                 : S.inputEmailVariants.default
             }
+            onClick={() => handleFocus('email')}
           >
             <input
               placeholder="이메일을 입력해주세요."
@@ -125,6 +132,7 @@ const SignUpOnePage = ({
                 ? S.inputPasswordVariants.error
                 : S.inputPasswordVariants.default
             }
+            onClick={() => handleFocus('password')}
           >
             <input
               type={isOpen ? 'text' : 'password'}
@@ -159,12 +167,13 @@ const SignUpOnePage = ({
             )}
           </div>
           <div
-            key={'Repassword'}
+            key={'rsepassword'}
             className={
               errors.repassword
                 ? S.ReinputPasswordVariants.error
                 : S.ReinputPasswordVariants.default
             }
+            onClick={() => handleFocus('repassword')}
           >
             <input
               type={reIsOpen ? 'text' : 'password'}
