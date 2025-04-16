@@ -209,7 +209,6 @@ export const InputBox = style({
     '&::placeholder': {
       color: vars.color.gray,
       background: 'none',
-      fontSize: '12px',
     },
     '&:valid': {
       background: 'none',
