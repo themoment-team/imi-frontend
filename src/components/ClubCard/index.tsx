@@ -12,13 +12,7 @@ const ClubCard = ({ clubInfo }: ClubCardProps) => {
   return (
     <div className={S.CardContainer}>
       <div className={S.ImageWrapper}>
-        <Image
-          src={clubInfo.iconUrl}
-          alt={clubInfo.name}
-          width={361}
-          height={207}
-          priority
-        />
+        <Image src={clubInfo.iconUrl} alt={clubInfo.name} fill />
       </div>
       <div className={S.InfoContainer}>
         <div className={S.HeaderRow}>
