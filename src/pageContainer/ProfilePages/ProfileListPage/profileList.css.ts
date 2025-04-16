@@ -46,12 +46,12 @@ export const CardContainer = style({
   gap: '3rem',
   justifyContent: 'center',
   width: '100%',
-  justifyItems: 'center',
+  justifyItems: 'start',
 });
 
 export const Card = style({
   width: '100%',
-  maxWidth: '30rem',
+  maxWidth: '20rem',
   height: '11.25rem',
   padding: '1.5rem 2rem',
   borderRadius: '1rem',
@@ -68,7 +68,7 @@ export const Card = style({
 
   '@media': {
     'screen and (max-width: 768px)': {
-      maxWidth: '100%',
+      maxWidth: '90%',
       height: 'auto',
     },
   },
