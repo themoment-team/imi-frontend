@@ -13,6 +13,8 @@ type FormValues = {
   gradeNumber: number;
 };
 
+type FormName = 'name' | 'gradeNumber';
+
 type SignUpTwoPageProps = {
   formData: { email: string; password: string };
   onPrev: () => void;
@@ -27,6 +29,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
     formState: { errors, isValid },
     clearErrors,
     watch,
+    setFocus,
   } = useForm<FormValues>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -36,6 +39,10 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
     console.log(data, formData);
 
     router.push('/');
+  };
+
+  const handleFocus = (id: FormName) => {
+    setFocus(id);
   };
 
   const allFieldsFilled = Object.values(watch()).every((value) => value !== '');
@@ -72,6 +79,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
                 ? S.inputNameVariants.error
                 : S.inputNameVariants.default
             }
+            onClick={() => handleFocus('name')}
           >
             <input
               placeholder="이름을 입력해주세요"
@@ -106,6 +114,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
                 ? S.inputGradeNumberVariants.error
                 : S.inputGradeNumberVariants.default
             }
+            onClick={() => handleFocus('gradeNumber')}
           >
             <input
               placeholder="학번을 입력해주세요. ex) 2215"
