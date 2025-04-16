@@ -227,7 +227,7 @@ export const InputText = style({
   background: 'none',
   fontWeight: '300',
   position: 'absolute',
-  left: 'calc(100% - 81.92px - 1rem)',
+  right: '1rem',
 });
 
 export const IconBox = style({
