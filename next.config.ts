@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  images: {
+    domains: ['cdn.discordapp.com'],
+  },
 };
 
 export default withVanillaExtract(nextConfig);
