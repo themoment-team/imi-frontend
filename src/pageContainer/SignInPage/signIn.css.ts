@@ -100,6 +100,7 @@ export const inputPasswordError = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   border: '1px solid red',
+  position: 'relative',
   height: '3.125rem',
   '@media': {
     'screen and (max-width: 481px)': {
@@ -125,7 +126,7 @@ export const InputEmail = style({
   justifyContent: 'space-between',
   width: '30.125rem',
   height: '3.125rem',
-
+  position: 'relative',
   '@media': {
     'screen and (max-width: 481px)': {
       width: '100vw',
@@ -225,6 +226,8 @@ export const InputText = style({
   color: vars.color.gray,
   background: 'none',
   fontWeight: '300',
+  position: 'absolute',
+  left: 'calc(100% - 81.92px - 1rem)',
 });
 
 export const IconBox = style({
