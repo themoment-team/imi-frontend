@@ -68,7 +68,7 @@ export const Card = style({
 
   '@media': {
     'screen and (max-width: 768px)': {
-      maxWidth: '90%',
+      maxWidth: '100%',
       height: 'auto',
     },
   },
