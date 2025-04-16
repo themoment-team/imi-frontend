@@ -25,8 +25,8 @@ interface ProfileListResDto {
 }
 
 const getProfiles = async (): Promise<Profile[]> => {
-  const response = await axiosInstance.get<ProfileListResDto>('/profile/list');
-  return response.data?.profileList ?? [];
+  const data: ProfileListResDto = await axiosInstance.get('/profile/list');
+  return data.profileList ?? [];
 };
 
 export default function ProfileListPage() {
@@ -48,7 +48,7 @@ export default function ProfileListPage() {
 
   const filteredProfiles = selectedClubs.length
     ? profiles.filter((p: Profile) =>
-        p.wanted.some((club: string) => selectedClubs.includes(club))
+        p.wanted?.some((club: string) => selectedClubs.includes(club))
       )
     : profiles;
 
