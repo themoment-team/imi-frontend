@@ -206,9 +206,10 @@ export const InputBox = style({
   width: '100%',
   background: vars.color.background,
   selectors: {
-    '&:placehorder': {
+    '&::placeholder': {
       color: vars.color.gray,
       background: 'none',
+      fontSize: '12px',
     },
     '&:valid': {
       background: 'none',
@@ -264,6 +265,8 @@ export const InputText = style({
   color: vars.color.gray,
   background: 'none',
   fontWeight: '300',
+  position: 'absolute',
+  left: 'calc(100% - 81.92px - 1rem)',
 });
 
 export const IconBox = style({
