@@ -60,6 +60,8 @@ const SignInPage = () => {
     console.error(errors);
   };
 
+  console.log('testWS');
+
   return (
     <div className={S.SigninContainer}>
       <div className={S.LogoContainer}>
