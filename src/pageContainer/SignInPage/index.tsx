@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
@@ -36,7 +37,16 @@ const SignInPage = () => {
     if (data.email.length === 6) {
       data.email = data.email + '@gsm.hs.kr';
     }
+
     console.log('로그인 정보:', data);
+
+    const url = 'https://amond-server.kro.kr/auth/login';
+
+    axios
+      .post(url, data)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+
     //api
     if (true) {
       setError('email', {
@@ -59,8 +69,6 @@ const SignInPage = () => {
   const onError = (errors: FieldErrors) => {
     console.error(errors);
   };
-
-  console.log('testWS');
 
   return (
     <div className={S.SigninContainer}>
