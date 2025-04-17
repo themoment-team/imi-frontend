@@ -17,9 +17,9 @@ interface ProfileResDto {
   name: string;
   email: string;
   studentId: number;
-  wanted?: string[];
-  major?: string;
-  content?: string;
+  wanted: string[];
+  major: string;
+  content: string;
 }
 
 // // 목업
