@@ -1,17 +1,31 @@
+'use client';
+
 import { ClubCard } from '@/components';
+import Loading from '@/components/Loading';
+import { axiosInstance } from '@/libs';
+import { ClubsResponse } from '@/types';
+
+import { useQuery } from '@tanstack/react-query';
 
 import * as S from './clubs.css';
 
-const ClubInfos = [
-  {
-    img: '/images/the-moment.png',
-    name: '더모먼트',
-    leader: '이세민',
-    projects: 'Hello GSM, GSM Networking',
-  },
-];
-
 const ClubsPage = () => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['clubInfos'],
+    queryFn: async () => {
+      const response: ClubsResponse = await axiosInstance.get('/club');
+      console.log(response);
+      return response;
+    },
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
+    refetchOnWindowFocus: false,
+  });
+
+  if (isLoading) return <Loading />;
+
+  if (error) return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
+
   return (
     <div className={S.ClubsPageContainer}>
       <div className={S.HeaderRow}>
@@ -19,8 +33,8 @@ const ClubsPage = () => {
         <p className={S.PageTitle}>동아리 목록</p>
       </div>
       <div className={S.ClubCardsContainer}>
-        {ClubInfos.map((clubInfo, index) => {
-          return <ClubCard key={index} clubInfo={clubInfo} />;
+        {data?.clubs.map((clubInfo) => {
+          return <ClubCard key={clubInfo.id} clubInfo={clubInfo} />;
         })}
       </div>
     </div>
