@@ -42,6 +42,14 @@ const SignInPage = () => {
 
     const url = 'https://amond-server.kro.kr/auth/login';
 
+    try {
+      const response = axios.post(url, data);
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+
     axios
       .post(url, data)
       .then((response) => console.log(response))
