@@ -57,14 +57,10 @@ const getProfile = async (
 ): Promise<ProfileResDto | null> => {
   try {
     const response = await axiosInstance.get<ProfileResDto>(
-      `/profile/${studentNameId}`,
-      {
-        headers: {
-          Authorization: undefined,
-        },
-      }
+      `/profile/${studentNameId}`
     );
-    return response.data;
+    console.log('Profile data:', response.data);
+    return response as unknown as ProfileResDto;
   } catch (error) {
     console.error('profile 요청 실패: ', error);
     return null;
@@ -74,7 +70,8 @@ const getProfile = async (
 const getMyProfile = async (): Promise<ProfileResDto | null> => {
   try {
     const response = await axiosInstance.get<ProfileResDto>(`/profile/my`);
-    return response.data;
+    console.log('My profile data:', response);
+    return response as unknown as ProfileResDto;
   } catch (error) {
     console.error('my profile 요청 실패: ', error);
     return null;
@@ -95,9 +92,16 @@ export default function ProfileDetailPage() {
     queryFn: () => getProfile(studentNameId),
   });
 
+  const isLoggedIn = () => {
+    return (
+      typeof window !== 'undefined' && !!localStorage.getItem('accessToken')
+    );
+  };
+
   const { data: myProfile } = useQuery({
     queryKey: ['myProfile'],
     queryFn: getMyProfile,
+    enabled: isLoggedIn(),
   });
 
   const isMyProfile =
