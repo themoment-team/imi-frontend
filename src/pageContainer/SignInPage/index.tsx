@@ -1,9 +1,9 @@
 'use client';
 
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
+import { axiosInstance } from '@/libs';
 
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -16,6 +16,13 @@ type FormValues = {
 };
 
 type FormName = 'email' | 'password';
+
+type Token = {
+  accessToken: string;
+  expiresIn: number;
+  issuedAt: number;
+  refreshToken: string;
+};
 
 const SignInPage = () => {
   const router = useRouter();
@@ -30,7 +37,7 @@ const SignInPage = () => {
     setFocus,
   } = useForm<FormValues>({ mode: 'onBlur', reValidateMode: 'onBlur' });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     if (data.email.length === 0 || data.password.length === 0) {
       return 0;
     }
@@ -38,21 +45,17 @@ const SignInPage = () => {
       data.email = data.email + '@gsm.hs.kr';
     }
 
-    console.log('로그인 정보:', data);
-
-    const url =
-      'https://port-0-imi-backend-lzsaeexf05f2c47e.sel4.cloudtype.app/auth/login';
-
     try {
-      const response = axios.post(url, data);
+      const response: Token = await axiosInstance.post('/auth/login', data);
 
-      console.log(response);
+      const expireDate = new Date(response.expiresIn).toUTCString();
+
+      document.cookie = `accessToken=${response.accessToken}; path=/; expires=${expireDate}`;
+      document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
+
+      router.push('/');
     } catch (error) {
       console.log('error', error);
-    }
-
-    //api
-    if (true) {
       setError('email', {
         type: 'server',
         message: '',
