@@ -40,7 +40,8 @@ const SignInPage = () => {
 
     console.log('로그인 정보:', data);
 
-    const url = 'https://amond-server.kro.kr/auth/login';
+    const url =
+      'https://port-0-imi-backend-lzsaeexf05f2c47e.sel4.cloudtype.app/auth/login';
 
     try {
       const response = axios.post(url, data);
