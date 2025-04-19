@@ -3,11 +3,14 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@/styles/theme.css';
 
 export const ProfileListContainer = style({
-  padding: '6.4rem 25rem',
+  padding: '6.4rem 28.8rem',
   display: 'flex',
   flexDirection: 'column',
   gap: '3.7rem',
   '@media': {
+    'screen and (max-width: 1880px)': {
+      padding: '6.4rem 26rem',
+    },
     'screen and (max-width: 1728px)': {
       padding: '6.4rem 20rem',
     },
@@ -51,12 +54,13 @@ export const CardContainer = style({
 
 export const Card = style({
   width: '100%',
-  maxWidth: '20rem',
+  minWidth: '18.75rem',
   height: '11.25rem',
   padding: '1.5rem 2rem',
   borderRadius: '1rem',
   boxSizing: 'border-box',
   boxShadow: '0px 4px 10px 0px rgba(0, 0, 0, 0.10)',
+  border: `solid 1px ${vars.color.primary}`,
   backgroundColor: vars.color.white,
   cursor: 'pointer',
   transition: 'transform 0.2s',
