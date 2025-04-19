@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { ClubSelector } from '@/components';
-import Loading from '@/components/Loading';
+import { Loading } from '@/components';
 import { axiosInstance } from '@/libs';
 
 import { useQuery } from '@tanstack/react-query';
