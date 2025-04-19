@@ -59,7 +59,6 @@ const getProfile = async (
     const response = await axiosInstance.get<ProfileResDto>(
       `/profile/${studentNameId}`
     );
-    console.log('Profile data:', response.data);
     return response as unknown as ProfileResDto;
   } catch (error) {
     console.error('profile 요청 실패: ', error);
