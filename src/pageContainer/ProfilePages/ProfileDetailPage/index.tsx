@@ -3,8 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 
 import { BackBtn } from '@/asset';
-import { EmptyProfile } from '@/components';
-import { Loading } from '@/components';
+import { EmptyProfile, Loading } from '@/components';
 import { axiosInstance } from '@/libs';
 import NotFoundPage from '@/pageContainer/NotFoundPage';
 
