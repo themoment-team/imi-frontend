@@ -168,7 +168,7 @@ export const InputBox = style({
   width: '100%',
   background: vars.color.background,
   selectors: {
-    '&:placehorder': {
+    '&:placeholder': {
       color: vars.color.gray,
       background: 'none',
     },
