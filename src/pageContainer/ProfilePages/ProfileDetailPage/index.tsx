@@ -6,25 +6,17 @@ import { BackBtn } from '@/asset';
 import { EmptyProfile, Loading } from '@/components';
 import { axiosInstance } from '@/libs';
 import NotFoundPage from '@/pageContainer/NotFoundPage';
+import { Profile } from '@/types';
 
 import { useQuery } from '@tanstack/react-query';
 
 import * as T from '../profile.css';
 import * as S from './profileDetail.css';
 
-interface ProfileResDto {
-  name: string;
-  email: string;
-  studentId: number;
-  wanted: string[];
-  major: string;
-  content: string;
-}
-
 // // 목업
 // const getProfile = async (
 //   studentNameId: string
-// ): Promise<ProfileResDto | null> => {
+// ): Promise<Profile | null> => {
 //   console.log('목업');
 
 //   return {
@@ -38,7 +30,7 @@ interface ProfileResDto {
 // };
 
 // // 목업
-// const getMyProfile = async (): Promise<ProfileResDto | null> => {
+// const getMyProfile = async (): Promise<Profile | null> => {
 //   console.log('목업');
 
 //   return {
@@ -51,18 +43,16 @@ interface ProfileResDto {
 //   };
 // };
 
-const getProfile = async (
-  studentNameId: string
-): Promise<ProfileResDto | null> => {
-  const response = await axiosInstance.get<ProfileResDto>(
+const getProfile = async (studentNameId: string): Promise<Profile | null> => {
+  const response = await axiosInstance.get<Profile>(
     `/profile/${studentNameId}`
   );
-  return response as unknown as ProfileResDto;
+  return response as unknown as Profile;
 };
 
-const getMyProfile = async (): Promise<ProfileResDto | null> => {
-  const response = await axiosInstance.get<ProfileResDto>(`/profile/my`);
-  return response as unknown as ProfileResDto;
+const getMyProfile = async (): Promise<Profile | null> => {
+  const response = await axiosInstance.get<Profile>(`/profile/my`);
+  return response as unknown as Profile;
 };
 
 export default function ProfileDetailPage() {
@@ -78,7 +68,7 @@ export default function ProfileDetailPage() {
     data: profile,
     isLoading,
     error: profileError,
-  } = useQuery<ProfileResDto | null>({
+  } = useQuery<Profile | null>({
     queryKey: ['profile', studentNameId],
     queryFn: () => getProfile(studentNameId),
     staleTime: 1000 * 60 * 5,

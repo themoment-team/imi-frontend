@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { ClubSelector, Loading } from '@/components';
 import { axiosInstance } from '@/libs';
+import { Profile, ProfileResponse } from '@/types';
 
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -11,21 +12,9 @@ import { useState } from 'react';
 import * as T from '../profile.css';
 import * as S from './profileList.css';
 
-interface Profile {
-  studentId: number;
-  name: string;
-  wanted: string[];
-  major: string;
-}
-
-interface ProfileListResDto {
-  amount: number;
-  profileList: Profile[];
-}
-
 const getProfiles = async (): Promise<Profile[]> => {
-  const data: ProfileListResDto = await axiosInstance.get('/profile/list');
-  return data.profileList ?? [];
+  const data: ProfileResponse = await axiosInstance.get('/profile/list');
+  return data.profiles ?? [];
 };
 
 export default function ProfileListPage() {
