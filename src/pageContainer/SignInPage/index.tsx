@@ -26,7 +26,7 @@ type Token = {
 
 const SignInPage = () => {
   const router = useRouter();
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const {
     register,
@@ -151,7 +151,7 @@ const SignInPage = () => {
                 },
               })}
             />
-            <div className={S.IconBox} onClick={() => setOpen(!isOpen)}>
+            <div className={S.IconBox} onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <OpenEyes /> : <CloseEyes />}
             </div>
           </div>
