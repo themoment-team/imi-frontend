@@ -33,12 +33,21 @@ export default function ProfileListPage() {
   const router = useRouter();
   const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
 
-  const { data: profiles = [], isLoading } = useQuery<Profile[]>({
+  const {
+    data: profiles = [],
+    isLoading,
+    error,
+  } = useQuery<Profile[]>({
     queryKey: ['profile/list'],
     queryFn: getProfiles,
   });
 
   if (isLoading) return <Loading />;
+
+  if (error) {
+    console.error('프로필 목록 불러오는 중 오류 발생:', error);
+    return <div>프로필 목록을 불러오는 중 오류가 발생했습니다.</div>;
+  }
 
   const toggleClub = (club: string) => {
     setSelectedClubs((prev) =>
