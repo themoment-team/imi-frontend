@@ -55,26 +55,15 @@ interface ProfileResDto {
 const getProfile = async (
   studentNameId: string
 ): Promise<ProfileResDto | null> => {
-  try {
-    const response = await axiosInstance.get<ProfileResDto>(
-      `/profile/${studentNameId}`
-    );
-    return response as unknown as ProfileResDto;
-  } catch (error) {
-    console.error('profile 요청 실패: ', error);
-    return null;
-  }
+  const response = await axiosInstance.get<ProfileResDto>(
+    `/profile/${studentNameId}`
+  );
+  return response as unknown as ProfileResDto;
 };
 
 const getMyProfile = async (): Promise<ProfileResDto | null> => {
-  try {
-    const response = await axiosInstance.get<ProfileResDto>(`/profile/my`);
-    console.log('My profile data:', response);
-    return response as unknown as ProfileResDto;
-  } catch (error) {
-    console.error('my profile 요청 실패: ', error);
-    return null;
-  }
+  const response = await axiosInstance.get<ProfileResDto>(`/profile/my`);
+  return response as unknown as ProfileResDto;
 };
 
 export default function ProfileDetailPage() {
@@ -86,9 +75,15 @@ export default function ProfileDetailPage() {
 
   const router = useRouter();
 
-  const { data: profile, isLoading } = useQuery<ProfileResDto | null>({
+  const {
+    data: profile,
+    isLoading,
+    error: profileError,
+  } = useQuery<ProfileResDto | null>({
     queryKey: ['profile', studentNameId],
     queryFn: () => getProfile(studentNameId),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 
   const isLoggedIn = () => {
@@ -97,9 +92,11 @@ export default function ProfileDetailPage() {
     );
   };
 
-  const { data: myProfile } = useQuery({
+  const { data: myProfile, error: myProfileError } = useQuery({
     queryKey: ['myProfile'],
     queryFn: getMyProfile,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
     enabled: isLoggedIn(),
   });
 
@@ -110,6 +107,12 @@ export default function ProfileDetailPage() {
       `${myProfile.studentId}${myProfile.name}`;
 
   if (isLoading) return <Loading />;
+
+  if (profileError || myProfileError) {
+    console.error('프로필 로딩 중 오류 발생:', profileError || myProfileError);
+    return <div>프로필을 불러오는 중 오류가 발생했습니다.</div>;
+  }
+
   if (!profile && isMyProfile) return <EmptyProfile />;
   if (!profile) return <NotFoundPage />;
 
