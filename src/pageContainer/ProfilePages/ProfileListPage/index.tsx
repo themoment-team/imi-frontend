@@ -2,9 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 
-import { ClubSelector } from '@/components';
-import Loading from '@/components/Loading';
+import { ClubSelector, Loading } from '@/components';
 import { axiosInstance } from '@/libs';
+import { Profile, ProfileResponse } from '@/types';
 
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -12,33 +12,30 @@ import { useState } from 'react';
 import * as T from '../profile.css';
 import * as S from './profileList.css';
 
-interface Profile {
-  studentId: number;
-  name: string;
-  wanted: string[];
-  major: string;
-}
-
-interface ProfileListResDto {
-  amount: number;
-  profileList: Profile[];
-}
-
 const getProfiles = async (): Promise<Profile[]> => {
-  const response = await axiosInstance.get<ProfileListResDto>('/profile/list');
-  return response.data?.profileList ?? [];
+  const data: ProfileResponse = await axiosInstance.get('/profile/list');
+  return data.profiles ?? [];
 };
 
 export default function ProfileListPage() {
   const router = useRouter();
   const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
 
-  const { data: profiles = [], isLoading } = useQuery<Profile[]>({
+  const {
+    data: profiles = [],
+    isLoading,
+    error,
+  } = useQuery<Profile[]>({
     queryKey: ['profile/list'],
     queryFn: getProfiles,
   });
 
   if (isLoading) return <Loading />;
+
+  if (error) {
+    console.error('프로필 목록 불러오는 중 오류 발생:', error);
+    return <div>프로필 목록을 불러오는 중 오류가 발생했습니다.</div>;
+  }
 
   const toggleClub = (club: string) => {
     setSelectedClubs((prev) =>
@@ -48,7 +45,7 @@ export default function ProfileListPage() {
 
   const filteredProfiles = selectedClubs.length
     ? profiles.filter((p: Profile) =>
-        p.wanted.some((club: string) => selectedClubs.includes(club))
+        p.wanted?.some((club: string) => selectedClubs.includes(club))
       )
     : profiles;
 
