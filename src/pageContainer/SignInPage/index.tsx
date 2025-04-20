@@ -38,9 +38,6 @@ const SignInPage = () => {
   } = useForm<FormValues>({ mode: 'onBlur', reValidateMode: 'onBlur' });
 
   const onSubmit = async (data: FormValues) => {
-    if (data.email.length === 0 || data.password.length === 0) {
-      return 0;
-    }
     if (data.email.length === 6) {
       data.email = data.email + '@gsm.hs.kr';
     }
