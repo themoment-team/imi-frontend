@@ -146,7 +146,7 @@ export const inputEmailError = style({
   width: '30.125rem',
   height: '3.125rem',
   border: `1px solid ${vars.color.red}`,
-
+  position: 'relative',
   '@media': {
     'screen and (max-width: 481px)': {
       width: '100vw',
