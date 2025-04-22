@@ -3,39 +3,42 @@
 import { useRouter } from 'next/navigation';
 
 import { ClubSelector } from '@/components';
+import Loading from '@/components/Loading';
+import { axiosInstance } from '@/libs';
 
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import * as T from '../profile.css';
 import * as S from './profileList.css';
 
-const profiles = [
-  { id: 1111, name: '정효주', major: 'FE', wanted: ['더모먼트', 'MSG'] },
-  { id: 2222, name: '전준연', major: 'FE', wanted: ['더모먼트'] },
-  { id: 3333, name: '이서준', major: 'FE', wanted: ['S/ASH'] },
-  {
-    id: 4444,
-    name: '이상혁',
-    major: 'AI',
-    wanted: ['마인드웨이', '더모먼트'],
-  },
-  {
-    id: 5555,
-    name: '이세민',
-    major: 'Security',
-    wanted: ['인력사무소', '앰퍼샌드'],
-  },
-  {
-    id: 6666,
-    name: '김태은',
-    major: 'BE',
-    wanted: ['인력사무소', '맛소금'],
-  },
-];
+interface Profile {
+  studentId: number;
+  name: string;
+  wanted: string[];
+  major: string;
+}
+
+interface ProfileListResDto {
+  amount: number;
+  profileList: Profile[];
+}
+
+const getProfiles = async (): Promise<Profile[]> => {
+  const response = await axiosInstance.get<ProfileListResDto>('/profile/list');
+  return response.data?.profileList ?? [];
+};
 
 export default function ProfileListPage() {
   const router = useRouter();
   const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
+
+  const { data: profiles = [], isLoading } = useQuery<Profile[]>({
+    queryKey: ['profile/list'],
+    queryFn: getProfiles,
+  });
+
+  if (isLoading) return <Loading />;
 
   const toggleClub = (club: string) => {
     setSelectedClubs((prev) =>
@@ -44,8 +47,8 @@ export default function ProfileListPage() {
   };
 
   const filteredProfiles = selectedClubs.length
-    ? profiles.filter((p) =>
-        p.wanted.some((club) => selectedClubs.includes(club))
+    ? profiles.filter((p: Profile) =>
+        p.wanted.some((club: string) => selectedClubs.includes(club))
       )
     : profiles;
 
@@ -58,11 +61,15 @@ export default function ProfileListPage() {
 
       {/* 자소서 카드 */}
       <div className={S.CardContainer}>
-        {filteredProfiles.map((profile) => (
+        {filteredProfiles.map((profile: Profile) => (
           <div
-            key={profile.id}
+            key={profile.studentId}
             className={S.Card}
-            onClick={() => router.push(`/profile/${profile.id}`)}
+            onClick={() =>
+              router.push(
+                `/profile/${encodeURIComponent(profile.studentId + profile.name)}`
+              )
+            }
           >
             <div className={T.TextContainer}>
               <p className={T.Tag}>이름</p>

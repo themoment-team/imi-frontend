@@ -1,25 +1,18 @@
 import Image from 'next/image';
 
+import { Club } from '@/types/clubResponse';
+
 import * as S from './clubCard.css';
 
-interface ClubInfo {
-  img: string;
-  name: string;
-  leader: string;
-  projects: string;
+interface ClubCardProps {
+  clubInfo: Club;
 }
 
-const ClubCard = ({ clubInfo }: { clubInfo: ClubInfo }) => {
+const ClubCard = ({ clubInfo }: ClubCardProps) => {
   return (
     <div className={S.CardContainer}>
       <div className={S.ImageWrapper}>
-        <Image
-          src={clubInfo.img}
-          alt={clubInfo.name}
-          width={361}
-          height={207}
-          priority
-        />
+        <Image src={clubInfo.iconUrl} alt={clubInfo.name} fill />
       </div>
       <div className={S.InfoContainer}>
         <div className={S.HeaderRow}>
@@ -28,7 +21,7 @@ const ClubCard = ({ clubInfo }: { clubInfo: ClubInfo }) => {
             <p className={S.LeaderText}>{clubInfo.leader}</p>
           </div>
         </div>
-        <p className={S.ProjectTitle}>{clubInfo.projects}</p>
+        <p className={S.ProjectTitle}>{clubInfo.mainContent}</p>
       </div>
     </div>
   );
