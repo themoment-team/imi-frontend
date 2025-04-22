@@ -5,7 +5,7 @@ type AuthContextType = {
   setIsLogged: (value: boolean) => void;
 };
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | boolean>(false);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
