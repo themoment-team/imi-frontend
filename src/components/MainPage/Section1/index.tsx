@@ -16,10 +16,12 @@ const Section1 = ({ scrollToSection2 }: { scrollToSection2: () => void }) => {
             당신의 열정과 재능을 보여줄 기회입니다.
           </p>
         </div>
-        <button className={S.ActionButton}>
-          <Link href="/signin">로그인</Link>
-          {/* 로그인 여부에 따라 바로가기 or 로그인 버튼 표시 필요 */}
-        </button>
+        <Link href="/signin">
+          <button className={S.ActionButton}>
+            로그인
+            {/* 로그인 여부에 따라 바로가기 or 로그인 버튼 표시 필요 */}
+          </button>
+        </Link>
       </div>
       <div className={S.AnimatedArrow} onClick={scrollToSection2}>
         <DownArrow />
