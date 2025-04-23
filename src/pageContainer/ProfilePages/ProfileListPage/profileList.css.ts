@@ -3,25 +3,25 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@/styles/theme.css';
 
 export const ProfileListContainer = style({
-  padding: '6.4rem 28.8rem',
+  padding: '6.4rem 28rem',
   display: 'flex',
   flexDirection: 'column',
   gap: '3.7rem',
   '@media': {
     'screen and (max-width: 1880px)': {
-      padding: '6.4rem 26rem',
+      padding: '6.4rem 23rem',
     },
     'screen and (max-width: 1728px)': {
-      padding: '6.4rem 20rem',
+      padding: '6.4rem 19rem',
     },
     'screen and (max-width: 1600px)': {
-      padding: '6.4rem 17rem',
+      padding: '6.4rem 14rem',
     },
     'screen and (max-width: 1440px)': {
       padding: '6.4rem 9rem',
     },
     'screen and (max-width: 1200px)': {
-      padding: '6.4rem 8rem',
+      padding: '6.4rem 7rem',
     },
     'screen and (max-width: 1024px)': {
       padding: '6.4rem 5rem',
