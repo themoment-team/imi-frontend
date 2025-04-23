@@ -12,9 +12,9 @@ import { useState } from 'react';
 import * as T from '../profile.css';
 import * as S from './profileList.css';
 
-const getProfiles = async (): Promise<Profile[]> => {
+const getProfileList = async (): Promise<Profile[]> => {
   const data: ProfileResponse = await axiosInstance.get('/profile/list');
-  return data.profiles ?? [];
+  return data.profileList ?? [];
 };
 
 export default function ProfileListPage() {
@@ -22,12 +22,12 @@ export default function ProfileListPage() {
   const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
 
   const {
-    data: profiles = [],
+    data: profileList = [],
     isLoading,
     error,
   } = useQuery<Profile[]>({
     queryKey: ['profile/list'],
-    queryFn: getProfiles,
+    queryFn: getProfileList,
   });
 
   if (isLoading) return <Loading />;
@@ -43,11 +43,11 @@ export default function ProfileListPage() {
     );
   };
 
-  const filteredProfiles = selectedClubs.length
-    ? profiles.filter((p: Profile) =>
+  const filteredProfileList = selectedClubs.length
+    ? profileList.filter((p: Profile) =>
         p.wanted?.some((club: string) => selectedClubs.includes(club))
       )
-    : profiles;
+    : profileList;
 
   return (
     <div className={S.ProfileListContainer}>
@@ -58,7 +58,7 @@ export default function ProfileListPage() {
 
       {/* 자소서 카드 */}
       <div className={S.CardContainer}>
-        {filteredProfiles.map((profile: Profile) => (
+        {filteredProfileList.map((profile: Profile) => (
           <div
             key={profile.studentId}
             className={S.Card}

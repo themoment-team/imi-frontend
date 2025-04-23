@@ -9,5 +9,5 @@ export interface Profile {
 
 export interface ProfileResponse {
   amount: number;
-  profiles: Profile[];
+  profileList: Profile[];
 }
