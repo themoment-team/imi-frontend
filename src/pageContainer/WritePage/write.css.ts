@@ -15,6 +15,9 @@ export const WritePageContainer = style({
     'screen and (max-width: 1440px)': {
       padding: '6.85rem 10rem 2.5rem',
     },
+    'screen and (max-width: 1024px)': {
+      padding: '6.85rem 7rem 2.5rem',
+    },
     'screen and (max-width: 850px)': {
       padding: '6.85rem 4.5rem 2.5rem',
     },
@@ -76,7 +79,7 @@ export const ToggleGroup = style({
 });
 
 export const TextareaField = style({
-  padding: '1.1rem',
+  padding: '1rem',
   resize: 'none',
   fontSize: '1.25rem',
   fontWeight: 400,
