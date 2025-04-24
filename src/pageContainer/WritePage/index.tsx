@@ -9,11 +9,18 @@ import * as S from './write.css';
 const WritePage = () => {
   const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
   const [major, setMajor] = useState('');
+  const [content, setContent] = useState('');
 
   const toggleClub = (club: string) => {
     setSelectedClubs((prev) =>
       prev.includes(club) ? prev.filter((c) => c !== club) : [...prev, club]
     );
+  };
+
+  const handleResizeHeight = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    const target = e.target as HTMLTextAreaElement;
+    target.style.height = 'auto';
+    target.style.height = `${target.scrollHeight + 1.8}px`;
   };
 
   return (
@@ -40,13 +47,13 @@ const WritePage = () => {
       <div className={S.Section}>
         <p className={S.SectionTitle}>내용</p>
         <textarea
+          value={content}
+          onChange={(e) => {
+            setContent(e.target.value);
+            handleResizeHeight(e);
+          }}
           placeholder="나의 장단점, 각오, 현재하고 있는 공부 등을 자유롭게 작성해보세요."
           className={S.TextareaField}
-          onInput={(e) => {
-            const target = e.target as HTMLTextAreaElement;
-            target.style.height = 'auto';
-            target.style.height = `${target.scrollHeight + 1.5}px`;
-          }}
         />
       </div>
       <div className={S.ButtonGroup}>
