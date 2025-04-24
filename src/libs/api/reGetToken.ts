@@ -1,7 +1,7 @@
 import { axiosInstance } from './axiosInstance';
 import getCookie from './getCookieToken';
 
-export const reGetToken = async (): Promise<boolean> => {
+export const reGetToken = async () => {
   try {
     const refreshToken = getCookie('refreshToken');
 
@@ -13,9 +13,7 @@ export const reGetToken = async (): Promise<boolean> => {
 
     document.cookie = `accessToken=${response.accessToken}; path=/; expires=${expireDate}`;
     document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
-
-    return true;
   } catch (error) {
-    return false;
+    console.log(error);
   }
 };
