@@ -8,6 +8,7 @@ import * as S from './write.css';
 
 const WritePage = () => {
   const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
+  const [major, setMajor] = useState('');
 
   const toggleClub = (club: string) => {
     setSelectedClubs((prev) =>
@@ -21,6 +22,8 @@ const WritePage = () => {
       <div className={S.Section}>
         <p className={S.SectionTitle}>관심 분야</p>
         <input
+          value={major}
+          onChange={(e) => setMajor(e.target.value)}
           placeholder="관심있는 분야를 작성해주세요. ex) 프론트엔드"
           className={S.InputField}
         />
