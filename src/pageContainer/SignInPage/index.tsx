@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
 import { axiosInstance } from '@/libs';
+import { useAuth } from '@/libs/context/contextLogin';
 
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -37,6 +38,8 @@ const SignInPage = () => {
     setFocus,
   } = useForm<FormValues>({ mode: 'onBlur', reValidateMode: 'onBlur' });
 
+  const { setIsLogged } = useAuth();
+
   const onSubmit = async (data: FormValues) => {
     if (data.email.length === 6) {
       data.email = data.email + '@gsm.hs.kr';
@@ -49,6 +52,8 @@ const SignInPage = () => {
 
       document.cookie = `accessToken=${response.accessToken}; path=/; expires=${expireDate}`;
       document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
+
+      setIsLogged(true);
 
       router.push('/');
     } catch (error) {
