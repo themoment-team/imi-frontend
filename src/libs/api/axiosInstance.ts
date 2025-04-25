@@ -1,13 +1,24 @@
 import axios from 'axios';
 
+import { reGetToken } from './reGetToken';
+
 export const axiosInstance = axios.create({
   baseURL: '/api',
   withCredentials: true,
 });
 
-axiosInstance.interceptors.request.use((config) => {
-  return config; // 추후에 필요한 경우 설정 추가
-});
+axiosInstance.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  async function (error) {
+    if (error.response?.state === 401) {
+      reGetToken();
+    }
+
+    return error;
+  }
+);
 
 axiosInstance.interceptors.response.use(
   (response) => {
