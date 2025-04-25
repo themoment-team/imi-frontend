@@ -55,12 +55,6 @@ export const SectionSubtitle = style({
   color: vars.color.gray,
 });
 
-export const ButtonGroup = style({
-  display: 'flex',
-  justifyContent: 'center',
-  gap: '1rem',
-});
-
 export const InputField = style({
   padding: '1.1rem',
   fontSize: '1.25rem',
@@ -91,26 +85,17 @@ export const TextareaField = style({
   },
 });
 
-export const SaveButton = style({
-  padding: '0.65rem 2.5rem',
-  fontSize: '1rem',
-  fontWeight: 400,
-  color: vars.color.white,
-  backgroundColor: vars.color.gray,
-  borderRadius: '1rem',
-  '@media': {
-    'screen and (max-width: 375px)': {
-      padding: '0.65rem 2rem',
-    },
-  },
-});
-
 export const SubmitButton = style({
   fontSize: '1rem',
   fontWeight: 400,
   backgroundColor: vars.color.primary,
   borderRadius: '1rem',
   padding: '0.65rem 2.5rem',
+  alignSelf: 'center',
+  transition: 'background-color 0.3s',
+  ':hover': {
+    backgroundColor: '#BBC5DE',
+  },
   '@media': {
     'screen and (max-width: 375px)': {
       padding: '0.65rem 2rem',
