@@ -15,6 +15,9 @@ export const WritePageContainer = style({
     'screen and (max-width: 1440px)': {
       padding: '6.85rem 10rem 2.5rem',
     },
+    'screen and (max-width: 1200px)': {
+      padding: '6.85rem 8.5rem 2.5rem',
+    },
     'screen and (max-width: 1024px)': {
       padding: '6.85rem 7rem 2.5rem',
     },
@@ -30,6 +33,12 @@ export const WritePageContainer = style({
 export const Title = style({
   fontSize: '1.75rem',
   fontWeight: 600,
+});
+
+export const Form = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2.48rem',
 });
 
 export const Section = style({
