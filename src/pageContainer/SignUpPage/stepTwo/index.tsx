@@ -11,10 +11,10 @@ import * as S from './signUpTwo.css';
 
 type FormValues = {
   name: string;
-  gradeNumber: number;
+  studentId: number;
 };
 
-type FormName = 'name' | 'gradeNumber';
+type FormName = 'name' | 'studentId';
 
 type SignUpTwoPageProps = {
   formData: { email: string; password: string };
@@ -54,7 +54,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
 
   const ClearError = () => {
     clearErrors('name');
-    clearErrors('gradeNumber');
+    clearErrors('studentId');
   };
 
   const GoPrev = () => {
@@ -106,22 +106,22 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
             )}
           </div>
         </div>
-        <div className={S.InputGradeNumberContainer}>
+        <div className={S.InputstudentIdContainer}>
           <p className={S.Text}>Grade</p>
           <div
-            key={'gradeNumber'}
+            key={'studentId'}
             className={
-              errors.gradeNumber
-                ? S.inputGradeNumberVariants.error
-                : S.inputGradeNumberVariants.default
+              errors.studentId
+                ? S.inputstudentIdVariants.error
+                : S.inputstudentIdVariants.default
             }
-            onClick={() => handleFocus('gradeNumber')}
+            onClick={() => handleFocus('studentId')}
           >
             <input
               placeholder="학번을 입력해주세요. ex) 2215"
               className={S.InputBox}
               onClick={() => ClearError()}
-              {...register('gradeNumber', {
+              {...register('studentId', {
                 validate: (value) => {
                   if (!value) {
                     return undefined;
@@ -139,8 +139,8 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
           </div>
           <div className={S.ErrorBox}>
             <div></div>
-            {errors.gradeNumber && (
-              <p className={S.ErrorText}>{errors.gradeNumber.message}</p>
+            {errors.studentId && (
+              <p className={S.ErrorText}>{errors.studentId.message}</p>
             )}
           </div>
         </div>
