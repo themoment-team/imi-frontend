@@ -36,10 +36,18 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
     reValidateMode: 'onBlur',
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data, formData);
+  const onSubmit = async (data: FormValues) => {
+    const Data = { ...data, ...formData };
 
-    router.push('/');
+    console.log(Data);
+
+    try {
+      await axiosInstance.post('/user/join', Data);
+
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleFocus = (id: FormName) => {
