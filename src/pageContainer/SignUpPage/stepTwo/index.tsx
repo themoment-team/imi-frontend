@@ -122,6 +122,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
               className={S.InputBox}
               onClick={() => ClearError()}
               {...register('studentId', {
+                valueAsNumber: true,
                 validate: (value) => {
                   if (!value) {
                     return undefined;
