@@ -7,7 +7,11 @@ import SignUpTwoPage from './stepTwo';
 
 export default function SignUpPage() {
   const [step, setStep] = useState<number>(1);
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    repassword: '',
+  });
 
   return step === 1 ? (
     <SignUpOnePage

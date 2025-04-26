@@ -16,7 +16,7 @@ type FormValues = {
 type FormName = 'name' | 'gradeNumber';
 
 type SignUpTwoPageProps = {
-  formData: { email: string; password: string };
+  formData: { email: string; password: string; repassword: string };
   onPrev: () => void;
 };
 
