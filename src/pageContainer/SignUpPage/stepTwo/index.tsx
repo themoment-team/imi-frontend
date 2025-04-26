@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { ImiLogo } from '@/asset';
+import { axiosInstance } from '@/libs';
 
 import { FieldErrors, useForm } from 'react-hook-form';
 
@@ -16,7 +17,7 @@ type FormValues = {
 type FormName = 'name' | 'gradeNumber';
 
 type SignUpTwoPageProps = {
-  formData: { email: string; password: string; repassword: string };
+  formData: { email: string; password: string };
   onPrev: () => void;
 };
 

@@ -10,7 +10,6 @@ export default function SignUpPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    repassword: '',
   });
 
   return step === 1 ? (

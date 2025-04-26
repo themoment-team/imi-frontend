@@ -12,7 +12,7 @@ import * as S from './signUpOne.css';
 type FormValues = {
   email: string;
   password: string;
-  repassword: string;
+  repassword?: string;
 };
 
 type FormName = 'email' | 'password' | 'repassword';
@@ -57,6 +57,9 @@ const SignUpOnePage = ({
     if (data.email.length === 6) {
       data.email = data.email + '@gsm.hs.kr';
     }
+
+    delete data.repassword;
+
     setFormData(data);
 
     //api
@@ -181,6 +184,9 @@ const SignUpOnePage = ({
               className={S.InputBox}
               {...register('repassword', {
                 validate: (value) => {
+                  if (!value) {
+                    return '';
+                  }
                   if (value.length === 0) {
                     return undefined;
                   }
