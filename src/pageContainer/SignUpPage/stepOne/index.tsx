@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 
 import * as S from './signUpOne.css';
