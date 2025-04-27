@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
+import { axiosInstance } from '@/libs';
 
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -53,23 +54,22 @@ const SignUpOnePage = ({
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     if (data.email.length === 6) {
       data.email = data.email + '@gsm.hs.kr';
     }
 
     delete data.repassword;
 
-    setFormData(data);
-
-    //api
-    if (false) {
+    try {
+      await axiosInstance.post('/user/check-email', data.email);
+      setFormData(data);
+      onNext();
+    } catch (error) {
       setError('email', {
         type: 'server',
         message: '이미 존재하는 이메일입니다',
       });
-    } else {
-      onNext();
     }
   };
 
