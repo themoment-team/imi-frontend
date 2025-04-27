@@ -7,24 +7,19 @@ export const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    return config;
-  },
-  async function (error) {
-    if (error.response?.state === 401) {
-      reGetToken();
-    }
-
-    return error;
-  }
-);
+axiosInstance.interceptors.request.use((config) => {
+  return config;
+});
 
 axiosInstance.interceptors.response.use(
   (response) => {
     return response.data;
   },
   async (error) => {
+    if (error.response?.state === 401) {
+      reGetToken();
+    }
+
     return Promise.reject(error);
   }
 );
