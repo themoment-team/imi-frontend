@@ -76,10 +76,7 @@ const SignUpOnePage = ({
         onNext();
       }
     } catch (error) {
-      setError('email', {
-        type: 'server',
-        message: '이미 존재하는 이메일입니다',
-      });
+      console.log(error);
     }
   };
 
