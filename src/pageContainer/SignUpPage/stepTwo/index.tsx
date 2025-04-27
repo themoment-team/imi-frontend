@@ -114,14 +114,14 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
             )}
           </div>
         </div>
-        <div className={S.InputstudentIdContainer}>
+        <div className={S.InputStudentIdContainer}>
           <p className={S.Text}>Grade</p>
           <div
             key={'studentId'}
             className={
               errors.studentId
-                ? S.inputstudentIdVariants.error
-                : S.inputstudentIdVariants.default
+                ? S.inputStudentIdVariants.error
+                : S.inputStudentIdVariants.default
             }
             onClick={() => handleFocus('studentId')}
           >
