@@ -18,7 +18,7 @@ type FormValues = {
 
 type FormName = 'email' | 'password';
 
-type Token = {
+type LoginResponse = {
   accessToken: string;
   expiresIn: number;
   issuedAt: number;
@@ -46,7 +46,10 @@ const SignInPage = () => {
     }
 
     try {
-      const response: Token = await axiosInstance.post('/auth/login', data);
+      const response: LoginResponse = await axiosInstance.post(
+        '/auth/login',
+        data
+      );
 
       const expireDate = new Date(response.expiresIn).toUTCString();
 
