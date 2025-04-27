@@ -62,9 +62,19 @@ const SignUpOnePage = ({
     delete data.repassword;
 
     try {
-      await axiosInstance.post('/user/check-email', data.email);
-      setFormData(data);
-      onNext();
+      const response = await axiosInstance.post('/user/check-email', {
+        email: data.email,
+      });
+
+      if (response) {
+        setError('email', {
+          type: 'server',
+          message: '이미 존재하는 이메일입니다',
+        });
+      } else {
+        setFormData(data);
+        onNext();
+      }
     } catch (error) {
       setError('email', {
         type: 'server',
