@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import getCookie from '@/utils/getCookie';
+
 import { reGetToken } from './reGetToken';
 
 export const axiosInstance = axios.create({
@@ -8,6 +10,10 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {
+  const accessToken = getCookie('accessToken');
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
   return config;
 });
 
