@@ -43,16 +43,16 @@ import * as S from './profileDetail.css';
 //   };
 // };
 
-const getProfile = async (studentNameId: string): Promise<Profile | null> => {
-  const response = await axiosInstance.get<Profile>(
+const getProfile = async (studentNameId: string) => {
+  const response: Profile = await axiosInstance.get(
     `/profile/${studentNameId}`
   );
-  return response as unknown as Profile;
+  return response;
 };
 
-const getMyProfile = async (): Promise<Profile | null> => {
-  const response = await axiosInstance.get<Profile>(`/profile/my`);
-  return response as unknown as Profile;
+const getMyProfile = async () => {
+  const response: Profile = await axiosInstance.get(`/profile/my`);
+  return response;
 };
 
 export default function ProfileDetailPage() {

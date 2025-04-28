@@ -12,7 +12,7 @@ import { useState } from 'react';
 import * as T from '../profile.css';
 import * as S from './profileList.css';
 
-const getProfileList = async (): Promise<Profile[]> => {
+const getProfileList = async () => {
   const data: ProfileResponse = await axiosInstance.get('/profile/list');
   return data.profileList ?? [];
 };
