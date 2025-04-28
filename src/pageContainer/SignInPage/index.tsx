@@ -19,7 +19,7 @@ type FormValues = {
 
 type FormName = 'email' | 'password';
 
-type LoginResponse = {
+export type LoginResponse = {
   accessToken: string;
   expiresIn: number;
   issuedAt: number;
