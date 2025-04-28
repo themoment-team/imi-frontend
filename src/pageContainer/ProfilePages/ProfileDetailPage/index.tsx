@@ -13,36 +13,6 @@ import { useQuery } from '@tanstack/react-query';
 import * as T from '../profile.css';
 import * as S from './profileDetail.css';
 
-// // 목업
-// const getProfile = async (
-//   studentNameId: string
-// ): Promise<Profile | null> => {
-//   console.log('목업');
-
-//   return {
-//     name: '이세민',
-//     email: 'semin@gsm.hs.kr',
-//     studentId: 2110,
-//     wanted: ['더모먼트', '소개과'],
-//     major: '프론트엔드',
-//     content: '자기소개서 내용입니다.',
-//   };
-// };
-
-// // 목업
-// const getMyProfile = async (): Promise<Profile | null> => {
-//   console.log('목업');
-
-//   return {
-//     name: '이세민',
-//     email: 'semin@gsm.hs.kr',
-//     studentId: 2110,
-//     major: '인형 뺏기',
-//     wanted: ['더모먼트', '소개과'],
-//     content: '이것은 내 자기소개서입니다.',
-//   };
-// };
-
 const getProfile = async (studentNameId: string) => {
   const response: Profile = await axiosInstance.get(
     `/profile/${studentNameId}`
