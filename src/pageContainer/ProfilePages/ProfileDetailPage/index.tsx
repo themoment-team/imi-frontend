@@ -97,7 +97,7 @@ export default function ProfileDetailPage() {
         </div>
 
         <div className={T.TextContainer}>
-          <p className={T.Tag}>희망 동아리</p>
+          <p className={T.Tag}>동아리</p>
           <p className={T.Content}>
             {Array.isArray(profile.wanted)
               ? profile.wanted.join(', ')
