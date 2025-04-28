@@ -3,9 +3,12 @@
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
+import { useAuth } from '@/hooks';
+import { axiosInstance } from '@/libs';
 
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import * as S from './signIn.css';
 
@@ -16,9 +19,16 @@ type FormValues = {
 
 type FormName = 'email' | 'password';
 
+type LoginResponse = {
+  accessToken: string;
+  expiresIn: number;
+  issuedAt: number;
+  refreshToken: string;
+};
+
 const SignInPage = () => {
   const router = useRouter();
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const {
     register,
@@ -29,16 +39,28 @@ const SignInPage = () => {
     setFocus,
   } = useForm<FormValues>({ mode: 'onBlur', reValidateMode: 'onBlur' });
 
-  const onSubmit = (data: FormValues) => {
-    if (data.email.length === 0 || data.password.length === 0) {
-      return 0;
-    }
+  const { setIsLogged } = useAuth();
+
+  const onSubmit = async (data: FormValues) => {
     if (data.email.length === 6) {
       data.email = data.email + '@gsm.hs.kr';
     }
-    console.log('로그인 정보:', data);
-    //api
-    if (true) {
+
+    try {
+      const response: LoginResponse = await axiosInstance.post(
+        '/auth/login',
+        data
+      );
+
+      document.cookie = `accessToken=${response.accessToken}; path=/;`;
+      document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
+
+      setIsLogged(true);
+
+      toast.success('로그인에 성공했습니다');
+      router.push('/');
+    } catch (error) {
+      toast.error('이메일 또는 비밀번호가 일치하지 않습니다.');
       setError('email', {
         type: 'server',
         message: '',
@@ -134,7 +156,7 @@ const SignInPage = () => {
                 },
               })}
             />
-            <div className={S.IconBox} onClick={() => setOpen(!isOpen)}>
+            <div className={S.IconBox} onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <OpenEyes /> : <CloseEyes />}
             </div>
           </div>

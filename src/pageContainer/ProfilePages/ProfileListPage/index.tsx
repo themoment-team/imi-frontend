@@ -2,43 +2,41 @@
 
 import { useRouter } from 'next/navigation';
 
-import { ClubSelector } from '@/components';
-import Loading from '@/components/Loading';
+import { ClubSelector, Loading } from '@/components';
 import { axiosInstance } from '@/libs';
+import { Profile, ProfileResponse } from '@/types';
 
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import * as T from '../profile.css';
 import * as S from './profileList.css';
 
-interface Profile {
-  studentId: number;
-  name: string;
-  wanted: string[];
-  major: string;
-}
-
-interface ProfileListResDto {
-  amount: number;
-  profileList: Profile[];
-}
-
-const getProfiles = async (): Promise<Profile[]> => {
-  const response = await axiosInstance.get<ProfileListResDto>('/profile/list');
-  return response.data?.profileList ?? [];
+const getProfileList = async () => {
+  const data: ProfileResponse = await axiosInstance.get('/profile/list');
+  return data.profileList ?? [];
 };
 
 export default function ProfileListPage() {
   const router = useRouter();
   const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
 
-  const { data: profiles = [], isLoading } = useQuery<Profile[]>({
+  const {
+    data: profileList = [],
+    isLoading,
+    error,
+  } = useQuery<Profile[]>({
     queryKey: ['profile/list'],
-    queryFn: getProfiles,
+    queryFn: getProfileList,
   });
 
   if (isLoading) return <Loading />;
+
+  if (error) {
+    toast.error('정보 불러오기 중 오류 발생.');
+    console.error('프로필 목록 불러오는 중 오류 발생: ', error);
+  }
 
   const toggleClub = (club: string) => {
     setSelectedClubs((prev) =>
@@ -46,11 +44,11 @@ export default function ProfileListPage() {
     );
   };
 
-  const filteredProfiles = selectedClubs.length
-    ? profiles.filter((p: Profile) =>
-        p.wanted.some((club: string) => selectedClubs.includes(club))
+  const filteredProfileList = selectedClubs.length
+    ? profileList.filter((p: Profile) =>
+        p.wanted?.some((club: string) => selectedClubs.includes(club))
       )
-    : profiles;
+    : profileList;
 
   return (
     <div className={S.ProfileListContainer}>
@@ -61,7 +59,7 @@ export default function ProfileListPage() {
 
       {/* 자소서 카드 */}
       <div className={S.CardContainer}>
-        {filteredProfiles.map((profile: Profile) => (
+        {filteredProfileList.map((profile: Profile) => (
           <div
             key={profile.studentId}
             className={S.Card}
@@ -81,7 +79,7 @@ export default function ProfileListPage() {
             </div>
 
             <div className={S.WantedContainer}>
-              <p className={T.Tag}>희망 동아리</p>
+              <p className={T.Tag}>동아리</p>
               <p className={T.Content}>
                 {Array.isArray(profile.wanted)
                   ? profile.wanted.join(', ')
