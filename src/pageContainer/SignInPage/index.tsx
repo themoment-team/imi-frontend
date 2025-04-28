@@ -7,6 +7,7 @@ import { axiosInstance, useAuth } from '@/libs';
 
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import * as S from './signIn.css';
 
@@ -55,9 +56,10 @@ const SignInPage = () => {
 
       setIsLogged(true);
 
+      toast.success('로그인 성공!');
       router.push('/');
     } catch (error) {
-      console.log('error', error);
+      toast.error('이메일 또는 비밀번호가 일치하지 않습니다.');
       setError('email', {
         type: 'server',
         message: '',
