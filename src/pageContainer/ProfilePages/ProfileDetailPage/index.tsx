@@ -1,58 +1,116 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { BackBtn } from '@/asset';
-import { EmptyProfile } from '@/components';
+import { EmptyProfile, Loading } from '@/components';
+import { axiosInstance } from '@/libs';
+import NotFoundPage from '@/pageContainer/NotFoundPage';
+import { Profile } from '@/types';
+
+import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 import * as T from '../profile.css';
 import * as S from './profileDetail.css';
 
-const profile = {
-  id: 1111,
-  name: '정효주',
-  major: 'FE',
-  wanted: ['더모먼트', 'MSG'],
-  content:
-    '안녕하세요 효주예요 제 엠비티아이는 엔프제이에요 친구들이 자꾸 저보고 티라고 하는데 저는 에프에요 사실 이 학교오고 티가 되긴 했는데 에프라고 우기고 있어요 감사합니다. 안녕하세요 효주예요 제 엠비티아이는 엔프제이에요 친구들이 자꾸 저보고 티라고 하는데 저는 에프에요 사실 이 학교오고 티가 되긴 했는데 에프라고 우기고 있어요 감사합니다. 안녕하세요 효주예요 제 엠비티아이는 엔프제이에요 친구들이 자꾸 저보고 티라고 하는데 저는 에프에요 사실 이 학교오고 티가 되긴 했는데 에프라고 우기고 있어요 감사합니다. 안녕하세요 효주예요 제 엠비티아이는 엔프제이에요 친구들이 자꾸 저보고 티라고 하는데 저는 에프에요 사실 이 학교오고 티가 되긴 했는데 에프라고 우기고 있어요 감사합니다. 안녕하세요 효주예요 제 엠비티아이는 엔프제이에요 친구들이 자꾸 저보고 티라고 하는데 저는 에프에요 사실 이 학교오고 티가 되긴 했는데 에프라고 우기고 있어요 감사합니다.  안녕하세요 효주예요 제 엠비티아이는 엔프제이에요 친구들이 자꾸 저보고 티라고 하는데 저는 에프에요 사실 이 학교오고 티가 되긴 했는데 에프라고 우기고 있어요 감사합니다. 안녕하세요 효주예요 제 엠비티아이는 엔프제이에요 친구들이 자꾸 저보고 티라고 하는데 저는 에프에요 사실 이 학교오고 티가 되긴 했는데 에프라고 우기고 있어요 감사합니다.',
-  // '',
+const getProfile = async (studentNameId: string) => {
+  const response: Profile = await axiosInstance.get(
+    `/profile/${studentNameId}`
+  );
+  return response;
+};
+
+const getMyProfile = async () => {
+  const response: Profile = await axiosInstance.get(`/profile/my`);
+  return response;
 };
 
 export default function ProfileDetailPage() {
+  const pathname = usePathname();
+  const idFromPath = pathname.split('/').pop() || '';
+  const studentNameId = decodeURIComponent(idFromPath);
+
+  console.log('studentNameId:', studentNameId);
+
   const router = useRouter();
 
-  if (!profile) return <EmptyProfile />;
+  const {
+    data: profile,
+    isLoading,
+    error: profileError,
+  } = useQuery<Profile | null>({
+    queryKey: ['profile', studentNameId],
+    queryFn: () => getProfile(studentNameId),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
+  });
+
+  const isLoggedIn = () => {
+    return (
+      typeof window !== 'undefined' && !!localStorage.getItem('accessToken')
+    );
+  };
+
+  const { data: myProfile, error: myProfileError } = useQuery({
+    queryKey: ['myProfile'],
+    queryFn: getMyProfile,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
+    enabled: isLoggedIn(),
+  });
+
+  const isMyProfile =
+    profile &&
+    myProfile &&
+    `${profile.studentId}${profile.name}` ===
+      `${myProfile.studentId}${myProfile.name}`;
+
+  if (isLoading) return <Loading />;
+
+  if (profileError || myProfileError) {
+    toast.error('정보 불러오기 중 오류 발생.');
+    console.error(
+      '프로필 불러오는 중 오류 발생:',
+      profileError || myProfileError
+    );
+  }
+
+  if (!profile && isMyProfile) return <EmptyProfile />;
+  if (!profile) return <NotFoundPage />;
 
   return (
-    <div>
-      <div className={S.ProfileDetailContainer}>
-        <div className={S.BackBtn} onClick={() => router.back()}>
-          <BackBtn />
-        </div>
-        <h1 className={S.Name}>{profile.name}</h1>
-        <div className={S.ContentContainer}>
+    <div className={S.ProfileDetailContainer}>
+      <div className={S.BackBtn} onClick={() => router.back()}>
+        <BackBtn />
+      </div>
+      <h1 className={S.Name}>{profile.name}</h1>
+      <div className={S.ContentContainer}>
+        {isMyProfile && (
           <a className={S.EditBtn} onClick={() => router.push(`/write`)}>
             수정하기
           </a>
-          <div className={T.TextContainer}>
-            <p className={T.Tag}>관심 분야</p>
-            <p className={T.Content}>{profile.major}</p>
-          </div>
-          <div className={T.TextContainer}>
-            <p className={T.Tag}>희망 동아리</p>
-            <p className={T.Content}>
-              {Array.isArray(profile.wanted)
-                ? profile.wanted.join(', ')
-                : profile.wanted}
-            </p>
-          </div>
+        )}
 
-          <p className={S.Content}>
-            {profile.content?.trim()
-              ? profile.content
-              : '자기소개서가 아직 작성되지 않았습니다.'}
+        <div className={T.TextContainer}>
+          <p className={T.Tag}>관심 분야</p>
+          <p className={T.Content}>{profile.major}</p>
+        </div>
+
+        <div className={T.TextContainer}>
+          <p className={T.Tag}>동아리</p>
+          <p className={T.Content}>
+            {Array.isArray(profile.wanted)
+              ? profile.wanted.join(', ')
+              : profile.wanted}
           </p>
         </div>
+
+        <p className={S.Content}>
+          {profile.content?.trim()
+            ? profile.content
+            : '자기소개서가 아직 작성되지 않았습니다.'}
+        </p>
       </div>
     </div>
   );
