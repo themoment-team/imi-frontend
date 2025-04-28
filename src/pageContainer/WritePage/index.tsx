@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { ClubSelector } from '@/components';
 import { axiosInstance } from '@/libs';
+import { Profile } from '@/types';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -52,7 +53,7 @@ const WritePage = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['myProfile'],
     queryFn: async () => {
-      const response = await axiosInstance.get('/profile/my');
+      const response: Profile = await axiosInstance.get('/profile/my');
       console.log(response);
       return response;
     },
