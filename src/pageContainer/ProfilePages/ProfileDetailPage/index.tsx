@@ -9,6 +9,7 @@ import NotFoundPage from '@/pageContainer/NotFoundPage';
 import { Profile } from '@/types';
 
 import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 import * as T from '../profile.css';
 import * as S from './profileDetail.css';
@@ -68,11 +69,11 @@ export default function ProfileDetailPage() {
   if (isLoading) return <Loading />;
 
   if (profileError || myProfileError) {
+    toast.error('정보 불러오기 중 오류 발생.');
     console.error(
       '프로필 불러오는 중 오류 발생:',
       profileError || myProfileError
     );
-    return <div>프로필을 불러오는 중 오류가 발생했습니다.</div>;
   }
 
   if (!profile && isMyProfile) return <EmptyProfile />;

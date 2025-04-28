@@ -8,6 +8,7 @@ import { Profile, ProfileResponse } from '@/types';
 
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import * as T from '../profile.css';
 import * as S from './profileList.css';
@@ -33,8 +34,8 @@ export default function ProfileListPage() {
   if (isLoading) return <Loading />;
 
   if (error) {
-    console.error('프로필 목록 불러오는 중 오류 발생:', error);
-    return <div>프로필 목록을 불러오는 중 오류가 발생했습니다.</div>;
+    toast.error('정보 불러오기 중 오류 발생.');
+    console.error('프로필 목록 불러오는 중 오류 발생: ', error);
   }
 
   const toggleClub = (club: string) => {
