@@ -1,11 +1,6 @@
-import { createContext, useContext } from 'react';
+import { AuthContext } from '@/context';
 
-type AuthContextType = {
-  isLogged: boolean;
-  setIsLogged: (value: boolean) => void;
-};
-
-export const AuthContext = createContext<AuthContextType | null>(null);
+import { useContext } from 'react';
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
