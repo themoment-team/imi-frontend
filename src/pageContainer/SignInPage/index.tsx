@@ -50,8 +50,6 @@ const SignInPage = () => {
         data
       );
 
-      const expireDate = new Date(response.expiresIn).toUTCString();
-
       document.cookie = `accessToken=${response.accessToken}; path=/;`;
       document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
 
