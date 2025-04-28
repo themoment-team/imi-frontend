@@ -6,6 +6,7 @@ import { ImiLogo } from '@/asset';
 import { axiosInstance } from '@/libs';
 
 import { FieldErrors, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import * as S from './signUpTwo.css';
 
@@ -45,8 +46,8 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
       await axiosInstance.post('/user/join', Data);
 
       router.push('/');
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
     }
   };
 
