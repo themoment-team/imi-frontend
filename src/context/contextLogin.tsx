@@ -1,4 +1,4 @@
-import { AuthContext } from '@/libs';
+import { AuthContext } from '@/hooks';
 
 import { ReactNode, useState } from 'react';
 

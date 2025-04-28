@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 
 import { ImiLogo } from '@/asset';
-import { useAuth } from '@/libs';
+import { useAuth } from '@/hooks';
 import { getCookie, isTokenValid } from '@/utils';
 
 import { useEffect, useState } from 'react';

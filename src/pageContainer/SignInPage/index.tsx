@@ -3,7 +3,8 @@
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
-import { axiosInstance, useAuth } from '@/libs';
+import { useAuth } from '@/hooks';
+import { axiosInstance } from '@/libs';
 
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
