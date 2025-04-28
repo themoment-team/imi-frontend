@@ -2,7 +2,12 @@ import axios from 'axios';
 
 import getCookie from '@/utils/getCookie';
 
-import { reGetToken } from './reGetToken';
+type RefreshResponse = {
+  accessToken: string;
+  expiresIn: number;
+  issuedAt: number;
+  refreshToken: string;
+};
 
 export const axiosInstance = axios.create({
   baseURL: '/api',
@@ -23,7 +28,21 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     if (error.response?.state === 401) {
-      reGetToken();
+      try {
+        const refreshToken = getCookie('refreshToken');
+
+        const response: RefreshResponse = await axiosInstance.post(
+          '/auth/refresh',
+          {
+            refreshToken,
+          }
+        );
+
+        document.cookie = `accessToken=${response.accessToken}; path=/;`;
+        document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     return Promise.reject(error);
