@@ -56,7 +56,7 @@ const SignInPage = () => {
 
       setIsLogged(true);
 
-      toast.success('로그인 성공!');
+      toast.success('로그인에 성공했습니다');
       router.push('/');
     } catch (error) {
       toast.error('이메일 또는 비밀번호가 일치하지 않습니다.');
