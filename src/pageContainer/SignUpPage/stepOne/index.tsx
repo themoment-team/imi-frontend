@@ -7,6 +7,7 @@ import { axiosInstance } from '@/libs';
 
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import * as S from './signUpOne.css';
 
@@ -71,6 +72,7 @@ const SignUpOnePage = ({
           type: 'server',
           message: '이미 존재하는 이메일입니다',
         });
+        toast.error('이미 존재하는 이메일입니다');
       } else {
         setFormData(data);
         onNext();
