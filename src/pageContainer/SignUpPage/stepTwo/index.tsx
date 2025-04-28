@@ -3,7 +3,9 @@
 import { useRouter } from 'next/navigation';
 
 import { ImiLogo } from '@/asset';
+import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
+import { LoginResponse } from '@/pageContainer/SignInPage';
 
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -25,6 +27,8 @@ type SignUpTwoPageProps = {
 const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
   const router = useRouter();
 
+  const { setIsLogged } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -40,10 +44,18 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
   const onSubmit = async (data: FormValues) => {
     const Data = { ...data, ...formData };
 
-    console.log(Data);
-
     try {
       await axiosInstance.post('/user/join', Data);
+
+      const response: LoginResponse = await axiosInstance.post('/auth/login', {
+        email: Data.email,
+        password: Data.password,
+      });
+
+      document.cookie = `accessToken=${response.accessToken}; path=/;`;
+      document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
+
+      setIsLogged(true);
 
       toast.success('회원가입에 성공했습니다');
       router.push('/');
