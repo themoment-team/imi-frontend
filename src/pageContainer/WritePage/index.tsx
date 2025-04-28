@@ -1,15 +1,19 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { ClubSelector } from '@/components';
 import { axiosInstance } from '@/libs';
 
-import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import * as S from './write.css';
 
 const WritePage = () => {
+  const router = useRouter();
+
   const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
   const [major, setMajor] = useState('');
   const [content, setContent] = useState('');
@@ -26,6 +30,47 @@ const WritePage = () => {
     target.style.height = `${target.scrollHeight + 1.8}px`;
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!major.trim()) {
+      toast.warn('관심 분야를 입력해주세요.');
+      return;
+    }
+    if (selectedClubs.length === 0) {
+      toast.warn('희망 동아리를 선택해주세요.');
+      return;
+    }
+    if (!content.trim()) {
+      toast.warn('내용을 입력해주세요.');
+      return;
+    }
+
+    mutate();
+  };
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['myProfile'],
+    queryFn: async () => {
+      const response = await axiosInstance.get('/profile/my');
+      console.log(response);
+      return response;
+    },
+    gcTime: 1000 * 60 * 60,
+    staleTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setSelectedClubs(data.wanted || []);
+      setMajor(data.major || '');
+      setContent(data.content || '');
+    }
+  }, [data]);
+
   const { mutate } = useMutation({
     mutationFn: async () => {
       const response = await axiosInstance.put('/profile', {
@@ -36,29 +81,13 @@ const WritePage = () => {
       return response;
     },
     onSuccess: () => {
+      router.push('/');
       toast.success('작성이 완료되었습니다.');
     },
     onError: () => {
       toast.error('오류가 발생했습니다.');
     },
   });
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!major.trim()) {
-      toast.warn('관심 분야를 입력해주세요.');
-      return;
-    } else if (selectedClubs.length === 0) {
-      toast.warn('희망 동아리를 선택해주세요.');
-      return;
-    } else if (!content.trim()) {
-      toast.warn('내용을 입력해주세요.');
-      return;
-    }
-
-    mutate();
-  };
 
   return (
     <div className={S.WritePageContainer}>
