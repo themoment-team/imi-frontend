@@ -45,6 +45,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
     try {
       await axiosInstance.post('/user/join', Data);
 
+      toast.success('회원가입에 성공했습니다');
       router.push('/');
     } catch (error: any) {
       toast.error(error.response.data.message);
