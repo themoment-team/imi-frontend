@@ -13,6 +13,7 @@ export default function ClubSelector({
     '더모먼트',
     '스타트업',
     '인큐브',
+    '리큐브',
     '코디',
     '미술하는친구들',
     'NAVY',
