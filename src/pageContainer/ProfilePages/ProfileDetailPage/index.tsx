@@ -4,6 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { BackBtn } from '@/asset';
 import { EmptyProfile, Loading } from '@/components';
+import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
 import NotFoundPage from '@/pageContainer/NotFoundPage';
 import { Profile } from '@/types';
@@ -46,18 +47,14 @@ export default function ProfileDetailPage() {
     gcTime: 1000 * 60 * 10,
   });
 
-  const isLoggedIn = () => {
-    return (
-      typeof window !== 'undefined' && !!localStorage.getItem('accessToken')
-    );
-  };
+  const { isLogged } = useAuth();
 
   const { data: myProfile, error: myProfileError } = useQuery({
     queryKey: ['myProfile'],
     queryFn: getMyProfile,
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 10,
-    enabled: isLoggedIn(),
+    enabled: isLogged,
   });
 
   const isMyProfile =
