@@ -3,8 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
-import { axiosInstance } from '@/libs';
-import { useAuth } from '@/libs/context/contextLogin';
+import { axiosInstance, useAuth } from '@/libs';
 
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -53,7 +52,7 @@ const SignInPage = () => {
 
       const expireDate = new Date(response.expiresIn).toUTCString();
 
-      document.cookie = `accessToken=${response.accessToken}; path=/; expires=${expireDate}`;
+      document.cookie = `accessToken=${response.accessToken}; path=/;`;
       document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
 
       setIsLogged(true);
