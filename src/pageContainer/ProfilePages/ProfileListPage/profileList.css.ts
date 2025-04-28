@@ -54,7 +54,7 @@ export const CardContainer = style({
 
 export const Card = style({
   width: '100%',
-  minWidth: '18.75rem',
+  maxWidth: '18.75rem',
   height: '11.25rem',
   padding: '1.5rem 2rem',
   borderRadius: '1rem',
@@ -67,13 +67,6 @@ export const Card = style({
   selectors: {
     '&:hover': {
       transform: 'scale(1.02)',
-    },
-  },
-
-  '@media': {
-    'screen and (max-width: 768px)': {
-      maxWidth: '100%',
-      height: 'auto',
     },
   },
 });
