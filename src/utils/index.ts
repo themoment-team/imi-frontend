@@ -1,2 +1,2 @@
-export { default as getCookie } from './getCookieToken';
+export * from './getCookie';
 export * from './isTokenValid';
