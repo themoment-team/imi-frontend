@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
 import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
+import { LoginResponse } from '@/types';
 
 import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -18,13 +19,6 @@ type FormValues = {
 };
 
 type FormName = 'email' | 'password';
-
-export type LoginResponse = {
-  accessToken: string;
-  expiresIn: number;
-  issuedAt: number;
-  refreshToken: string;
-};
 
 const SignInPage = () => {
   const router = useRouter();

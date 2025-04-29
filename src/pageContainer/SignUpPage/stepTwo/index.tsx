@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ImiLogo } from '@/asset';
 import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
-import { LoginResponse } from '@/pageContainer/SignInPage';
+import { LoginResponse } from '@/types';
 
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
