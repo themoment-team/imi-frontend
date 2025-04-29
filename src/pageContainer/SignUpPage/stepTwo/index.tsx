@@ -1,5 +1,7 @@
 'use client';
 
+import { AxiosError } from 'axios';
+import Error from 'next/error';
 import { useRouter } from 'next/navigation';
 
 import { ImiLogo } from '@/asset';
@@ -59,8 +61,10 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
 
       toast.success('회원가입에 성공했습니다');
       router.push('/');
-    } catch (error: any) {
-      toast.error(error.response.data.message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data.message);
+      }
     }
   };
 
