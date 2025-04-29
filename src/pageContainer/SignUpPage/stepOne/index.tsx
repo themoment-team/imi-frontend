@@ -77,8 +77,12 @@ const SignUpOnePage = ({
         setFormData(data);
         onNext();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      if (error.response?.state === 404 && error.response?.state === 503) {
+        toast.error('에러가 발생했습니다');
+      } else {
+        toast.error('서버통신중 에러가 발생했습니다');
+      }
     }
   };
 
