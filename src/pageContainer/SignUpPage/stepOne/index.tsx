@@ -3,16 +3,18 @@
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
+import { axiosInstance } from '@/libs';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import * as S from './signUpOne.css';
 
 type FormValues = {
   email: string;
   password: string;
-  repassword: string;
+  repassword?: string;
 };
 
 type FormName = 'email' | 'password' | 'repassword';
@@ -53,20 +55,34 @@ const SignUpOnePage = ({
     },
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     if (data.email.length === 6) {
       data.email = data.email + '@gsm.hs.kr';
     }
-    setFormData(data);
 
-    //api
-    if (false) {
-      setError('email', {
-        type: 'server',
-        message: '이미 존재하는 이메일입니다',
+    delete data.repassword;
+
+    try {
+      const response = await axiosInstance.post('/user/check-email', {
+        email: data.email,
       });
-    } else {
-      onNext();
+
+      if (response) {
+        setError('email', {
+          type: 'server',
+          message: '이미 존재하는 이메일입니다',
+        });
+        toast.error('이미 존재하는 이메일입니다');
+      } else {
+        setFormData(data);
+        onNext();
+      }
+    } catch (error: any) {
+      if (error.response?.state === 404 && error.response?.state === 503) {
+        toast.error('에러가 발생했습니다');
+      } else {
+        toast.error('서버통신중 에러가 발생했습니다');
+      }
     }
   };
 
@@ -181,6 +197,9 @@ const SignUpOnePage = ({
               className={S.InputBox}
               {...register('repassword', {
                 validate: (value) => {
+                  if (!value) {
+                    return '';
+                  }
                   if (value.length === 0) {
                     return undefined;
                   }
