@@ -37,10 +37,68 @@ export const ProfileListContainer = style({
   },
 });
 
+export const TitleAndGradeSelector = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  width: '100%',
+  marginBottom: '20px',
+});
+
 export const Title = style({
   fontSize: '2rem',
   textAlign: 'center',
   fontWeight: '500',
+  flex: 1,
+});
+
+export const GradeSelector = style({
+  position: 'relative',
+  fontSize: '0.875rem',
+});
+
+export const GradeToggle = style({
+  display: 'flex',
+  width: ' 6.75rem',
+  padding: '0.5rem 1rem',
+  justifyContent: 'space-between',
+  backgroundColor: '#FFFFFF',
+  border: `1px solid ${vars.color.primary}`,
+  borderRadius: '0.375rem',
+});
+
+export const SelectedText = style({
+  color: `${vars.color.text}`,
+});
+
+export const DefaultText = style({
+  color: `${vars.color.gray}`,
+});
+
+export const ToggleBtn = style({
+  transform: 'rotate(-90deg)',
+});
+
+export const GradeDropdown = style({
+  position: 'absolute',
+  top: '100%',
+  left: 0,
+  zIndex: 10,
+  backgroundColor: '#FFFFFF',
+  border: `1px solid ${vars.color.primary}`,
+  borderRadius: '0.375rem',
+  width: ' 6.75rem',
+  marginTop: '0.25rem',
+});
+
+export const GradeOption = style({
+  padding: '0.5rem 1rem',
+  cursor: 'pointer',
+});
+
+export const SelectedGrade = style({
+  backgroundColor: `${vars.color.white}`,
+  borderRadius: '0.375rem',
 });
 
 export const CardContainer = style({
