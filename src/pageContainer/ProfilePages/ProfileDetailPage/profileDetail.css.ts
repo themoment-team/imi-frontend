@@ -6,6 +6,7 @@ export const ProfileDetailContainer = style({
   display: 'flex',
   flexDirection: 'column',
   padding: '6.5rem 20rem',
+  minHeight: '100vh',
 
   '@media': {
     'screen and (max-width: 1728px)': {
@@ -30,10 +31,6 @@ export const ProfileDetailContainer = style({
       padding: '6.5rem 1.5rem',
     },
   },
-});
-
-export const BackBtn = style({
-  cursor: 'pointer',
 });
 
 export const Name = style({
@@ -78,5 +75,6 @@ export const ContentContainer = style({
 
 export const Content = style({
   fontSize: '1.25rem',
-  lineHeight: '2.5rem',
+  fontWeight: '300',
+  lineHeight: '2rem',
 });
