@@ -68,7 +68,11 @@ const WritePage = () => {
     if (data) {
       setSelectedClubs(data.wanted || []);
       setMajor(data.major || '');
-      setContent(data.content || '');
+      setContent(
+        data.content === '아직 자소서를 작성하지 않았습니다.'
+          ? ''
+          : data.content || ''
+      );
     }
   }, [data]);
 
