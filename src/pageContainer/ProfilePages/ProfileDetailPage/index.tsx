@@ -43,8 +43,6 @@ export default function ProfileDetailPage() {
   } = useQuery<Profile | null>({
     queryKey: ['profile', studentNameId],
     queryFn: () => getProfile(studentNameId),
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
   });
 
   const { isLogged } = useAuth();
@@ -52,8 +50,6 @@ export default function ProfileDetailPage() {
   const { data: myProfile, error: myProfileError } = useQuery({
     queryKey: ['myProfile'],
     queryFn: getMyProfile,
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
     enabled: isLogged,
   });
 
