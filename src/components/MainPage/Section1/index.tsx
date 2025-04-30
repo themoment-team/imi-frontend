@@ -3,10 +3,12 @@
 import Link from 'next/link';
 
 import { DownArrow } from '@/asset';
+import { useAuth } from '@/hooks';
 
 import * as S from './section1.css';
 
 const Section1 = ({ scrollToSection2 }: { scrollToSection2: () => void }) => {
+  const { isLogged } = useAuth();
   return (
     <section className={S.SectionContainer}>
       <div className={S.ContentContainer}>
@@ -16,12 +18,15 @@ const Section1 = ({ scrollToSection2 }: { scrollToSection2: () => void }) => {
             당신의 열정과 재능을 보여줄 기회입니다.
           </p>
         </div>
-        <Link href="/signin">
-          <button className={S.ActionButton}>
-            로그인
-            {/* 로그인 여부에 따라 바로가기 or 로그인 버튼 표시 필요 */}
-          </button>
-        </Link>
+        {isLogged ? (
+          <Link href="/write">
+            <button className={S.ActionButton}>바로가기</button>
+          </Link>
+        ) : (
+          <Link href="/signin">
+            <button className={S.ActionButton}>로그인</button>
+          </Link>
+        )}
       </div>
       <div className={S.AnimatedArrow} onClick={scrollToSection2}>
         <DownArrow />

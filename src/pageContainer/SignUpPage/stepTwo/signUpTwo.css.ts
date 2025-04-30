@@ -55,7 +55,7 @@ export const InputNameContainer = style({
   },
 });
 
-export const InputGradeNumberContainer = style({
+export const InputStudentIdContainer = style({
   display: 'flex',
   width: '30.125rem',
   flexDirection: 'column',
@@ -71,7 +71,7 @@ export const InputGradeNumberContainer = style({
   },
 });
 
-export const InputGradeNumber = style({
+export const InputStudentId = style({
   display: 'flex',
   alignItems: 'center',
   border: `1px solid ${vars.color.primary}`,
@@ -90,7 +90,7 @@ export const InputGradeNumber = style({
   },
 });
 
-export const inputGradeNumberError = style({
+export const inputStudentIdError = style({
   display: 'flex',
   alignItems: 'center',
   borderRadius: '8px',
@@ -109,9 +109,9 @@ export const inputGradeNumberError = style({
   },
 });
 
-export const inputGradeNumberVariants = styleVariants({
-  default: [InputGradeNumber],
-  error: [inputGradeNumberError],
+export const inputStudentIdVariants = styleVariants({
+  default: [InputStudentId],
+  error: [inputStudentIdError],
 });
 
 export const InputName = style({

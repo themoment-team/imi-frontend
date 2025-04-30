@@ -1,19 +1,25 @@
 'use client';
 
+import { AxiosError } from 'axios';
+import Error from 'next/error';
 import { useRouter } from 'next/navigation';
 
 import { ImiLogo } from '@/asset';
+import { useAuth } from '@/hooks';
+import { axiosInstance } from '@/libs';
+import { LoginResponse } from '@/types';
 
 import { FieldErrors, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import * as S from './signUpTwo.css';
 
 type FormValues = {
   name: string;
-  gradeNumber: number;
+  studentId: number;
 };
 
-type FormName = 'name' | 'gradeNumber';
+type FormName = 'name' | 'studentId';
 
 type SignUpTwoPageProps = {
   formData: { email: string; password: string };
@@ -22,6 +28,8 @@ type SignUpTwoPageProps = {
 
 const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
   const router = useRouter();
+
+  const { setIsLogged } = useAuth();
 
   const {
     register,
@@ -35,10 +43,29 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
     reValidateMode: 'onBlur',
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data, formData);
+  const onSubmit = async (data: FormValues) => {
+    const Data = { ...data, ...formData };
 
-    router.push('/');
+    try {
+      await axiosInstance.post('/user/join', Data);
+
+      const response: LoginResponse = await axiosInstance.post('/auth/login', {
+        email: Data.email,
+        password: Data.password,
+      });
+
+      document.cookie = `accessToken=${response.accessToken}; path=/;`;
+      document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
+
+      setIsLogged(true);
+
+      toast.success('회원가입에 성공했습니다');
+      router.push('/');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data.message);
+      }
+    }
   };
 
   const handleFocus = (id: FormName) => {
@@ -53,7 +80,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
 
   const ClearError = () => {
     clearErrors('name');
-    clearErrors('gradeNumber');
+    clearErrors('studentId');
   };
 
   const GoPrev = () => {
@@ -105,22 +132,23 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
             )}
           </div>
         </div>
-        <div className={S.InputGradeNumberContainer}>
+        <div className={S.InputStudentIdContainer}>
           <p className={S.Text}>Grade</p>
           <div
-            key={'gradeNumber'}
+            key={'studentId'}
             className={
-              errors.gradeNumber
-                ? S.inputGradeNumberVariants.error
-                : S.inputGradeNumberVariants.default
+              errors.studentId
+                ? S.inputStudentIdVariants.error
+                : S.inputStudentIdVariants.default
             }
-            onClick={() => handleFocus('gradeNumber')}
+            onClick={() => handleFocus('studentId')}
           >
             <input
               placeholder="학번을 입력해주세요. ex) 2215"
               className={S.InputBox}
               onClick={() => ClearError()}
-              {...register('gradeNumber', {
+              {...register('studentId', {
+                valueAsNumber: true,
                 validate: (value) => {
                   if (!value) {
                     return undefined;
@@ -138,8 +166,8 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
           </div>
           <div className={S.ErrorBox}>
             <div></div>
-            {errors.gradeNumber && (
-              <p className={S.ErrorText}>{errors.gradeNumber.message}</p>
+            {errors.studentId && (
+              <p className={S.ErrorText}>{errors.studentId.message}</p>
             )}
           </div>
         </div>
