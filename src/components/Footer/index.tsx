@@ -13,11 +13,11 @@ export default function Footer() {
 
   const [isHome, setHome] = useState<boolean>(false);
 
-  const ProPath = ['/', '/profile/list', '/clubs', '/profile/[id]'];
+  const ProPath = ['/', '/profile/list', '/clubs', '/profile/'];
 
   const pathname = usePathname();
 
-  useEffect(() => {
+  /* useEffect(() => {
     setDisplay(true);
     if (!ProPath.includes(pathname)) {
       setDisplay(() => false);
@@ -26,6 +26,22 @@ export default function Footer() {
       setHome(true);
     } else {
       setHome(false);
+    }
+  }, [pathname]);
+*/
+  useEffect(() => {
+    setDisplay(true);
+    if (pathname === '/') {
+      setHome(true);
+    } else {
+      setHome(false);
+    }
+    if (pathname.startsWith('/profile/') && pathname != '/profile/list') {
+      setDisplay(() => true);
+    } else if (!ProPath.includes(pathname)) {
+      setDisplay(() => false);
+    } else {
+      setDisplay(() => true);
     }
   }, [pathname]);
 
