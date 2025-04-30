@@ -63,6 +63,8 @@ export default function Header() {
 
     toast.success('로그아웃 되었습니다');
     setIsLogged(false);
+
+    router.push('/');
   };
 
   return (
