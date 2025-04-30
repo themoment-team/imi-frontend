@@ -4,6 +4,8 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { ImiLogo } from '@/asset';
 import { useAuth } from '@/hooks';
+import { axiosInstance } from '@/libs';
+import { Profile } from '@/types';
 import { getCookie, isTokenValid } from '@/utils';
 
 import { useEffect, useState } from 'react';
@@ -25,9 +27,14 @@ export default function Header() {
 
   const [display, setDisplay] = useState<boolean>(false);
 
-  const ProPath = ['/', '/write', '/profile/list', '/clubs', '/profile/[id]'];
+  const ProPath = ['/', '/write', '/profile/list', '/clubs', `/profile/`];
 
-  const handleNavigation = (path: string) => {
+  const handleNavigation = async (path: string) => {
+    if (path === '/profile/') {
+      const response: Profile = await axiosInstance.get('/profile/my');
+
+      path += `${response.studentId}${response.name}`;
+    }
     setActivePath(path);
     router.push(path);
   };
@@ -36,10 +43,16 @@ export default function Header() {
 
   useEffect(() => {
     setDisplay(true);
-    if (!ProPath.includes(pathname)) {
+    if (pathname.startsWith('/profile/') && pathname != '/profile/list') {
+      setDisplay(() => true);
+      setActivePath('/profile/');
+    } else if (!ProPath.includes(pathname)) {
       setDisplay(() => false);
+      setActivePath(pathname);
+    } else {
+      setDisplay(() => true);
+      setActivePath(pathname);
     }
-    setActivePath(pathname);
   }, [pathname]);
 
   useEffect(() => {
@@ -54,7 +67,7 @@ export default function Header() {
   const NavigationArray: NavigationType[] = [
     { name: '동아리', path: '/clubs' },
     { name: '소개서 목록', path: '/profile/list' },
-    { name: '자기소개서', path: '/profile/[id]' },
+    { name: '자기소개서', path: `/profile/` },
   ];
 
   const handleLogout = () => {
