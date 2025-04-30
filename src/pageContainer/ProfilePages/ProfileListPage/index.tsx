@@ -75,7 +75,10 @@ export default function ProfileListPage() {
             className={S.GradeToggle}
             onClick={() => setIsGradeDropdownOpen((prev) => !prev)}
           >
-            {selectedGrade ? `${selectedGrade}학년` : '학년 선택'}
+            <span className={selectedGrade ? S.SelectedText : S.DefaultText}>
+              {selectedGrade ? `${selectedGrade}학년` : '학년 선택'}
+            </span>
+
             <ArrowBtn width="1rem" height="1rem" className={S.ToggleBtn} />
           </button>
 
@@ -85,7 +88,7 @@ export default function ProfileListPage() {
                 <li
                   key={grade}
                   className={`${S.GradeOption} ${
-                    selectedGrade === grade ? S.Selected : ''
+                    selectedGrade === grade ? S.SelectedGrade : ''
                   }`}
                   onClick={() => toggleGrade(grade)}
                 >

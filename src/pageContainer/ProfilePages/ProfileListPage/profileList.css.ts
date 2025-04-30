@@ -63,9 +63,16 @@ export const GradeToggle = style({
   padding: '0.5rem 1rem',
   justifyContent: 'space-between',
   backgroundColor: '#FFFFFF',
-  color: `${vars.color.gray}`,
   border: `1px solid ${vars.color.primary}`,
   borderRadius: '0.375rem',
+});
+
+export const SelectedText = style({
+  color: `${vars.color.text}`,
+});
+
+export const DefaultText = style({
+  color: `${vars.color.gray}`,
 });
 
 export const ToggleBtn = style({
@@ -89,7 +96,7 @@ export const GradeOption = style({
   cursor: 'pointer',
 });
 
-export const Selected = style({
+export const SelectedGrade = style({
   backgroundColor: `${vars.color.white}`,
   borderRadius: '0.375rem',
 });
