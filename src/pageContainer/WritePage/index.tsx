@@ -42,10 +42,6 @@ const WritePage = () => {
       toast.warn('희망 동아리를 선택해주세요.');
       return;
     }
-    if (!content.trim()) {
-      toast.warn('내용을 입력해주세요.');
-      return;
-    }
 
     mutate();
   };
