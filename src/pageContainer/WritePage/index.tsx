@@ -50,14 +50,8 @@ const WritePage = () => {
     queryKey: ['myProfile'],
     queryFn: async () => {
       const response: Profile = await axiosInstance.get('/profile/my');
-      console.log(response);
       return response;
     },
-    gcTime: 1000 * 60 * 60,
-    staleTime: Infinity,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
   });
 
   useEffect(() => {
