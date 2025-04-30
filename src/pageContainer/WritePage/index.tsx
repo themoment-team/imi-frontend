@@ -86,7 +86,7 @@ const WritePage = () => {
       return response;
     },
     onSuccess: () => {
-      router.push('/');
+      router.push(`/profile/${data?.studentId}${data?.name}`);
       toast.success('작성이 완료되었습니다.');
     },
     onError: () => {
