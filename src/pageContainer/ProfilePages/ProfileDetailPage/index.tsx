@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 
-import { BackBtn } from '@/asset';
+import { ArrowBtn } from '@/asset';
 import { EmptyProfile, Loading } from '@/components';
 import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
@@ -78,9 +78,12 @@ export default function ProfileDetailPage() {
 
   return (
     <div className={S.ProfileDetailContainer}>
-      <div className={S.BackBtn} onClick={() => router.back()}>
-        <BackBtn />
-      </div>
+      <ArrowBtn
+        width="2.25rem"
+        height="2.25rem"
+        onClick={() => router.back()}
+      />
+
       <h1 className={S.Name}>{profile.name}</h1>
       <div className={S.ContentContainer}>
         {isMyProfile && (
