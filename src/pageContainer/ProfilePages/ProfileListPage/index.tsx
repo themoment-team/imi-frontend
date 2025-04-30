@@ -120,7 +120,7 @@ export default function ProfileListPage() {
               <p className={T.Content}>{profile.name}</p>
             </div>
             <div className={T.TextContainer}>
-              <p className={T.Tag}>관심분야</p>
+              <p className={T.Tag}>전공</p>
               <p className={T.Content}>{profile.major}</p>
             </div>
             <div className={S.WantedContainer}>
