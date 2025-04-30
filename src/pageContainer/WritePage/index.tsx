@@ -120,11 +120,17 @@ const WritePage = () => {
           </div>
         </div>
         <div className={S.Section}>
-          <p className={S.SectionTitle}>내용</p>
+          <div className={S.SectionTitleBox}>
+            <p className={S.SectionTitle}>내용</p>
+            <p className={S.SectionSubtitle}>{content.length}/2400</p>
+          </div>
           <textarea
             value={content}
             onChange={(e) => {
-              setContent(e.target.value);
+              const newContent = e.target.value;
+              if (newContent.length <= 2400) {
+                setContent(newContent);
+              }
               handleResizeHeight(e);
             }}
             placeholder="나의 장단점, 각오, 현재하고 있는 공부 등을 자유롭게 작성해보세요."

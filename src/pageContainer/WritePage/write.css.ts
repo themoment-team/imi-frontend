@@ -53,6 +53,13 @@ export const SectionHeader = style({
   gap: '0.35rem',
 });
 
+export const SectionTitleBox = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'flex-end',
+  padding: '0 0.5rem 0 0',
+});
+
 export const SectionTitle = style({
   fontSize: '1.25rem',
   fontWeight: '400',
@@ -65,7 +72,7 @@ export const SectionSubtitle = style({
 });
 
 export const InputField = style({
-  padding: '1.1rem',
+  padding: '1rem',
   fontSize: '1.25rem',
   fontWeight: 400,
   borderRadius: '1rem',
@@ -85,7 +92,8 @@ export const TextareaField = style({
   padding: '1rem',
   resize: 'none',
   fontSize: '1.25rem',
-  fontWeight: 400,
+  fontWeight: 300,
+  lineHeight: '2rem',
   borderRadius: '1rem',
   minHeight: '15.8rem',
   border: `1px solid ${vars.color.primary}`,
