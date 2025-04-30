@@ -89,18 +89,21 @@ const WritePage = () => {
       <p className={S.Title}>자기소개서 작성</p>
       <form className={S.Form} onSubmit={handleSubmit}>
         <div className={S.Section}>
-          <p className={S.SectionTitle}>관심 분야</p>
+          <p className={S.SectionTitle}>전공</p>
           <input
             value={major}
             onChange={(e) => setMajor(e.target.value)}
-            placeholder="관심있는 분야를 작성해주세요. ex) 프론트엔드"
+            placeholder="전공을 작성해주세요. ex) 프론트엔드"
             className={S.InputField}
           />
         </div>
         <div className={S.Section}>
           <div className={S.SectionHeader}>
             <p className={S.SectionTitle}>동아리</p>
-            <p className={S.SectionSubtitle}>희망 동아리를 선택해주세요.</p>
+            <p className={S.SectionSubtitle}>
+              {String(data?.studentId)[0] === '1' ? '희망' : '소속'} 동아리를
+              선택해주세요.
+            </p>
           </div>
           <div className={S.ToggleGroup}>
             <ClubSelector
