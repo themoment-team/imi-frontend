@@ -32,10 +32,6 @@ export const ProfileDetailContainer = style({
   },
 });
 
-export const BackBtn = style({
-  cursor: 'pointer',
-});
-
 export const Name = style({
   fontSize: '2rem',
   fontWeight: '500',
@@ -78,5 +74,6 @@ export const ContentContainer = style({
 
 export const Content = style({
   fontSize: '1.25rem',
-  lineHeight: '2.5rem',
+  fontWeight: '300',
+  lineHeight: '2rem',
 });
