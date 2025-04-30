@@ -16,19 +16,6 @@ export default function Footer() {
   const ProPath = ['/', '/profile/list', '/clubs', '/profile/'];
 
   const pathname = usePathname();
-
-  /* useEffect(() => {
-    setDisplay(true);
-    if (!ProPath.includes(pathname)) {
-      setDisplay(() => false);
-    }
-    if (pathname === '/') {
-      setHome(true);
-    } else {
-      setHome(false);
-    }
-  }, [pathname]);
-*/
   useEffect(() => {
     setDisplay(true);
     if (pathname === '/') {
