@@ -31,12 +31,17 @@ export default function Header() {
 
   const handleNavigation = async (path: string) => {
     if (path === '/profile/') {
-      const response: Profile = await axiosInstance.get('/profile/my');
+      try {
+        const response: Profile = await axiosInstance.get('/profile/my');
 
-      path += `${response.studentId}${response.name}`;
+        path += `${response.studentId}${response.name}`;
+
+        setActivePath(path);
+        router.push(path);
+      } catch (error) {
+        toast.error('로그인 후 사용 가능한 서비스입니다.');
+      }
     }
-    setActivePath(path);
-    router.push(path);
   };
 
   const pathname = usePathname();
