@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { ClubSelector } from '@/components';
+import { ClubSelector, Loading } from '@/components';
 import { axiosInstance } from '@/libs';
 import { Profile } from '@/types';
 
@@ -83,6 +83,13 @@ const WritePage = () => {
       toast.error('오류가 발생했습니다.');
     },
   });
+
+  if (isLoading) return <Loading />;
+
+  if (error) {
+    toast.error('정보 불러오기 중 오류 발생.');
+    console.error('자기소개서 내용을 불러오는 중 오류 발생: ', error);
+  }
 
   return (
     <div className={S.WritePageContainer}>
