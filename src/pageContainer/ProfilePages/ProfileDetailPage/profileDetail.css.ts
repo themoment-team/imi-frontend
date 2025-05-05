@@ -6,7 +6,7 @@ export const ProfileDetailContainer = style({
   display: 'flex',
   flexDirection: 'column',
   padding: '6.5rem 20rem',
-  minHeight: '100vh',
+  minHeight: 'calc(100vh - 4.5rem)',
 
   '@media': {
     'screen and (max-width: 1728px)': {
