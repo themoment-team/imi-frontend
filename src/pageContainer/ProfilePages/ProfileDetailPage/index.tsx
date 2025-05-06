@@ -77,7 +77,7 @@ export default function ProfileDetailPage() {
       <ArrowBtn
         width="2.25rem"
         height="2.25rem"
-        onClick={() => router.back()}
+        onClick={() => router.push(`/profile/list`)}
       />
 
       <h1 className={S.Name}>{profile.name}</h1>
