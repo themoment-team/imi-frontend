@@ -4,10 +4,9 @@ import { useRouter } from 'next/navigation';
 
 import { ClubSelector, Loading } from '@/components';
 import { useMyProfile } from '@/hooks';
-import { axiosInstance } from '@/libs';
-import { Profile } from '@/types';
+import { put } from '@/libs';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -56,17 +55,19 @@ const WritePage = () => {
   }, [myProfile]);
 
   const { mutate } = useMutation({
-    mutationFn: async () => {
-      const response = await axiosInstance.put('/profile', {
+    mutationFn: () =>
+      put('/profile', {
         wanted: selectedClubs,
         major,
         content,
-      });
-      return response;
-    },
+      }),
     onSuccess: () => {
-      router.push(`/profile/${myProfile?.studentId}${myProfile?.name}`);
-      toast.success('작성이 완료되었습니다.');
+      if (myProfile && myProfile.studentId && myProfile.name) {
+        router.push(`/profile/${myProfile.studentId}${myProfile.name}`);
+        toast.success('작성이 완료되었습니다.');
+      } else {
+        toast.error('프로필 정보를 찾을 수 없습니다.');
+      }
     },
     onError: () => {
       toast.error('오류가 발생했습니다.');
