@@ -55,12 +55,12 @@ const WritePage = () => {
 
   useEffect(() => {
     if (myProfile) {
-      setSelectedClubs(myProfile.wanted || []);
-      setMajor(myProfile.major || '');
+      setSelectedClubs(myProfile.wanted);
+      setMajor(myProfile.major);
       setContent(
         myProfile.content === '아직 자소서를 작성하지 않았습니다.'
           ? ''
-          : myProfile.content || ''
+          : myProfile.content
       );
     }
   }, [myProfile]);
