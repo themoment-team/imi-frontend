@@ -34,16 +34,6 @@ const WritePage = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!major.trim()) {
-      toast.warn('관심 분야를 입력해주세요.');
-      return;
-    }
-    if (selectedClubs.length === 0) {
-      toast.warn('희망 동아리를 선택해주세요.');
-      return;
-    }
-
     mutate();
   };
 
