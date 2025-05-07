@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { ClubSelector, Loading } from '@/components';
+import { useMyProfile } from '@/hooks';
 import { axiosInstance } from '@/libs';
 import { Profile } from '@/types';
 
@@ -46,25 +47,23 @@ const WritePage = () => {
     mutate();
   };
 
-  const { data, error, isLoading } = useQuery({
-    queryKey: ['myProfile'],
-    queryFn: async () => {
-      const response: Profile = await axiosInstance.get('/profile/my');
-      return response;
-    },
-  });
+  const {
+    data: myProfile,
+    error: myProfileError,
+    isLoading: myProfileLoading,
+  } = useMyProfile();
 
   useEffect(() => {
-    if (data) {
-      setSelectedClubs(data.wanted || []);
-      setMajor(data.major || '');
+    if (myProfile) {
+      setSelectedClubs(myProfile.wanted || []);
+      setMajor(myProfile.major || '');
       setContent(
-        data.content === '아직 자소서를 작성하지 않았습니다.'
+        myProfile.content === '아직 자소서를 작성하지 않았습니다.'
           ? ''
-          : data.content || ''
+          : myProfile.content || ''
       );
     }
-  }, [data]);
+  }, [myProfile]);
 
   const { mutate } = useMutation({
     mutationFn: async () => {
@@ -76,7 +75,7 @@ const WritePage = () => {
       return response;
     },
     onSuccess: () => {
-      router.push(`/profile/${data?.studentId}${data?.name}`);
+      router.push(`/profile/${myProfile?.studentId}${myProfile?.name}`);
       toast.success('작성이 완료되었습니다.');
     },
     onError: () => {
@@ -84,11 +83,11 @@ const WritePage = () => {
     },
   });
 
-  if (isLoading) return <Loading />;
+  if (myProfileLoading) return <Loading />;
 
-  if (error) {
+  if (myProfileError) {
     toast.error('정보 불러오기 중 오류 발생.');
-    console.error('자기소개서 내용을 불러오는 중 오류 발생: ', error);
+    console.error('자기소개서 내용을 불러오는 중 오류 발생: ', myProfileError);
   }
 
   return (
@@ -108,8 +107,8 @@ const WritePage = () => {
           <div className={S.SectionHeader}>
             <p className={S.SectionTitle}>동아리</p>
             <p className={S.SectionSubtitle}>
-              {String(data?.studentId)[0] === '1' ? '희망' : '소속'} 동아리를
-              선택해주세요.
+              {String(myProfile?.studentId)[0] === '1' ? '희망' : '소속'}{' '}
+              동아리를 선택해주세요.
             </p>
           </div>
           <div className={S.ToggleGroup}>
