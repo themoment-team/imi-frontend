@@ -12,6 +12,8 @@ import { toast } from 'react-toastify';
 
 import * as S from './write.css';
 
+const MAX_CONTENT_LENGTH = 2400;
+
 const WritePage = () => {
   const router = useRouter();
 
@@ -112,13 +114,15 @@ const WritePage = () => {
         <div className={S.Section}>
           <div className={S.SectionTitleBox}>
             <p className={S.SectionTitle}>내용</p>
-            <p className={S.SectionSubtitle}>{content.length}/2400</p>
+            <p className={S.SectionSubtitle}>
+              {content.length}/{MAX_CONTENT_LENGTH}
+            </p>
           </div>
           <textarea
             value={content}
             onChange={(e) => {
               const newContent = e.target.value;
-              if (newContent.length <= 2400) {
+              if (newContent.length <= MAX_CONTENT_LENGTH) {
                 setContent(newContent);
               }
               handleResizeHeight(e);
