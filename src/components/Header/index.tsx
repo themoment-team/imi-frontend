@@ -41,6 +41,9 @@ export default function Header() {
       } catch (error) {
         toast.error('로그인 후 사용 가능한 서비스입니다.');
       }
+    } else {
+      setActivePath(path);
+      router.push(path);
     }
   };
 
