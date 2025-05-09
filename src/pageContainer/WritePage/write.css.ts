@@ -57,7 +57,7 @@ export const SectionTitleBox = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'flex-end',
-  padding: '0 0.5rem 0 0',
+  paddingRight: '0.5rem',
 });
 
 export const SectionTitle = style({
