@@ -7,6 +7,7 @@ export const ProfileListContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '3.7rem',
+  minHeight: 'calc(100vh - 4.5rem)',
   '@media': {
     'screen and (max-width: 1880px)': {
       padding: '6.4rem 23rem',
