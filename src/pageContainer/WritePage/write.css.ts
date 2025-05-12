@@ -15,6 +15,12 @@ export const WritePageContainer = style({
     'screen and (max-width: 1440px)': {
       padding: '6.85rem 10rem 2.5rem',
     },
+    'screen and (max-width: 1200px)': {
+      padding: '6.85rem 8.5rem 2.5rem',
+    },
+    'screen and (max-width: 1024px)': {
+      padding: '6.85rem 7rem 2.5rem',
+    },
     'screen and (max-width: 850px)': {
       padding: '6.85rem 4.5rem 2.5rem',
     },
@@ -29,6 +35,12 @@ export const Title = style({
   fontWeight: 600,
 });
 
+export const Form = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2.48rem',
+});
+
 export const Section = style({
   display: 'flex',
   flexDirection: 'column',
@@ -39,6 +51,13 @@ export const SectionHeader = style({
   display: 'flex',
   alignItems: 'flex-end',
   gap: '0.35rem',
+});
+
+export const SectionTitleBox = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'flex-end',
+  paddingRight: '0.5rem',
 });
 
 export const SectionTitle = style({
@@ -52,14 +71,8 @@ export const SectionSubtitle = style({
   color: vars.color.gray,
 });
 
-export const ButtonGroup = style({
-  display: 'flex',
-  justifyContent: 'center',
-  gap: '1rem',
-});
-
 export const InputField = style({
-  padding: '1.1rem',
+  padding: '1rem',
   fontSize: '1.25rem',
   fontWeight: 400,
   borderRadius: '1rem',
@@ -76,29 +89,16 @@ export const ToggleGroup = style({
 });
 
 export const TextareaField = style({
-  padding: '1.1rem',
+  padding: '1rem',
   resize: 'none',
   fontSize: '1.25rem',
-  fontWeight: 400,
+  fontWeight: 300,
+  lineHeight: '2rem',
   borderRadius: '1rem',
   minHeight: '15.8rem',
   border: `1px solid ${vars.color.primary}`,
   ':focus': {
     outline: `1.5px solid ${vars.color.primary}`,
-  },
-});
-
-export const SaveButton = style({
-  padding: '0.65rem 2.5rem',
-  fontSize: '1rem',
-  fontWeight: 400,
-  color: vars.color.white,
-  backgroundColor: vars.color.gray,
-  borderRadius: '1rem',
-  '@media': {
-    'screen and (max-width: 375px)': {
-      padding: '0.65rem 2rem',
-    },
   },
 });
 
@@ -108,6 +108,11 @@ export const SubmitButton = style({
   backgroundColor: vars.color.primary,
   borderRadius: '1rem',
   padding: '0.65rem 2.5rem',
+  alignSelf: 'center',
+  transition: 'background-color 0.3s',
+  ':hover': {
+    backgroundColor: '#BBC5DE',
+  },
   '@media': {
     'screen and (max-width: 375px)': {
       padding: '0.65rem 2rem',
