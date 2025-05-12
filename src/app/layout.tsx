@@ -9,6 +9,9 @@ import Provider from './provider';
 export const metadata: Metadata = {
   title: 'IMI',
   description: 'IMI는 GSM 신입생들을 위한 자기소개서 작성 서비스입니다.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 const RootLayout = ({
@@ -18,14 +21,6 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="ko">
-      <head>
-        <link
-          rel="stylesheet"
-          as="style"
-          crossOrigin=""
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css"
-        />
-      </head>
       <body className={themeClass}>
         <Provider>
           <Header />
