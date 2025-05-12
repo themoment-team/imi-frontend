@@ -7,6 +7,7 @@ export const ProfileListContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '3.7rem',
+  minHeight: 'calc(100vh - 4.5rem)',
   '@media': {
     'screen and (max-width: 1880px)': {
       padding: '6.4rem 23rem',
@@ -39,8 +40,9 @@ export const ProfileListContainer = style({
 
 export const TitleAndGradeSelector = style({
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   alignItems: 'center',
+  position: 'relative',
   width: '100%',
   marginBottom: '20px',
 });
@@ -49,11 +51,11 @@ export const Title = style({
   fontSize: '2rem',
   textAlign: 'center',
   fontWeight: '500',
-  flex: 1,
 });
 
 export const GradeSelector = style({
-  position: 'relative',
+  position: 'absolute',
+  right: 0,
   fontSize: '0.875rem',
 });
 

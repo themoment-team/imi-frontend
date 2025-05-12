@@ -126,9 +126,12 @@ export default function ProfileListPage() {
             <div className={S.WantedContainer}>
               <p className={T.Tag}>동아리</p>
               <p className={T.Content}>
-                {Array.isArray(profile.wanted)
-                  ? profile.wanted.join(', ')
-                  : profile.wanted}
+                {(() => {
+                  const text = Array.isArray(profile.wanted)
+                    ? profile.wanted.join(', ')
+                    : profile.wanted || '';
+                  return text.length > 13 ? text.slice(0, 13) + ' ···' : text;
+                })()}
               </p>
             </div>
           </div>
