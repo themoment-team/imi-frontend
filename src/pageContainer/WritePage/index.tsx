@@ -124,6 +124,8 @@ const WritePage = () => {
               const newContent = e.target.value;
               if (newContent.length <= MAX_CONTENT_LENGTH) {
                 setContent(newContent);
+              } else {
+                toast.warn('2400자를 초과했습니다.');
               }
               handleResizeHeight(e);
             }}
