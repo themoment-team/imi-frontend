@@ -60,8 +60,8 @@ const WritePage = () => {
     mutationFn: () =>
       put('/profile', {
         wanted: selectedClubs,
-        major,
-        content,
+        major: major.trim(),
+        content: content.trim(),
       }),
     onSuccess: () => {
       if (myProfile && myProfile.studentId && myProfile.name) {
