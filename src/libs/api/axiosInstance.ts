@@ -40,8 +40,6 @@ axiosInstance.interceptors.response.use(
 
         document.cookie = `accessToken=${response.accessToken}; path=/;`;
         document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
-
-        window.location.reload();
       } catch (error) {
         console.error(error);
       }
