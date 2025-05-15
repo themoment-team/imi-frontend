@@ -74,10 +74,6 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
 
   const allFieldsFilled = Object.values(watch()).every((value) => value !== '');
 
-  const onError = (errors: FieldErrors) => {
-    console.error(errors);
-  };
-
   const ClearError = () => {
     clearErrors('name');
     clearErrors('studentId');
@@ -94,10 +90,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
       <div className={S.LogoContainer}>
         <ImiLogo width="4.125rem" height="3rem" />
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmit, onError)}
-        className={S.InputContainer}
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className={S.InputContainer}>
         <div className={S.InputNameContainer}>
           <p className={S.Text}>Name</p>
           <div
