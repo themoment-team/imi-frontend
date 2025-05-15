@@ -14,7 +14,6 @@ const ClubsPage = () => {
     queryKey: ['clubInfos'],
     queryFn: async () => {
       const response: ClubsResponse = await axiosInstance.get('/club');
-      console.log(response);
       return response;
     },
     staleTime: 1000 * 60 * 5,
