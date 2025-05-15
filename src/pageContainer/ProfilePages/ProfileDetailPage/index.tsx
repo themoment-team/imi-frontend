@@ -32,8 +32,6 @@ export default function ProfileDetailPage() {
   const idFromPath = pathname.split('/').pop() || '';
   const studentNameId = decodeURIComponent(idFromPath);
 
-  console.log('studentNameId:', studentNameId);
-
   const router = useRouter();
 
   const {
