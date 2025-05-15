@@ -13,9 +13,11 @@ const ClubsPage = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ['clubInfos'],
     queryFn: () => get<ClubsResponse>('/club'),
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
+    staleTime: 1000 * 60 * 60,
+    gcTime: 1000 * 60 * 60 * 24,
+    refetchOnMount: false,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 
   if (isLoading) return <Loading />;
