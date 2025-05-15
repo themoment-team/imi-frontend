@@ -27,7 +27,7 @@ axiosInstance.interceptors.response.use(
     return response.data;
   },
   async (error) => {
-    if (error.response?.state === 401) {
+    if (error.response?.status === 401) {
       try {
         const refreshToken = getCookie('refreshToken');
 
