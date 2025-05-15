@@ -6,6 +6,7 @@ import { get } from '@/libs';
 import { ClubsResponse } from '@/types';
 
 import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 import * as S from './clubs.css';
 
@@ -22,7 +23,10 @@ const ClubsPage = () => {
 
   if (isLoading) return <Loading />;
 
-  if (error) return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
+  if (error) {
+    toast.error('정보 불러오기 중 오류 발생.');
+    console.error(error);
+  }
 
   return (
     <div className={S.ClubsPageContainer}>
