@@ -41,7 +41,7 @@ axiosInstance.interceptors.response.use(
         document.cookie = `accessToken=${response.accessToken}; path=/;`;
         document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
 
