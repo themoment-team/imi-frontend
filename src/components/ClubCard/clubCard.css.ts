@@ -45,7 +45,6 @@ export const ProjectTitle = style({
 });
 
 export const LeaderBadge = style({
-  height: 'fit-content',
   padding: '0.125rem 0.725rem',
   backgroundColor: vars.color.primary,
   borderRadius: '0.5rem',
