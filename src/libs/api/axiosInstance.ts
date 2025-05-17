@@ -25,14 +25,14 @@ axiosInstance.interceptors.request.use((config) => {
 let isRefreshing = false;
 let refreshSubscribers: ((token: string) => void)[] = [];
 
-function onTokenRefreshed(token: string) {
+const onTokenRefreshed = (token: string) => {
   refreshSubscribers.forEach((callback) => callback(token));
   refreshSubscribers = [];
-}
+};
 
-function addRefreshSubscriber(callback: (token: string) => void) {
+const addRefreshSubscriber = (callback: (token: string) => void) => {
   refreshSubscribers.push(callback);
-}
+};
 
 axiosInstance.interceptors.response.use(
   (response) => {
