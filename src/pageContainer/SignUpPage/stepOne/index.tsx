@@ -1,6 +1,5 @@
 'use client';
 
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
