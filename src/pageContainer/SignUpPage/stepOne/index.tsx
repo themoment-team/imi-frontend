@@ -1,11 +1,12 @@
 'use client';
 
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
 import { axiosInstance } from '@/libs';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -15,6 +16,7 @@ type FormValues = {
   email: string;
   password: string;
   repassword?: string;
+  authCode?: number;
 };
 
 type FormName = 'email' | 'password' | 'repassword';
@@ -33,6 +35,9 @@ const SignUpOnePage = ({
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
   const [reIsOpen, setReOpen] = useState(false);
+
+  const [authBtn, setAuthBtn] = useState<boolean>(false);
+  const [emailAuth, setEmailAuth] = useState<boolean>(false);
 
   const handleFocus = (id: FormName) => {
     setFocus(id);
@@ -61,6 +66,7 @@ const SignUpOnePage = ({
     }
 
     delete data.repassword;
+    delete data.authCode;
 
     try {
       const response = await axiosInstance.post('/user/check-email', {
@@ -92,6 +98,40 @@ const SignUpOnePage = ({
     console.error(errors);
   };
 
+  const EmailAuth = async () => {
+    const email = { email: watch('email') };
+
+    if (email.email.length === 6) {
+      email.email = email.email + '@gsm.hs.kr';
+    }
+
+    try {
+      axiosInstance.post('/auth/send-email', email);
+      toast.success('이메일 전송이 완료되었습니다!');
+      toast.info('메일이 안왔다면 스팸 메일함을 확인해주세요');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const checkAuthCode = async (authCode: number) => {
+    try {
+      await axiosInstance.post('/auth/verify-email', { authCode: authCode });
+      toast.success('이메일 인증에 성공했습니다.');
+      setEmailAuth(true);
+    } catch (error) {
+      toast.error('이메일 인증에 실패했습니다.');
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const code = watch('authCode');
+    if (String(code).length === 6 && code != undefined) {
+      checkAuthCode(Number(code));
+    }
+  }, [watch('authCode')]);
+
   return (
     <div className={S.SignUpContainer}>
       <div className={S.LogoContainer}>
@@ -103,41 +143,89 @@ const SignUpOnePage = ({
       >
         <div className={S.InputEmailContainer}>
           <p className={S.Text}>Email</p>
+          <div className={S.InputWrapper}>
+            <div
+              className={
+                errors.email
+                  ? S.inputEmailVariants.error
+                  : S.inputEmailVariants.default
+              }
+              onClick={() => handleFocus('email')}
+            >
+              <input
+                placeholder="이메일을 입력해주세요."
+                className={S.InputBox}
+                {...register('email', {
+                  validate: (value) => {
+                    if (value.length === 0) {
+                      setAuthBtn(false);
+                      return undefined;
+                    }
+                    if (
+                      (/^[sS]\d{2}0\d{2}$/.test(value) ||
+                        /^[sS]\d{2}0\d{2}@gsm\.hs\.kr$/.test(value)) &&
+                      value.length > 0
+                    ) {
+                      setAuthBtn(true);
+                      return true;
+                    }
+                    setAuthBtn(false);
+                    return '이메일 형식에 맞지 않습니다';
+                  },
+                })}
+              />
+              <p className={S.InputText}>@gsm.hs.kr</p>
+            </div>
+            {authBtn ? (
+              <div className={S.AuthButton} onClick={EmailAuth}>
+                인증
+              </div>
+            ) : (
+              <div className={S.BlockAuthButton}>인증</div>
+            )}
+          </div>
+        </div>
+        <div className={S.ErrorBox}>
+          <div></div>
+          {errors.email && (
+            <p className={S.ErrorText}>{errors.email.message}</p>
+          )}
+        </div>
+        <div className={S.InputAuthContainer}>
+          <p className={S.Text}>인증번호</p>
           <div
+            key={'authCode'}
             className={
-              errors.email
-                ? S.inputEmailVariants.error
-                : S.inputEmailVariants.default
+              errors.authCode || errors.authCode
+                ? S.inputAuthVariants.error
+                : S.inputAuthVariants.default
             }
-            onClick={() => handleFocus('email')}
           >
             <input
-              placeholder="이메일을 입력해주세요."
+              type="text"
+              pattern="[0-9]*"
               className={S.InputBox}
-              {...register('email', {
+              placeholder="인증번호를 입력해주세요."
+              disabled={emailAuth}
+              {...register('authCode', {
                 validate: (value) => {
-                  if (value.length === 0) {
+                  if (String(value).length === 0) {
                     return undefined;
                   }
-                  if (
-                    (/^[sS]\d{2}0\d{2}$/.test(value) ||
-                      /^[sS]\d{2}0\d{2}@gsm\.hs\.kr$/.test(value)) &&
-                    value.length > 0
-                  ) {
-                    return true;
+                  if (String(value).length > 6) {
+                    return '6글자 아래로 입력해 주세요';
                   }
-                  return '이메일 형식에 맞지 않습니다';
+                  return /^\d+$/.test(String(value)) || '숫자만 입력해주세요.';
                 },
               })}
             />
-            <p className={S.InputText}>@gsm.hs.kr</p>
           </div>
-          <div className={S.ErrorBox}>
-            <div></div>
-            {errors.email && (
-              <p className={S.ErrorText}>{errors.email.message}</p>
-            )}
-          </div>
+        </div>
+        <div className={S.ErrorBox}>
+          <div></div>
+          {errors.authCode && (
+            <p className={S.ErrorText}>{errors.authCode.message}</p>
+          )}
         </div>
         <div className={S.InputPasswordContainer}>
           <p className={S.Text}>Password</p>
@@ -183,7 +271,7 @@ const SignUpOnePage = ({
             )}
           </div>
           <div
-            key={'rsepassword'}
+            key={'repassword'}
             className={
               errors.repassword
                 ? S.ReinputPasswordVariants.error
@@ -224,11 +312,11 @@ const SignUpOnePage = ({
         <button
           type="submit"
           className={
-            isValid && allFieldsFilled ? S.SignUpBtn : S.BlockSignUpBtn
+            isValid && allFieldsFilled && emailAuth
+              ? S.SignUpBtn
+              : S.BlockSignUpBtn
           }
-          disabled={
-            !isValid || !allFieldsFilled || Object.keys(errors).length > 0
-          }
+          disabled={!(isValid && allFieldsFilled && emailAuth)}
         >
           다음
         </button>
