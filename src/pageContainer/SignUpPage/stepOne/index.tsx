@@ -156,8 +156,8 @@ const SignUpOnePage = ({
                 className={S.InputBox}
                 {...register('email', {
                   validate: (value) => {
+                    setAuthBtn(false);
                     if (value.length === 0) {
-                      setAuthBtn(false);
                       return undefined;
                     }
                     if (
@@ -168,7 +168,6 @@ const SignUpOnePage = ({
                       setAuthBtn(true);
                       return true;
                     }
-                    setAuthBtn(false);
                     return '이메일 형식에 맞지 않습니다';
                   },
                 })}
