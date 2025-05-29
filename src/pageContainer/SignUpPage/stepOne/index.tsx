@@ -38,6 +38,8 @@ const SignUpOnePage = ({
   const [authBtn, setAuthBtn] = useState<boolean>(false);
   const [emailAuth, setEmailAuth] = useState<boolean>(false);
 
+  const [authStack, setAuthStack] = useState<number>(0);
+
   const handleFocus = (id: FormName) => {
     setFocus(id);
   };
@@ -108,7 +110,9 @@ const SignUpOnePage = ({
       await axiosInstance.post('/auth/send-email', email);
       toast.success('이메일 전송이 완료되었습니다!');
       toast.info('메일이 안왔다면 스팸 메일함을 확인해주세요');
+      setAuthStack(0);
     } catch (error) {
+      toast.error('이메일 전송이 실패했습니다');
       console.error(error);
     }
   };
@@ -119,12 +123,18 @@ const SignUpOnePage = ({
       toast.success('이메일 인증에 성공했습니다.');
       setEmailAuth(true);
     } catch (error) {
+      setAuthStack((e) => e + 1);
       toast.error('이메일 인증에 실패했습니다.');
-      console.log(error);
+      console.error(error);
     }
   };
 
   useEffect(() => {
+    if (authStack > 4) {
+      toast.error('이메일 인증을 처음부터 다시 시도해주세요');
+      return;
+    }
+
     const code = watch('authCode');
     if (String(code).length === 6 && code != undefined) {
       checkAuthCode(Number(code));
