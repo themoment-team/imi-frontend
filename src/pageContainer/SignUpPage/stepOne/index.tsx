@@ -105,7 +105,7 @@ const SignUpOnePage = ({
     }
 
     try {
-      axiosInstance.post('/auth/send-email', email);
+      await axiosInstance.post('/auth/send-email', email);
       toast.success('이메일 전송이 완료되었습니다!');
       toast.info('메일이 안왔다면 스팸 메일함을 확인해주세요');
     } catch (error) {
@@ -174,13 +174,14 @@ const SignUpOnePage = ({
               />
               <p className={S.InputText}>@gsm.hs.kr</p>
             </div>
-            {authBtn ? (
-              <div className={S.AuthButton} onClick={EmailAuth}>
-                인증
-              </div>
-            ) : (
-              <div className={S.BlockAuthButton}>인증</div>
-            )}
+            <div
+              className={
+                authBtn && !emailAuth ? S.AuthButton : S.BlockAuthButton
+              }
+              onClick={authBtn && !emailAuth ? EmailAuth : undefined}
+            >
+              인증
+            </div>
           </div>
         </div>
         <div className={S.ErrorBox}>
