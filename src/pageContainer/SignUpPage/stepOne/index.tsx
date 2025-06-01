@@ -35,6 +35,8 @@ const SignUpOnePage = ({
   const [isOpen, setOpen] = useState(false);
   const [reIsOpen, setReOpen] = useState(false);
 
+  const [authIsOpen, setAuthIsOpen] = useState<boolean>(false);
+
   const [authBtn, setAuthBtn] = useState<boolean>(false);
   const [emailAuth, setEmailAuth] = useState<boolean>(false);
 
@@ -111,6 +113,7 @@ const SignUpOnePage = ({
       toast.success('이메일 전송이 완료되었습니다!');
       toast.info('메일이 안왔다면 스팸 메일함을 확인해주세요');
       setAuthStack(0);
+      setAuthIsOpen(true);
     } catch (error) {
       toast.error('이메일 전송이 실패했습니다');
       console.error(error);
@@ -200,42 +203,48 @@ const SignUpOnePage = ({
             <p className={S.ErrorText}>{errors.email.message}</p>
           )}
         </div>
-        <div className={S.InputAuthContainer}>
-          <p className={S.Text}>인증번호</p>
-          <div
-            key={'authCode'}
-            className={
-              errors.authCode || errors.authCode
-                ? S.inputAuthVariants.error
-                : S.inputAuthVariants.default
-            }
-          >
-            <input
-              type="text"
-              pattern="[0-9]*"
-              className={S.InputBox}
-              placeholder="인증번호를 입력해주세요."
-              disabled={emailAuth}
-              {...register('authCode', {
-                validate: (value) => {
-                  if (String(value).length === 0) {
-                    return undefined;
-                  }
-                  if (String(value).length > 6) {
-                    return '6글자 아래로 입력해 주세요';
-                  }
-                  return /^\d+$/.test(String(value)) || '숫자만 입력해주세요.';
-                },
-              })}
-            />
+        {authIsOpen ? (
+          <div>
+            <div className={S.InputAuthContainer}>
+              <p className={S.Text}>인증번호</p>
+              <div
+                key={'authCode'}
+                className={
+                  errors.authCode || errors.authCode
+                    ? S.inputAuthVariants.error
+                    : S.inputAuthVariants.default
+                }
+              >
+                <input
+                  type="text"
+                  pattern="[0-9]*"
+                  className={S.InputBox}
+                  placeholder="인증번호를 입력해주세요."
+                  disabled={emailAuth}
+                  {...register('authCode', {
+                    validate: (value) => {
+                      if (String(value).length === 0) {
+                        return undefined;
+                      }
+                      if (String(value).length > 6) {
+                        return '6글자 아래로 입력해 주세요';
+                      }
+                      return (
+                        /^\d+$/.test(String(value)) || '숫자만 입력해주세요.'
+                      );
+                    },
+                  })}
+                />
+              </div>
+            </div>
+            <div className={S.ErrorBox}>
+              <div></div>
+              {errors.authCode && (
+                <p className={S.ErrorText}>{errors.authCode.message}</p>
+              )}
+            </div>{' '}
           </div>
-        </div>
-        <div className={S.ErrorBox}>
-          <div></div>
-          {errors.authCode && (
-            <p className={S.ErrorText}>{errors.authCode.message}</p>
-          )}
-        </div>
+        ) : null}
         <div className={S.InputPasswordContainer}>
           <p className={S.Text}>Password</p>
           <div
