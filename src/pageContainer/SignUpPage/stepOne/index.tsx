@@ -121,8 +121,16 @@ const SignUpOnePage = ({
   };
 
   const checkAuthCode = async (authCode: number) => {
+    const email = { email: watch('email') };
+
+    if (email.email.length === 6) {
+      email.email = email.email + '@gsm.hs.kr';
+    }
     try {
-      await axiosInstance.post('/auth/verify-email', { authCode: authCode });
+      await axiosInstance.post('/auth/verify-email', {
+        email: email.email,
+        authCode: authCode,
+      });
       toast.success('이메일 인증에 성공했습니다.');
       setEmailAuth(true);
     } catch (error) {
