@@ -75,6 +75,7 @@ export const InputPassword = style({
   display: 'flex',
   alignItems: 'center',
   border: `1px solid ${vars.color.primary}`,
+  background: vars.color.white,
   borderRadius: '8px',
   padding: '1rem',
   justifyContent: 'space-between',
@@ -93,6 +94,7 @@ export const InputPassword = style({
 export const inputPasswordError = style({
   display: 'flex',
   alignItems: 'center',
+  background: vars.color.white,
   borderRadius: '8px',
   padding: '1rem',
   justifyContent: 'space-between',
@@ -160,6 +162,7 @@ export const ReinputPasswordVariants = styleVariants({
 export const InputEmail = style({
   display: 'flex',
   alignItems: 'center',
+  background: vars.color.white,
   border: `1px solid ${vars.color.primary}`,
   borderRadius: '8px',
   padding: '1rem',
@@ -182,6 +185,7 @@ export const inputEmailError = style({
   alignItems: 'center',
   borderRadius: '8px',
   padding: '1rem',
+  background: vars.color.white,
   justifyContent: 'space-between',
   width: '25rem',
   height: '3.125rem',
@@ -395,6 +399,7 @@ export const inputAuthCode = style({
   display: 'flex',
   alignItems: 'center',
   border: `1px solid ${vars.color.primary}`,
+  background: vars.color.white,
   borderRadius: '8px',
   padding: '1rem',
   justifyContent: 'space-between',
@@ -413,6 +418,7 @@ export const inputAuthCode = style({
 export const inputAuthCodeError = style({
   display: 'flex',
   alignItems: 'center',
+  background: vars.color.white,
   border: `1px solid ${vars.color.red}`,
   borderRadius: '8px',
   padding: '1rem',
