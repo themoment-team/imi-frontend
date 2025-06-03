@@ -169,7 +169,7 @@ const SignUpOnePage = ({
       const formatted = `${String(minutes).padStart(1, '0')}:${String(seconds).padStart(2, '0')}`;
       setTimeString(formatted);
 
-      if (timeLeft < 0) {
+      if (timeLeft <= 0) {
         clearInterval(interval);
         setIsBlock(false);
         localStorage.removeItem(startKey);
