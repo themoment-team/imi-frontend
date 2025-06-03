@@ -138,7 +138,14 @@ const SignUpOnePage = ({
       setEmailAuth(true);
     } catch (error) {
       setAuthStack((e) => e + 1);
-      toast.error('이메일 인증에 실패했습니다.');
+      if (authStack === 4) {
+        toast.info('이메일 인증에 5회 실패했습니다');
+        toast.info('모든 인증이 5분동안 수행되지 않습니다');
+        countBlockTime(setBlockTime);
+        setAuthStack((e) => e + 1);
+      } else {
+        toast.error('이메일 인증에 실패했습니다.');
+      }
       console.error(error);
     }
   };
@@ -179,9 +186,7 @@ const SignUpOnePage = ({
 
   useEffect(() => {
     if (authStack > 4) {
-      toast.error('이메일 인증에 5회 실패했습니다');
-      toast.info('모든 인증이 5분동안 수행되지 않습니다');
-      countBlockTime(setBlockTime);
+      toast.info('email 인증코드를 다시 받아주세요');
       return;
     }
 
