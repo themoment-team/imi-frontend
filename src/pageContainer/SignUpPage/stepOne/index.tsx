@@ -42,6 +42,9 @@ const SignUpOnePage = ({
 
   const [authStack, setAuthStack] = useState<number>(0);
 
+  const [blockTime, setBlockTime] = useState<string>('');
+  const [isBlock, setIsBlock] = useState<boolean>(false);
+
   const handleFocus = (id: FormName) => {
     setFocus(id);
   };
@@ -140,9 +143,47 @@ const SignUpOnePage = ({
     }
   };
 
+  const countBlockTime = (
+    setTimeString: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    setIsBlock(true);
+    const startKey = 'count_block_time';
+    const now = Date.now();
+    let startTime = localStorage.getItem(startKey);
+
+    if (!startTime) {
+      localStorage.setItem(startKey, now.toString());
+      startTime = now.toString();
+    }
+
+    const startTimestamp = parseInt(startTime, 10);
+    const endTimestamp = startTimestamp + 5 * 60 * 1000;
+
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const timeLeft = Math.max(0, Math.floor((endTimestamp - now) / 1000));
+
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+
+      const formatted = `${String(minutes).padStart(1, '0')}:${String(seconds).padStart(2, '0')}`;
+      setTimeString(formatted);
+
+      if (timeLeft < 0) {
+        clearInterval(interval);
+        setIsBlock(false);
+        localStorage.removeItem(startKey);
+      }
+    }, 1000);
+
+    return interval;
+  };
+
   useEffect(() => {
     if (authStack > 4) {
-      toast.error('이메일 인증을 처음부터 다시 시도해주세요');
+      toast.error('이메일 인증에 5회 실패했습니다');
+      toast.info('모든 인증이 5분동안 수행되지 않습니다');
+      countBlockTime(setBlockTime);
       return;
     }
 
@@ -151,6 +192,13 @@ const SignUpOnePage = ({
       checkAuthCode(Number(code));
     }
   }, [watch('authCode')]);
+
+  useEffect(() => {
+    const existingStartTime = localStorage.getItem('count_block_time');
+    if (existingStartTime) {
+      countBlockTime(setBlockTime);
+    }
+  }, []);
 
   return (
     <div className={S.SignUpContainer}>
@@ -162,7 +210,10 @@ const SignUpOnePage = ({
         className={S.InputContainer}
       >
         <div className={S.InputEmailContainer}>
-          <p className={S.Text}>Email</p>
+          <div className={S.TextWrapper}>
+            <p className={S.Text}>Email</p>
+            {isBlock ? <p className={S.BlockTime}>{blockTime}</p> : null}
+          </div>
           <div className={S.InputWrapper}>
             <div
               className={
@@ -197,9 +248,13 @@ const SignUpOnePage = ({
             </div>
             <div
               className={
-                authBtn && !emailAuth ? S.AuthButton : S.BlockAuthButton
+                authBtn && !emailAuth && !isBlock
+                  ? S.AuthButton
+                  : S.BlockAuthButton
               }
-              onClick={authBtn && !emailAuth ? EmailAuth : undefined}
+              onClick={
+                authBtn && !emailAuth && !isBlock ? EmailAuth : undefined
+              }
             >
               인증
             </div>
@@ -228,7 +283,7 @@ const SignUpOnePage = ({
                   pattern="[0-9]*"
                   className={S.InputBox}
                   placeholder="인증번호를 입력해주세요."
-                  disabled={emailAuth}
+                  disabled={emailAuth || isBlock}
                   {...register('authCode', {
                     validate: (value) => {
                       if (String(value).length === 0) {

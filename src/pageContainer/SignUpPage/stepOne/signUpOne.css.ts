@@ -234,11 +234,25 @@ export const InputBox = style({
   },
 });
 
+export const TextWrapper = style({
+  display: 'flex',
+  flexDirection: 'row',
+  width: '100%',
+  justifyContent: 'space-between',
+});
+
 export const Text = style({
   color: ' #1E1E1E',
   textAlign: 'center',
   fontSize: '1rem',
   padding: '0 0 0.25rem 0.58rem',
+});
+
+export const BlockTime = style({
+  color: vars.color.gray,
+  textAlign: 'center',
+  fontSize: '1rem',
+  padding: '0 0.58rem 0.25rem 0',
 });
 
 export const UnderText = style({
