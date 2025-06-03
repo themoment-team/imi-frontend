@@ -175,8 +175,6 @@ const SignUpOnePage = ({
         localStorage.removeItem(startKey);
       }
     }, 1000);
-
-    return interval;
   };
 
   useEffect(() => {
