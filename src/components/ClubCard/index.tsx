@@ -12,7 +12,12 @@ const ClubCard = ({ clubInfo }: ClubCardProps) => {
   return (
     <a href={clubInfo.notionUrl} target="_blank" className={S.CardContainer}>
       <div className={S.ImageWrapper}>
-        <Image src={clubInfo.iconUrl} alt={clubInfo.name} fill />
+        <Image
+          src={clubInfo.iconUrl}
+          alt={clubInfo.name}
+          fill
+          objectFit="cover"
+        />
       </div>
       <div className={S.InfoContainer}>
         <div className={S.HeaderRow}>
