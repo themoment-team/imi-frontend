@@ -9,8 +9,17 @@ interface ClubCardProps {
 }
 
 const ClubCard = ({ clubInfo }: ClubCardProps) => {
+  const CardWrapper = clubInfo.notionUrl ? 'a' : 'div';
+  const cardClassName = `${S.baseCardContainer} ${clubInfo.notionUrl ? S.clickableCard : ''}`;
+
   return (
-    <a href={clubInfo.notionUrl} target="_blank" className={S.CardContainer}>
+    <CardWrapper
+      {...(clubInfo.notionUrl && {
+        href: clubInfo.notionUrl,
+        target: '_blank',
+      })}
+      className={cardClassName}
+    >
       <div className={S.ImageWrapper}>
         <Image
           src={clubInfo.iconUrl}
@@ -28,7 +37,7 @@ const ClubCard = ({ clubInfo }: ClubCardProps) => {
         </div>
         <p className={S.ProjectTitle}>{clubInfo.mainContent}</p>
       </div>
-    </a>
+    </CardWrapper>
   );
 };
 
