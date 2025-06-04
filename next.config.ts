@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    domains: ['cdn.discordapp.com'],
+    domains: ['pub-e292ef2c981c41ddb874365aaf43390c.r2.dev'],
   },
 };
 
