@@ -20,11 +20,13 @@ const WritePage = () => {
   const [selectedClubs, setSelectedClubs] = useState<string[]>([]);
   const [major, setMajor] = useState('');
   const [content, setContent] = useState('');
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const toggleClub = (club: string) => {
     setSelectedClubs((prev) =>
       prev.includes(club) ? prev.filter((c) => c !== club) : [...prev, club]
     );
+    setHasUnsavedChanges(true);
   };
 
   const handleResizeHeight = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -53,23 +55,59 @@ const WritePage = () => {
           ? ''
           : myProfile.content
       );
+      setHasUnsavedChanges(false);
     }
   }, [myProfile]);
 
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      event.preventDefault();
-      event.returnValue = '';
-      return '작성하던 내용이 모두 사라집니다. 계속하시겠습니까?';
+      if (hasUnsavedChanges) {
+        event.preventDefault();
+        event.returnValue = '';
+        return '작성하던 내용이 모두 사라집니다. 계속하시겠습니까?';
+      }
     };
 
-    if (window !== undefined)
+    const handleRouteChange = () => {
+      if (hasUnsavedChanges) {
+        return confirm('작성하던 내용이 모두 사라집니다. 계속하시겠습니까?');
+      }
+      return true;
+    };
+
+    if (typeof window !== 'undefined') {
       window.addEventListener('beforeunload', handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
+      const originalPush = router.push;
+      const originalReplace = router.replace;
+      const originalBack = router.back;
+
+      router.push = (...args) => {
+        if (handleRouteChange()) {
+          return originalPush.apply(router, args);
+        }
+      };
+
+      router.replace = (...args) => {
+        if (handleRouteChange()) {
+          return originalReplace.apply(router, args);
+        }
+      };
+
+      router.back = () => {
+        if (handleRouteChange()) {
+          return originalBack.apply(router);
+        }
+      };
+
+      return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+        router.push = originalPush;
+        router.replace = originalReplace;
+        router.back = originalBack;
+      };
+    }
+  }, [hasUnsavedChanges, router]);
 
   const { mutate } = useMutation({
     mutationFn: () =>
@@ -79,6 +117,7 @@ const WritePage = () => {
         content: content.trim(),
       }),
     onSuccess: () => {
+      setHasUnsavedChanges(false);
       if (myProfile && myProfile.studentId && myProfile.name) {
         router.push(`/profile/${myProfile.studentId}${myProfile.name}`);
         toast.success('작성이 완료되었습니다.');
@@ -106,7 +145,10 @@ const WritePage = () => {
           <p className={S.SectionTitle}>전공</p>
           <input
             value={major}
-            onChange={(e) => setMajor(e.target.value)}
+            onChange={(e) => {
+              setMajor(e.target.value);
+              setHasUnsavedChanges(true);
+            }}
             placeholder="전공을 작성해주세요. ex) 프론트엔드"
             className={S.InputField}
           />
@@ -139,6 +181,7 @@ const WritePage = () => {
               const newContent = e.target.value;
               if (newContent.length <= MAX_CONTENT_LENGTH) {
                 setContent(newContent);
+                setHasUnsavedChanges(true);
               } else {
                 toast.warn('2400자를 초과했습니다.');
               }
