@@ -197,12 +197,6 @@ export const Text = style({
   padding: '0 0 0.25rem 0.58rem',
 });
 
-export const UnderText = style({
-  color: ' #1E1E1E',
-  textAlign: 'center',
-  fontSize: '1rem',
-});
-
 export const SignoutText = style({
   color: ' #1E1E1E',
   textAlign: 'center',
