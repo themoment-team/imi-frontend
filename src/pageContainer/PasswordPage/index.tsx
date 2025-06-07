@@ -12,25 +12,18 @@ import { toast } from 'react-toastify';
 import * as S from './password.css';
 
 type FormValues = {
-  email?: string;
-  currentpassword: string;
+  email: string;
   newpassword: string;
   newrepassword?: string;
   authCode?: number;
 };
 
-type FormName =
-  | 'email'
-  | 'currentpassword'
-  | 'newpassword'
-  | 'newrepassword'
-  | 'authCode';
+type FormName = 'email' | 'newpassword' | 'newrepassword' | 'authCode';
 
 const PasswordPage = () => {
   const router = useRouter();
   const [isOpen, setOpen] = useState<boolean>(false);
   const [reIsOpen, setReOpen] = useState<boolean>(false);
-  const [isCurrentOpen, setCurrentOpen] = useState<boolean>(false);
 
   const [authIsOpen, setAuthIsOpen] = useState<boolean>(false);
 
@@ -50,7 +43,6 @@ const PasswordPage = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    setError,
     watch,
     setFocus,
   } = useForm<FormValues>({
@@ -59,23 +51,19 @@ const PasswordPage = () => {
   });
 
   const onSubmit = async (data: FormValues) => {
-    delete data.email;
     delete data.newrepassword;
     delete data.authCode;
 
     try {
       await axiosInstance.post('/user/password', {
-        oldPassword: data.currentpassword,
+        email: data.email,
         newPassword: data.newpassword,
       });
 
+      toast.success('비밀번호 재설정에 성공했습니다!');
       router.push('./signin');
     } catch (error: any) {
-      if (error.response?.state === 404 && error.response?.state === 503) {
-        toast.error('에러가 발생했습니다');
-      } else {
-        toast.error('서버통신중 에러가 발생했습니다');
-      }
+      toast.error('비밀번호 재설정에 실패했습니다.');
     }
   };
 
@@ -297,53 +285,6 @@ const PasswordPage = () => {
           </div>
         ) : null}
         <div className={S.InputPasswordContainer}>
-          <p className={S.Text}>현재 비밀번호</p>
-          <div
-            key={'password'}
-            className={
-              errors.currentpassword || errors.currentpassword
-                ? S.inputPasswordVariants.error
-                : S.inputPasswordVariants.default
-            }
-            onClick={() => handleFocus('currentpassword')}
-          >
-            <input
-              type={isOpen ? 'text' : 'password'}
-              placeholder="비밀번호를 입력해주세요."
-              className={S.InputBox}
-              {...register('currentpassword', {
-                validate: (value) => {
-                  if (value.length === 0) {
-                    return undefined;
-                  }
-                  if (
-                    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()-_+=]{8,16}$/.test(
-                      value
-                    ) &&
-                    value.length >= 8 &&
-                    value.length <= 16
-                  ) {
-                    return true;
-                  }
-                  return '8~16자의 영문, 숫자를 포함해야합니다.';
-                },
-              })}
-            />
-            <div
-              className={S.IconBox}
-              onClick={() => setCurrentOpen(!isCurrentOpen)}
-            >
-              {isCurrentOpen ? <OpenEyes /> : <CloseEyes />}
-            </div>
-          </div>
-          <div className={S.ErrorBox}>
-            <div></div>
-            {errors.currentpassword && (
-              <p className={S.ErrorText}>{errors.currentpassword.message}</p>
-            )}
-          </div>
-        </div>
-        <div className={S.InputPasswordContainer}>
           <p className={S.Text}>새 비밀번호</p>
           <div
             key={'newpassword'}
@@ -402,7 +343,7 @@ const PasswordPage = () => {
               {...register('newrepassword', {
                 validate: (value) => {
                   if (!value) {
-                    return '';
+                    return undefined;
                   }
                   if (value.length === 0) {
                     return undefined;
