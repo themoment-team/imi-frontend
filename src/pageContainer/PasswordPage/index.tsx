@@ -54,6 +54,10 @@ const PasswordPage = () => {
     delete data.newrepassword;
     delete data.authCode;
 
+    if (data.email?.length === 6) {
+      data.email = data.email + '@gsm.hs.kr';
+    }
+
     try {
       await axiosInstance.post('/user/password', {
         email: data.email,
