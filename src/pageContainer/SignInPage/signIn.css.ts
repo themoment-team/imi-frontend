@@ -294,3 +294,10 @@ export const BlockLoginBtn = style({
     },
   },
 });
+
+export const Divid = style({
+  width: '0.1rem',
+  height: '1rem',
+  background: vars.color.primary,
+  margin: '0 0 0 0.5rem',
+});

@@ -168,6 +168,7 @@ const SignInPage = () => {
         <p className={S.GrayText} onClick={() => router.push('/password')}>
           비밀번호재설정
         </p>
+        <div className={S.Divid} />
         <p className={S.GrayText} onClick={() => router.push('/signup')}>
           회원가입
         </p>
