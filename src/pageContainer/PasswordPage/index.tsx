@@ -65,7 +65,7 @@ const PasswordPage = () => {
       });
 
       toast.success('비밀번호 재설정에 성공했습니다!');
-      router.push('./signin');
+      router.push('/signin');
     } catch (error: any) {
       toast.error('비밀번호 재설정에 실패했습니다.');
     }
