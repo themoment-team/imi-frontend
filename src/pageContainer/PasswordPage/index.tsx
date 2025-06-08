@@ -59,7 +59,7 @@ const PasswordPage = () => {
     }
 
     try {
-      await axiosInstance.post('/user/password', {
+      await axiosInstance.patch('/user/password', {
         email: data.email,
         newPassword: data.newpassword,
       });
