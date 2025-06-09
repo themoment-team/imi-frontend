@@ -15,7 +15,7 @@ export const HeaderRow = style({
   width: '100%',
   display: 'flex',
   alignItems: 'center',
-  gap: '1rem',
+  justifyContent: 'space-between',
   padding: '0 3rem',
 
   '@media': {
@@ -34,13 +34,25 @@ export const HeaderRow = style({
   },
 });
 
+export const HeaderLeft = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1rem',
+});
+
+export const HeaderRight = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+});
+
 export const PageTitle = style({
   fontSize: '2rem',
   fontWeight: 500,
 });
 
 export const AccentBar = style({
-  width: '0.25rem',
+  width: '0.1875rem',
   height: '2.25rem',
   backgroundColor: vars.color.primary,
 });
@@ -64,4 +76,21 @@ export const ClubCardsContainer = style({
       padding: '0 12rem',
     },
   },
+});
+
+export const FilterButton = style({
+  fontSize: '0.9375rem',
+  fontWeight: 400,
+  lineHeight: 'normal',
+  color: vars.color.gray,
+});
+
+export const FilterButtonActive = style({
+  color: vars.color.text,
+});
+
+export const SeparatorBar = style({
+  width: '0.125rem',
+  height: '1rem',
+  backgroundColor: vars.color.primary,
 });
