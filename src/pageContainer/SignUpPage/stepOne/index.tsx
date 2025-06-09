@@ -49,6 +49,20 @@ const SignUpOnePage = ({
     setFocus(id);
   };
 
+  const saveLocalStorage = (stack: number) => {
+    localStorage.setItem('auth_stack_signup', stack.toString());
+  };
+
+  const loadLocalStorage = (): number => {
+    const saved = localStorage.getItem('auth_stack_signup');
+    return saved ? parseInt(saved, 10) : 0;
+  };
+
+  const updateAuthStack = (newStack: number) => {
+    setAuthStack(newStack);
+    saveLocalStorage(newStack);
+  };
+
   const {
     register,
     handleSubmit,
@@ -86,6 +100,8 @@ const SignUpOnePage = ({
         });
         toast.error('이미 존재하는 이메일입니다');
       } else {
+        updateAuthStack(0);
+        localStorage.removeItem('auth_stack_signup');
         setFormData(data);
         onNext();
       }
@@ -115,7 +131,7 @@ const SignUpOnePage = ({
       await axiosInstance.post('/auth/send-email', email);
       toast.success('이메일 전송이 완료되었습니다!');
       toast.info('메일이 안왔다면 스팸 메일함을 확인해주세요');
-      setAuthStack(0);
+      updateAuthStack(0);
       setAuthIsOpen(true);
     } catch (error) {
       toast.error('이메일 전송이 실패했습니다');
@@ -136,13 +152,16 @@ const SignUpOnePage = ({
       });
       toast.success('이메일 인증에 성공했습니다.');
       setEmailAuth(true);
+      updateAuthStack(0);
+      localStorage.removeItem('auth_stack_signup');
     } catch (error) {
-      setAuthStack((e) => e + 1);
-      if (authStack === 4) {
+      const newStack = authStack + 1;
+      updateAuthStack(newStack);
+
+      if (newStack === 5) {
         toast.info('이메일 인증에 5회 실패했습니다');
         toast.info('모든 인증이 5분동안 수행되지 않습니다');
         countBlockTime(setBlockTime);
-        setAuthStack((e) => e + 1);
       } else {
         toast.error('이메일 인증에 실패했습니다.');
       }
@@ -180,6 +199,8 @@ const SignUpOnePage = ({
         clearInterval(interval);
         setIsBlock(false);
         localStorage.removeItem(startKey);
+        updateAuthStack(0);
+        localStorage.removeItem('auth_stack_signup');
       }
     }, 1000);
   };
@@ -197,6 +218,11 @@ const SignUpOnePage = ({
   }, [watch('authCode')]);
 
   useEffect(() => {
+    const savedAuthStack = loadLocalStorage();
+    if (savedAuthStack > 0) {
+      setAuthStack(savedAuthStack);
+    }
+
     const existingStartTime = localStorage.getItem('count_block_time');
     if (existingStartTime) {
       countBlockTime(setBlockTime);
