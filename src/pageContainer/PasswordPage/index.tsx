@@ -3,7 +3,9 @@
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
+import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
+import { LoginResponse } from '@/types';
 
 import { useEffect, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -35,6 +37,8 @@ const PasswordPage = () => {
   const [blockTime, setBlockTime] = useState<string>('');
   const [isBlock, setIsBlock] = useState<boolean>(false);
 
+  const { setIsLogged } = useAuth();
+
   const handleFocus = (id: FormName) => {
     setFocus(id);
   };
@@ -64,7 +68,18 @@ const PasswordPage = () => {
         newPassword: data.newpassword,
       });
 
+      const response: LoginResponse = await axiosInstance.post('/auth/login', {
+        email: data.email,
+        password: data.newpassword,
+      });
+
+      document.cookie = `accessToken=${response.accessToken}; path=/;`;
+      document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
+
+      setIsLogged(true);
+
       toast.success('비밀번호 재설정에 성공했습니다!');
+      toast.success('로그인에 성공했습니다');
       router.push('/signin');
     } catch (error: any) {
       toast.error('비밀번호 재설정에 실패했습니다.');
