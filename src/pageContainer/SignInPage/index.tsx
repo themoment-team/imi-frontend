@@ -165,7 +165,10 @@ const SignInPage = () => {
         </button>
       </form>
       <div className={S.SignupBox}>
-        <p className={S.UnderText}>계정이 없으신가요?</p>
+        <p className={S.GrayText} onClick={() => router.push('/password')}>
+          비밀번호재설정
+        </p>
+        <div className={S.Divid} />
         <p className={S.GrayText} onClick={() => router.push('/signup')}>
           회원가입
         </p>
