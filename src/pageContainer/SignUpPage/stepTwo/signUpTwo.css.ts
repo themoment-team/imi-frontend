@@ -74,6 +74,7 @@ export const InputStudentIdContainer = style({
 export const InputStudentId = style({
   display: 'flex',
   alignItems: 'center',
+  background: vars.color.white,
   border: `1px solid ${vars.color.primary}`,
   borderRadius: '8px',
   padding: '1rem',
@@ -95,6 +96,7 @@ export const inputStudentIdError = style({
   alignItems: 'center',
   borderRadius: '8px',
   padding: '1rem',
+  background: vars.color.white,
   justifyContent: 'space-between',
   width: '30.125rem',
   border: `1px solid ${vars.color.red}`,
@@ -117,6 +119,7 @@ export const inputStudentIdVariants = styleVariants({
 export const InputName = style({
   display: 'flex',
   alignItems: 'center',
+  background: vars.color.white,
   border: `1px solid ${vars.color.primary}`,
   borderRadius: '8px',
   padding: '1rem',
@@ -137,6 +140,7 @@ export const inputNameError = style({
   display: 'flex',
   alignItems: 'center',
   borderRadius: '8px',
+  background: vars.color.white,
   padding: '1rem',
   justifyContent: 'space-between',
   width: '30.125rem',
