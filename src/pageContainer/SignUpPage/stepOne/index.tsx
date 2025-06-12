@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
 import { axiosInstance } from '@/libs';
 
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
@@ -21,29 +21,43 @@ type FormValues = {
 type FormName = 'email' | 'password' | 'repassword';
 
 type SignUpOnePageProps = {
-  formData: { email: string; password: string };
+  formData: { email: string; password: string; authCode: number };
   setFormData: (data: any) => void;
   onNext: () => void;
+  authIsOpen: boolean;
+  setAuthIsOpen: Dispatch<SetStateAction<boolean>>;
+  authBtn: boolean;
+  setAuthBtn: Dispatch<SetStateAction<boolean>>;
+  emailAuth: boolean;
+  setEmailAuth: Dispatch<SetStateAction<boolean>>;
+  authStack: number;
+  setAuthStack: Dispatch<SetStateAction<number>>;
+  blockTime: string;
+  setBlockTime: Dispatch<SetStateAction<string>>;
+  isBlock: boolean;
+  setIsBlock: Dispatch<SetStateAction<boolean>>;
 };
 
 const SignUpOnePage = ({
   formData,
   setFormData,
   onNext,
+  authIsOpen,
+  setAuthIsOpen,
+  authBtn,
+  setAuthBtn,
+  emailAuth,
+  setEmailAuth,
+  authStack,
+  setAuthStack,
+  blockTime,
+  setBlockTime,
+  isBlock,
+  setIsBlock,
 }: SignUpOnePageProps) => {
   const router = useRouter();
   const [isOpen, setOpen] = useState(false);
   const [reIsOpen, setReOpen] = useState(false);
-
-  const [authIsOpen, setAuthIsOpen] = useState<boolean>(false);
-
-  const [authBtn, setAuthBtn] = useState<boolean>(false);
-  const [emailAuth, setEmailAuth] = useState<boolean>(false);
-
-  const [authStack, setAuthStack] = useState<number>(0);
-
-  const [blockTime, setBlockTime] = useState<string>('');
-  const [isBlock, setIsBlock] = useState<boolean>(false);
 
   const handleFocus = (id: FormName) => {
     setFocus(id);
@@ -77,6 +91,7 @@ const SignUpOnePage = ({
       email: formData.email || '',
       password: formData.password || '',
       repassword: formData.password || '',
+      authCode: formData.authCode || 0,
     },
   });
 
@@ -86,7 +101,6 @@ const SignUpOnePage = ({
     }
 
     delete data.repassword;
-    delete data.authCode;
 
     try {
       const response = await axiosInstance.post('/user/check-email', {
@@ -208,6 +222,10 @@ const SignUpOnePage = ({
   useEffect(() => {
     if (authStack > 4) {
       toast.info('email 인증코드를 다시 받아주세요');
+      return;
+    }
+
+    if (emailAuth) {
       return;
     }
 
