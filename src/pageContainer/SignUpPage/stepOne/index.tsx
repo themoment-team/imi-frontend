@@ -247,6 +247,23 @@ const SignUpOnePage = ({
     }
   }, []);
 
+  const emailValue = watch('email');
+
+  useEffect(() => {
+    if (emailValue === '') {
+      setAuthBtn(false);
+      return;
+    }
+    const isValid =
+      (/^[sS]\d{2}0\d{2}$/.test(emailValue) ||
+        /^[sS]\d{2}0\d{2}@gsm\.hs\.kr$/.test(emailValue)) &&
+      emailValue.length > 0;
+
+    if (isValid) {
+      setAuthBtn(isValid);
+    }
+  }, [emailValue]);
+
   return (
     <div className={S.SignUpContainer}>
       <div className={S.LogoContainer}>
@@ -275,7 +292,6 @@ const SignUpOnePage = ({
                 className={S.InputBox}
                 {...register('email', {
                   validate: (value) => {
-                    setAuthBtn(false);
                     if (value.length === 0) {
                       return undefined;
                     }
@@ -284,7 +300,6 @@ const SignUpOnePage = ({
                         /^[sS]\d{2}0\d{2}@gsm\.hs\.kr$/.test(value)) &&
                       value.length > 0
                     ) {
-                      setAuthBtn(true);
                       return true;
                     }
                     return '이메일 형식에 맞지 않습니다';
