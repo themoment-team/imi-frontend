@@ -80,7 +80,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
   };
 
   const GoPrev = () => {
-    if (confirm('현재 변경사항이 저장되지 않았습니다. 계속하시겠습니까?')) {
+    if (confirm('작성하던 내용이 모두 사라집니다. 계속하시겠습니까?')) {
       onPrev();
     }
   };

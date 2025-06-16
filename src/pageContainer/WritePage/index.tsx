@@ -126,15 +126,15 @@ const WritePage = () => {
       }
     },
     onError: () => {
-      toast.error('오류가 발생했습니다.');
+      toast.error('문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
     },
   });
 
   if (myProfileLoading) return <Loading />;
 
   if (myProfileError) {
-    toast.error('정보 불러오기 중 오류 발생.');
-    console.error('자기소개서 내용을 불러오는 중 오류 발생: ', myProfileError);
+    toast.error('프로필 정보를 찾을 수 없습니다.');
+    console.error(myProfileError);
   }
 
   return (
