@@ -38,8 +38,8 @@ export default function ProfileListPage() {
   if (isLoading) return <Loading />;
 
   if (error) {
-    toast.error('정보 불러오기 중 오류 발생.');
-    console.error('프로필 목록 불러오는 중 오류 발생: ', error);
+    toast.error('정보 불러오기 중 오류가 발생했습니다.');
+    console.error(error);
   }
 
   const toggleClub = (club: string) => {

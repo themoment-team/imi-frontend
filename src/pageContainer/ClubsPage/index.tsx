@@ -27,7 +27,7 @@ const ClubsPage = () => {
   if (isLoading) return <Loading />;
 
   if (error) {
-    toast.error('정보 불러오기 중 오류 발생.');
+    toast.error('정보 불러오기 중 오류가 발생했습니다.');
     console.error(error);
   }
 
