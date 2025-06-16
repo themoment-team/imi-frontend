@@ -59,7 +59,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
 
       setIsLogged(true);
 
-      toast.success('회원가입에 성공했습니다');
+      toast.success('회원가입에 성공했습니다.');
       router.push('/');
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -80,7 +80,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
   };
 
   const GoPrev = () => {
-    if (confirm('현재 변경사항이 저장되지 않았습니다. 계속하시겠습니까')) {
+    if (confirm('현재 변경사항이 저장되지 않았습니다. 계속하시겠습니까?')) {
       onPrev();
     }
   };
@@ -102,7 +102,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
             onClick={() => handleFocus('name')}
           >
             <input
-              placeholder="이름을 입력해주세요"
+              placeholder="이름을 입력해주세요."
               className={S.InputBox}
               onClick={() => ClearError()}
               {...register('name', {

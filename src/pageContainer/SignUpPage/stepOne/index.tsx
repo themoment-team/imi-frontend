@@ -110,9 +110,9 @@ const SignUpOnePage = ({
       if (response) {
         setError('email', {
           type: 'server',
-          message: '이미 존재하는 이메일입니다',
+          message: '이미 존재하는 이메일입니다.',
         });
-        toast.error('이미 존재하는 이메일입니다');
+        toast.error('이미 존재하는 이메일입니다.');
       } else {
         updateAuthStack(0);
         localStorage.removeItem('auth_stack_signup');
@@ -139,12 +139,12 @@ const SignUpOnePage = ({
 
     try {
       await axiosInstance.post('/auth/send-email', email);
-      toast.success('이메일 전송이 완료되었습니다!');
-      toast.info('메일이 안왔다면 스팸 메일함을 확인해주세요');
+      toast.success('이메일 전송이 완료되었습니다.');
+      toast.info('메일이 보이지 않는다면 스팸함을 확인해주세요.');
       updateAuthStack(0);
       setAuthIsOpen(true);
     } catch (error) {
-      toast.error('이메일 전송이 실패했습니다');
+      toast.error('이메일 전송이 실패했습니다.');
       console.error(error);
     }
   };
@@ -169,8 +169,9 @@ const SignUpOnePage = ({
       updateAuthStack(newStack);
 
       if (newStack === 5) {
-        toast.info('이메일 인증에 5회 실패했습니다');
-        toast.info('모든 인증이 5분동안 수행되지 않습니다');
+        toast.info(
+          '이메일 인증에 5회 실패했습니다. 5분 후 다시 시도해 주세요.'
+        );
         countBlockTime(setBlockTime);
       } else {
         toast.error('이메일 인증에 실패했습니다.');
@@ -217,7 +218,7 @@ const SignUpOnePage = ({
 
   useEffect(() => {
     if (authStack > 4) {
-      toast.info('email 인증코드를 다시 받아주세요');
+      toast.info('이메일 인증코드를 다시 받아주세요.');
       return;
     }
 
@@ -298,7 +299,7 @@ const SignUpOnePage = ({
                     ) {
                       return true;
                     }
-                    return '이메일 형식에 맞지 않습니다';
+                    return '이메일 형식이 올바르지 않습니다.';
                   },
                 })}
               />
@@ -348,7 +349,7 @@ const SignUpOnePage = ({
                         return undefined;
                       }
                       if (String(value).length > 6) {
-                        return '6글자 아래로 입력해 주세요';
+                        return '6글자 이하로 입력해 주세요.';
                       }
                       return (
                         /^\d+$/.test(String(value)) || '숫자만 입력해주세요.'
@@ -433,7 +434,7 @@ const SignUpOnePage = ({
                   if (watch('password') === value) {
                     return true;
                   }
-                  return '비밀번호가 일치하지 않습니다';
+                  return '비밀번호가 일치하지 않습니다.';
                 },
               })}
             />
