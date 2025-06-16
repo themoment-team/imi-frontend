@@ -120,11 +120,7 @@ const SignUpOnePage = ({
         onNext();
       }
     } catch (error: any) {
-      if (error.response?.state === 404 && error.response?.state === 503) {
-        toast.error('에러가 발생했습니다');
-      } else {
-        toast.error('서버통신중 에러가 발생했습니다');
-      }
+      toast.error('문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
     }
   };
 
