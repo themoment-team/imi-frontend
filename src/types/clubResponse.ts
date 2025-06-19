@@ -5,6 +5,7 @@ export interface Club {
   mainContent: string;
   notionUrl: string;
   iconUrl: string;
+  isFunctionalClub: boolean;
 }
 
 export interface ClubsResponse {

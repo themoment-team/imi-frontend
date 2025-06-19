@@ -32,8 +32,6 @@ export default function ProfileDetailPage() {
   const idFromPath = pathname.split('/').pop() || '';
   const studentNameId = decodeURIComponent(idFromPath);
 
-  console.log('studentNameId:', studentNameId);
-
   const router = useRouter();
 
   const {
@@ -62,11 +60,8 @@ export default function ProfileDetailPage() {
   if (isLoading) return <Loading />;
 
   if (profileError || myProfileError) {
-    toast.error('정보 불러오기 중 오류 발생.');
-    console.error(
-      '프로필 불러오는 중 오류 발생:',
-      profileError || myProfileError
-    );
+    toast.error('프로필 정보를 찾을 수 없습니다.');
+    console.error(profileError || myProfileError);
   }
 
   if (!profile && isMyProfile) return <EmptyProfile />;

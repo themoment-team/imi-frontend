@@ -59,7 +59,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
 
       setIsLogged(true);
 
-      toast.success('회원가입에 성공했습니다');
+      toast.success('회원가입에 성공했습니다.');
       router.push('/');
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -74,17 +74,13 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
 
   const allFieldsFilled = Object.values(watch()).every((value) => value !== '');
 
-  const onError = (errors: FieldErrors) => {
-    console.error(errors);
-  };
-
   const ClearError = () => {
     clearErrors('name');
     clearErrors('studentId');
   };
 
   const GoPrev = () => {
-    if (confirm('현재 변경사항이 저장되지 않았습니다. 계속하시겠습니까')) {
+    if (confirm('작성하던 내용이 모두 사라집니다. 계속하시겠습니까?')) {
       onPrev();
     }
   };
@@ -94,10 +90,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
       <div className={S.LogoContainer}>
         <ImiLogo width="4.125rem" height="3rem" />
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmit, onError)}
-        className={S.InputContainer}
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className={S.InputContainer}>
         <div className={S.InputNameContainer}>
           <p className={S.Text}>Name</p>
           <div
@@ -109,7 +102,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
             onClick={() => handleFocus('name')}
           >
             <input
-              placeholder="이름을 입력해주세요"
+              placeholder="이름을 입력해주세요."
               className={S.InputBox}
               onClick={() => ClearError()}
               {...register('name', {

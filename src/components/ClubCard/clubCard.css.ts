@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 import { vars } from '@/styles/theme.css';
 
-export const CardContainer = style({
+export const baseCardContainer = style({
   width: '22.5rem',
   backgroundColor: vars.color.background,
   borderRadius: '1rem',
@@ -10,6 +10,9 @@ export const CardContainer = style({
   flexDirection: 'column',
   boxShadow: '0px 0.25rem 0.625rem rgba(0, 0, 0, 0.1)',
   overflow: 'hidden',
+});
+
+export const clickableCard = style({
   cursor: 'pointer',
 });
 
@@ -45,7 +48,8 @@ export const ProjectTitle = style({
 });
 
 export const LeaderBadge = style({
-  padding: '0.125rem 0.75rem',
+  height: 'fit-content',
+  padding: '0.125rem 0.725rem',
   backgroundColor: vars.color.primary,
   borderRadius: '0.5rem',
   display: 'flex',
@@ -54,6 +58,7 @@ export const LeaderBadge = style({
 });
 
 export const LeaderText = style({
+  lineHeight: 'normal',
   fontSize: '1rem',
   fontWeight: 300,
 });

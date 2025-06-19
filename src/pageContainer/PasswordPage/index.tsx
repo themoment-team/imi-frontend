@@ -3,124 +3,86 @@
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
+import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
+import { LoginResponse } from '@/types';
 
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import * as S from './signUpOne.css';
+import * as S from './password.css';
 
 type FormValues = {
   email: string;
-  password: string;
-  repassword?: string;
+  newpassword: string;
+  newrepassword?: string;
   authCode?: number;
 };
 
-type FormName = 'email' | 'password' | 'repassword';
+type FormName = 'email' | 'newpassword' | 'newrepassword' | 'authCode';
 
-type SignUpOnePageProps = {
-  formData: { email: string; password: string; authCode: number };
-  setFormData: (data: any) => void;
-  onNext: () => void;
-  authIsOpen: boolean;
-  setAuthIsOpen: Dispatch<SetStateAction<boolean>>;
-  authBtn: boolean;
-  setAuthBtn: Dispatch<SetStateAction<boolean>>;
-  emailAuth: boolean;
-  setEmailAuth: Dispatch<SetStateAction<boolean>>;
-  authStack: number;
-  setAuthStack: Dispatch<SetStateAction<number>>;
-  blockTime: string;
-  setBlockTime: Dispatch<SetStateAction<string>>;
-  isBlock: boolean;
-  setIsBlock: Dispatch<SetStateAction<boolean>>;
-};
-
-const SignUpOnePage = ({
-  formData,
-  setFormData,
-  onNext,
-  authIsOpen,
-  setAuthIsOpen,
-  authBtn,
-  setAuthBtn,
-  emailAuth,
-  setEmailAuth,
-  authStack,
-  setAuthStack,
-  blockTime,
-  setBlockTime,
-  isBlock,
-  setIsBlock,
-}: SignUpOnePageProps) => {
+const PasswordPage = () => {
   const router = useRouter();
-  const [isOpen, setOpen] = useState(false);
-  const [reIsOpen, setReOpen] = useState(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [reIsOpen, setReOpen] = useState<boolean>(false);
+
+  const [authIsOpen, setAuthIsOpen] = useState<boolean>(false);
+
+  const [authBtn, setAuthBtn] = useState<boolean>(false);
+  const [emailAuth, setEmailAuth] = useState<boolean>(false);
+
+  const [authStack, setAuthStack] = useState<number>(0);
+
+  const [blockTime, setBlockTime] = useState<string>('');
+  const [isBlock, setIsBlock] = useState<boolean>(false);
+
+  const { setIsLogged } = useAuth();
 
   const handleFocus = (id: FormName) => {
     setFocus(id);
-  };
-
-  const saveLocalStorage = (stack: number) => {
-    localStorage.setItem('auth_stack_signup', stack.toString());
-  };
-
-  const loadLocalStorage = (): number => {
-    const saved = localStorage.getItem('auth_stack_signup');
-    return saved ? parseInt(saved, 10) : 0;
-  };
-
-  const updateAuthStack = (newStack: number) => {
-    setAuthStack(newStack);
-    saveLocalStorage(newStack);
   };
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    setError,
     watch,
     setFocus,
   } = useForm<FormValues>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
-    defaultValues: {
-      email: formData.email || '',
-      password: formData.password || '',
-      repassword: formData.password || '',
-      authCode: formData.authCode || 0,
-    },
   });
 
   const onSubmit = async (data: FormValues) => {
-    if (data.email.length === 6) {
+    delete data.newrepassword;
+    delete data.authCode;
+
+    if (data.email?.length === 6) {
       data.email = data.email + '@gsm.hs.kr';
     }
 
-    delete data.repassword;
-
     try {
-      const response = await axiosInstance.post('/user/check-email', {
+      await axiosInstance.patch('/user/password', {
         email: data.email,
+        newPassword: data.newpassword,
       });
 
-      if (response) {
-        setError('email', {
-          type: 'server',
-          message: '이미 존재하는 이메일입니다.',
-        });
-        toast.error('이미 존재하는 이메일입니다.');
-      } else {
-        updateAuthStack(0);
-        localStorage.removeItem('auth_stack_signup');
-        setFormData(data);
-        onNext();
-      }
+      const response: LoginResponse = await axiosInstance.post('/auth/login', {
+        email: data.email,
+        password: data.newpassword,
+      });
+
+      document.cookie = `accessToken=${response.accessToken}; path=/;`;
+      document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
+
+      setIsLogged(true);
+
+      toast.success('비밀번호 재설정에 성공했습니다.');
+      toast.success('로그인에 성공했습니다.');
+      router.push('/signin');
     } catch (error: any) {
-      toast.error('문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      toast.error('비밀번호 재설정에 실패했습니다.');
     }
   };
 
@@ -133,7 +95,7 @@ const SignUpOnePage = ({
   const EmailAuth = async () => {
     const email = { email: watch('email') };
 
-    if (email.email.length === 6) {
+    if (email.email?.length === 6) {
       email.email = email.email + '@gsm.hs.kr';
     }
 
@@ -141,7 +103,7 @@ const SignUpOnePage = ({
       await axiosInstance.post('/auth/send-email', email);
       toast.success('이메일 전송이 완료되었습니다.');
       toast.info('메일이 보이지 않는다면 스팸함을 확인해주세요.');
-      updateAuthStack(0);
+      setAuthStack(0);
       setAuthIsOpen(true);
     } catch (error) {
       toast.error('이메일 전송이 실패했습니다.');
@@ -152,7 +114,7 @@ const SignUpOnePage = ({
   const checkAuthCode = async (authCode: number) => {
     const email = { email: watch('email') };
 
-    if (email.email.length === 6) {
+    if (email.email?.length === 6) {
       email.email = email.email + '@gsm.hs.kr';
     }
     try {
@@ -162,17 +124,14 @@ const SignUpOnePage = ({
       });
       toast.success('이메일 인증에 성공했습니다.');
       setEmailAuth(true);
-      updateAuthStack(0);
-      localStorage.removeItem('auth_stack_signup');
     } catch (error) {
-      const newStack = authStack + 1;
-      updateAuthStack(newStack);
-
-      if (newStack === 5) {
+      setAuthStack((e) => e + 1);
+      if (authStack === 4) {
         toast.info(
           '이메일 인증에 5회 실패했습니다. 5분 후 다시 시도해 주세요.'
         );
         countBlockTime(setBlockTime);
+        setAuthStack((e) => e + 1);
       } else {
         toast.error('이메일 인증에 실패했습니다.');
       }
@@ -210,8 +169,6 @@ const SignUpOnePage = ({
         clearInterval(interval);
         setIsBlock(false);
         localStorage.removeItem(startKey);
-        updateAuthStack(0);
-        localStorage.removeItem('auth_stack_signup');
       }
     }, 1000);
   };
@@ -222,10 +179,6 @@ const SignUpOnePage = ({
       return;
     }
 
-    if (emailAuth) {
-      return;
-    }
-
     const code = watch('authCode');
     if (String(code).length === 6 && code != undefined) {
       checkAuthCode(Number(code));
@@ -233,33 +186,11 @@ const SignUpOnePage = ({
   }, [watch('authCode')]);
 
   useEffect(() => {
-    const savedAuthStack = loadLocalStorage();
-    if (savedAuthStack > 0) {
-      setAuthStack(savedAuthStack);
-    }
-
     const existingStartTime = localStorage.getItem('count_block_time');
     if (existingStartTime) {
       countBlockTime(setBlockTime);
     }
   }, []);
-
-  const emailValue = watch('email');
-
-  useEffect(() => {
-    if (emailValue === '') {
-      setAuthBtn(false);
-      return;
-    }
-    const isValid =
-      (/^[sS]\d{2}0\d{2}$/.test(emailValue) ||
-        /^[sS]\d{2}0\d{2}@gsm\.hs\.kr$/.test(emailValue)) &&
-      emailValue.length > 0;
-
-    if (isValid) {
-      setAuthBtn(isValid);
-    }
-  }, [emailValue]);
 
   return (
     <div className={S.SignUpContainer}>
@@ -289,14 +220,20 @@ const SignUpOnePage = ({
                 className={S.InputBox}
                 {...register('email', {
                   validate: (value) => {
-                    if (value.length === 0) {
+                    setAuthBtn(false);
+                    if (value === undefined) {
+                      return;
+                    }
+                    if (value?.length === 0) {
                       return undefined;
                     }
                     if (
                       (/^[sS]\d{2}0\d{2}$/.test(value) ||
                         /^[sS]\d{2}0\d{2}@gsm\.hs\.kr$/.test(value)) &&
+                      value &&
                       value.length > 0
                     ) {
+                      setAuthBtn(true);
                       return true;
                     }
                     return '이메일 형식이 올바르지 않습니다.';
@@ -368,21 +305,21 @@ const SignUpOnePage = ({
           </div>
         ) : null}
         <div className={S.InputPasswordContainer}>
-          <p className={S.Text}>Password</p>
+          <p className={S.Text}>새 비밀번호</p>
           <div
-            key={'password'}
+            key={'newpassword'}
             className={
-              errors.password || errors.repassword
+              errors.newpassword || errors.newpassword
                 ? S.inputPasswordVariants.error
                 : S.inputPasswordVariants.default
             }
-            onClick={() => handleFocus('password')}
+            onClick={() => handleFocus('newpassword')}
           >
             <input
               type={isOpen ? 'text' : 'password'}
               placeholder="비밀번호를 입력해주세요."
               className={S.InputBox}
-              {...register('password', {
+              {...register('newpassword', {
                 validate: (value) => {
                   if (value.length === 0) {
                     return undefined;
@@ -406,32 +343,32 @@ const SignUpOnePage = ({
           </div>
           <div className={S.ErrorBox}>
             <div></div>
-            {errors.password && (
-              <p className={S.ErrorText}>{errors.password.message}</p>
+            {errors.newpassword && (
+              <p className={S.ErrorText}>{errors.newpassword.message}</p>
             )}
           </div>
           <div
-            key={'repassword'}
+            key={'newrepassword'}
             className={
-              errors.repassword
+              errors.newrepassword
                 ? S.ReinputPasswordVariants.error
                 : S.ReinputPasswordVariants.default
             }
-            onClick={() => handleFocus('repassword')}
+            onClick={() => handleFocus('newrepassword')}
           >
             <input
               type={reIsOpen ? 'text' : 'password'}
               placeholder="비밀번호를 재입력해주세요."
               className={S.InputBox}
-              {...register('repassword', {
+              {...register('newrepassword', {
                 validate: (value) => {
                   if (!value) {
-                    return '';
+                    return undefined;
                   }
                   if (value.length === 0) {
                     return undefined;
                   }
-                  if (watch('password') === value) {
+                  if (watch('newpassword') === value) {
                     return true;
                   }
                   return '비밀번호가 일치하지 않습니다.';
@@ -444,8 +381,8 @@ const SignUpOnePage = ({
           </div>
           <div className={S.ErrorBox}>
             <div></div>
-            {errors.repassword && (
-              <p className={S.ErrorText}>{errors.repassword.message}</p>
+            {errors.newrepassword && (
+              <p className={S.ErrorText}>{errors.newrepassword.message}</p>
             )}
           </div>
         </div>
@@ -461,14 +398,8 @@ const SignUpOnePage = ({
           다음
         </button>
       </form>
-      <div className={S.SigninBox}>
-        <p className={S.UnderText}>계정이 이미있으신가요?</p>
-        <p className={S.GrayText} onClick={() => router.push('/signin')}>
-          로그인
-        </p>
-      </div>
     </div>
   );
 };
 
-export default SignUpOnePage;
+export default PasswordPage;

@@ -72,19 +72,12 @@ const SignInPage = () => {
 
   const allFieldsFilled = Object.values(watch()).every((value) => value !== '');
 
-  const onError = (errors: FieldErrors) => {
-    console.error(errors);
-  };
-
   return (
     <div className={S.SigninContainer}>
       <div className={S.LogoContainer}>
         <ImiLogo width="4.125rem" height="3rem" />
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmit, onError)}
-        className={S.InputContainer}
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className={S.InputContainer}>
         <div className={S.InputEmailContainer}>
           <p className={S.Text}>Email</p>
           <div
@@ -172,7 +165,10 @@ const SignInPage = () => {
         </button>
       </form>
       <div className={S.SignupBox}>
-        <p className={S.UnderText}>계정이 없으신가요?</p>
+        <p className={S.GrayText} onClick={() => router.push('/password')}>
+          비밀번호재설정
+        </p>
+        <div className={S.Divid} />
         <p className={S.GrayText} onClick={() => router.push('/signup')}>
           회원가입
         </p>

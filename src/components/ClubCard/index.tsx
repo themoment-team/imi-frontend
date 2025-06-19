@@ -10,9 +10,20 @@ interface ClubCardProps {
 
 const ClubCard = ({ clubInfo }: ClubCardProps) => {
   return (
-    <div className={S.CardContainer}>
+    <a
+      {...(clubInfo.notionUrl && {
+        href: clubInfo.notionUrl,
+        target: '_blank',
+      })}
+      className={`${S.baseCardContainer} ${clubInfo.notionUrl ? S.clickableCard : ''}`}
+    >
       <div className={S.ImageWrapper}>
-        <Image src={clubInfo.iconUrl} alt={clubInfo.name} fill />
+        <Image
+          src={clubInfo.iconUrl}
+          alt={clubInfo.name}
+          fill
+          objectFit="cover"
+        />
       </div>
       <div className={S.InfoContainer}>
         <div className={S.HeaderRow}>
@@ -23,7 +34,7 @@ const ClubCard = ({ clubInfo }: ClubCardProps) => {
         </div>
         <p className={S.ProjectTitle}>{clubInfo.mainContent}</p>
       </div>
-    </div>
+    </a>
   );
 };
 
