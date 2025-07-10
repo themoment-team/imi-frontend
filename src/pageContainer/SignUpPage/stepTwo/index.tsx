@@ -1,6 +1,7 @@
 'use client';
 
 import { AxiosError } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { useRouter } from 'next/navigation';
 
 import { ImiLogo } from '@/asset';
@@ -52,7 +53,7 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
         email: Data.email,
         password: Data.password,
       });
-      return response.data;
+      return response as unknown as LoginResponse;
     },
   });
 
