@@ -47,7 +47,7 @@ const SignInPage = () => {
         '/auth/login',
         loginData
       );
-      return response.data;
+      return response as unknown as LoginResponse;
     },
     onSuccess: (response) => {
       document.cookie = `accessToken=${response.accessToken}; path=/;`;
