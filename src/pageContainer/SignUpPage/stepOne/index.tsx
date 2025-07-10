@@ -16,13 +16,13 @@ type FormValues = {
   email: string;
   password: string;
   repassword?: string;
-  authCode?: number;
+  authCode?: string;
 };
 
 type FormName = 'email' | 'password' | 'repassword';
 
 type SignUpOnePageProps = {
-  formData: { email: string; password: string; authCode: number };
+  formData: { email: string; password: string; authCode: string };
   setFormData: (data: any) => void;
   onNext: () => void;
   authIsOpen: boolean;
@@ -92,7 +92,7 @@ const SignUpOnePage = ({
       email: formData.email || '',
       password: formData.password || '',
       repassword: formData.password || '',
-      authCode: formData.authCode || 0,
+      authCode: formData.authCode || '',
     },
   });
 

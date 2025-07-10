@@ -10,7 +10,7 @@ export default function SignUpPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    authCode: 0,
+    authCode: '',
   });
 
   const [authIsOpen, setAuthIsOpen] = useState<boolean>(false);
