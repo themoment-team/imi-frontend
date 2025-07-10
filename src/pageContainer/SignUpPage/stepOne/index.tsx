@@ -261,6 +261,12 @@ const SignUpOnePage = ({
     }
   }, [emailValue]);
 
+  useEffect(() => {
+    if ((emailAuth && !formData.email) || formData.email !== watch('email')) {
+      setEmailAuth(false);
+    }
+  }, [watch('email')]);
+
   return (
     <div className={S.SignUpContainer}>
       <div className={S.LogoContainer}>
