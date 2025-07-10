@@ -1,7 +1,6 @@
 'use client';
 
 import { AxiosError } from 'axios';
-import Error from 'next/error';
 import { useRouter } from 'next/navigation';
 
 import { ImiLogo } from '@/asset';
@@ -9,7 +8,8 @@ import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
 import { LoginResponse } from '@/types';
 
-import { FieldErrors, useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import * as S from './signUpTwo.css';
@@ -25,6 +25,8 @@ type SignUpTwoPageProps = {
   formData: { email: string; password: string };
   onPrev: () => void;
 };
+
+type TypeSignup = FormValues & { email: string; password: string };
 
 const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
   const router = useRouter();
@@ -43,16 +45,21 @@ const SignUpTwoPage = ({ formData, onPrev }: SignUpTwoPageProps) => {
     reValidateMode: 'onBlur',
   });
 
-  const onSubmit = async (data: FormValues) => {
-    const Data = { ...data, ...formData };
-
-    try {
+  const signUpMutation = useMutation<LoginResponse, AxiosError, TypeSignup>({
+    mutationFn: async (Data: TypeSignup) => {
       await axiosInstance.post('/user/join', Data);
-
-      const response: LoginResponse = await axiosInstance.post('/auth/login', {
+      const response = await axiosInstance.post<LoginResponse>('/auth/login', {
         email: Data.email,
         password: Data.password,
       });
+      return response.data;
+    },
+  });
+
+  const onSubmit = async (data: FormValues) => {
+    const Data = { ...data, ...formData };
+    try {
+      const response = await signUpMutation.mutateAsync(Data);
 
       document.cookie = `accessToken=${response.accessToken}; path=/;`;
       document.cookie = `refreshToken=${response.refreshToken}; path=/;`;

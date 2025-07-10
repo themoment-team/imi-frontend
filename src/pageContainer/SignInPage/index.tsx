@@ -1,5 +1,6 @@
 'use client';
 
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
@@ -7,8 +8,9 @@ import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
 import { LoginResponse } from '@/types';
 
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-import { FieldErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import * as S from './signIn.css';
@@ -35,25 +37,26 @@ const SignInPage = () => {
 
   const { setIsLogged } = useAuth();
 
-  const onSubmit = async (data: FormValues) => {
-    if (data.email.length === 6) {
-      data.email = data.email + '@gsm.hs.kr';
-    }
-
-    try {
-      const response: LoginResponse = await axiosInstance.post(
+  const loginMutation = useMutation<LoginResponse, AxiosError, FormValues>({
+    mutationFn: async (data: FormValues) => {
+      const loginData = { ...data };
+      if (loginData.email.length === 6) {
+        loginData.email = loginData.email + '@gsm.hs.kr';
+      }
+      const response = await axiosInstance.post<LoginResponse>(
         '/auth/login',
-        data
+        loginData
       );
-
+      return response.data;
+    },
+    onSuccess: (response) => {
       document.cookie = `accessToken=${response.accessToken}; path=/;`;
       document.cookie = `refreshToken=${response.refreshToken}; path=/;`;
-
       setIsLogged(true);
-
       toast.success('로그인에 성공했습니다');
       router.push('/');
-    } catch (error) {
+    },
+    onError: () => {
       toast.error('이메일 또는 비밀번호가 일치하지 않습니다.');
       setError('email', {
         type: 'server',
@@ -63,7 +66,11 @@ const SignInPage = () => {
         type: 'server',
         message: '이메일 또는 비밀번호가 일치하지 않습니다.',
       });
-    }
+    },
+  });
+
+  const onSubmit = async (data: FormValues) => {
+    loginMutation.mutate(data);
   };
 
   const handleFocus = (id: FormName) => {
