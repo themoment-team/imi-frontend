@@ -20,4 +20,14 @@ export const Tag = style({
 
 export const Content = style({
   backgroundColor: 'transparent',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  maxWidth: '80%',
+
+  '@media': {
+    'screen and (max-width: 1440px)': {
+      maxWidth: '70%',
+    },
+  },
 });

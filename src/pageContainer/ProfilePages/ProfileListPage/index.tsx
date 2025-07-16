@@ -105,37 +105,42 @@ export default function ProfileListPage() {
 
       {/* 자기소개서 카드 */}
       <div className={S.CardContainer}>
-        {filteredProfileList.map((profile: Profile) => (
-          <div
-            key={profile.studentId}
-            className={S.Card}
-            onClick={() =>
-              router.push(
-                `/profile/${encodeURIComponent(profile.studentId + profile.name)}`
-              )
-            }
-          >
-            <div className={T.TextContainer}>
-              <p className={T.Tag}>이름</p>
-              <p className={T.Content}>{profile.name}</p>
+        {filteredProfileList.map((profile: Profile) => {
+          const wantedText = Array.isArray(profile.wanted)
+            ? profile.wanted.join(', ')
+            : profile.wanted || '';
+
+          return (
+            <div
+              key={profile.studentId}
+              className={S.Card}
+              onClick={() =>
+                router.push(
+                  `/profile/${encodeURIComponent(profile.studentId + profile.name)}`
+                )
+              }
+            >
+              <div className={T.TextContainer}>
+                <p className={T.Tag}>이름</p>
+                <p className={T.Content} title={profile.name}>
+                  {profile.name}
+                </p>
+              </div>
+              <div className={T.TextContainer}>
+                <p className={T.Tag}>전공</p>
+                <p className={T.Content} title={profile.major}>
+                  {profile.major}
+                </p>
+              </div>
+              <div className={S.WantedContainer}>
+                <p className={T.Tag}>동아리</p>
+                <p className={T.Content} title={wantedText}>
+                  {wantedText}
+                </p>
+              </div>
             </div>
-            <div className={T.TextContainer}>
-              <p className={T.Tag}>전공</p>
-              <p className={T.Content}>{profile.major}</p>
-            </div>
-            <div className={S.WantedContainer}>
-              <p className={T.Tag}>동아리</p>
-              <p className={T.Content}>
-                {(() => {
-                  const text = Array.isArray(profile.wanted)
-                    ? profile.wanted.join(', ')
-                    : profile.wanted || '';
-                  return text.length > 13 ? text.slice(0, 13) + ' ···' : text;
-                })()}
-              </p>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
