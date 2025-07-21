@@ -7,6 +7,7 @@ import { useAuth } from '@/hooks';
 import { axiosInstance } from '@/libs';
 import { LoginResponse } from '@/types';
 
+import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -80,7 +81,7 @@ const PasswordPage = () => {
 
       toast.success('비밀번호 재설정에 성공했습니다.');
       toast.success('로그인에 성공했습니다.');
-      router.push('/signin');
+      router.push('/');
     } catch (error: any) {
       toast.error('비밀번호 재설정에 실패했습니다.');
     }
@@ -92,23 +93,29 @@ const PasswordPage = () => {
     console.error(errors);
   };
 
-  const EmailAuth = async () => {
-    const email = { email: watch('email') };
-
-    if (email.email?.length === 6) {
-      email.email = email.email + '@gsm.hs.kr';
-    }
-
-    try {
-      await axiosInstance.post('/auth/send-email', email);
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (email: string) => {
+      let sendEmail = email;
+      if (sendEmail?.length === 6) {
+        sendEmail = sendEmail + '@gsm.hs.kr';
+      }
+      await axiosInstance.post('/auth/send-email', { email: sendEmail });
+    },
+    onSuccess: () => {
       toast.success('이메일 전송이 완료되었습니다.');
       toast.info('메일이 보이지 않는다면 스팸함을 확인해주세요.');
       setAuthStack(0);
       setAuthIsOpen(true);
-    } catch (error) {
+    },
+    onError: (error) => {
       toast.error('이메일 전송이 실패했습니다.');
       console.error(error);
-    }
+    },
+  });
+
+  const EmailAuth = () => {
+    const email = watch('email');
+    mutate(email);
   };
 
   const checkAuthCode = async (authCode: number) => {
@@ -244,12 +251,14 @@ const PasswordPage = () => {
             </div>
             <div
               className={
-                authBtn && !emailAuth && !isBlock
+                authBtn && !emailAuth && !isBlock && !isPending
                   ? S.AuthButton
                   : S.BlockAuthButton
               }
               onClick={
-                authBtn && !emailAuth && !isBlock ? EmailAuth : undefined
+                !isPending && authBtn && !emailAuth && !isBlock
+                  ? EmailAuth
+                  : undefined
               }
             >
               인증

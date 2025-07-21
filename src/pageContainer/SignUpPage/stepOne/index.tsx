@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CloseEyes, ImiLogo, OpenEyes } from '@/asset';
 import { axiosInstance } from '@/libs';
 
+import { useMutation } from '@tanstack/react-query';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -15,13 +16,13 @@ type FormValues = {
   email: string;
   password: string;
   repassword?: string;
-  authCode?: number;
+  authCode?: string;
 };
 
 type FormName = 'email' | 'password' | 'repassword';
 
 type SignUpOnePageProps = {
-  formData: { email: string; password: string; authCode: number };
+  formData: { email: string; password: string; authCode: string };
   setFormData: (data: any) => void;
   onNext: () => void;
   authIsOpen: boolean;
@@ -91,7 +92,7 @@ const SignUpOnePage = ({
       email: formData.email || '',
       password: formData.password || '',
       repassword: formData.password || '',
-      authCode: formData.authCode || 0,
+      authCode: formData.authCode || '',
     },
   });
 
@@ -130,24 +131,25 @@ const SignUpOnePage = ({
     console.error(errors);
   };
 
-  const EmailAuth = async () => {
-    const email = { email: watch('email') };
-
-    if (email.email.length === 6) {
-      email.email = email.email + '@gsm.hs.kr';
-    }
-
-    try {
-      await axiosInstance.post('/auth/send-email', email);
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (email: string) => {
+      let sendEmail = email;
+      if (sendEmail?.length === 6) {
+        sendEmail = sendEmail + '@gsm.hs.kr';
+      }
+      await axiosInstance.post('/auth/send-email', { email: sendEmail });
+    },
+    onSuccess: () => {
       toast.success('이메일 전송이 완료되었습니다.');
       toast.info('메일이 보이지 않는다면 스팸함을 확인해주세요.');
       updateAuthStack(0);
       setAuthIsOpen(true);
-    } catch (error) {
+    },
+    onError: (error) => {
       toast.error('이메일 전송이 실패했습니다.');
       console.error(error);
-    }
-  };
+    },
+  });
 
   const checkAuthCode = async (authCode: number) => {
     const email = { email: watch('email') };
@@ -261,6 +263,12 @@ const SignUpOnePage = ({
     }
   }, [emailValue]);
 
+  useEffect(() => {
+    if ((emailAuth && !formData.email) || formData.email !== watch('email')) {
+      setEmailAuth(false);
+    }
+  }, [watch('email')]);
+
   return (
     <div className={S.SignUpContainer}>
       <div className={S.LogoContainer}>
@@ -307,12 +315,14 @@ const SignUpOnePage = ({
             </div>
             <div
               className={
-                authBtn && !emailAuth && !isBlock
+                authBtn && !emailAuth && !isBlock && !isPending
                   ? S.AuthButton
                   : S.BlockAuthButton
               }
               onClick={
-                authBtn && !emailAuth && !isBlock ? EmailAuth : undefined
+                authBtn && !emailAuth && !isBlock && !isPending
+                  ? () => mutate(watch('email'))
+                  : undefined
               }
             >
               인증
