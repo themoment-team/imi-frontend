@@ -8,6 +8,7 @@ import { put } from '@/libs';
 
 import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { toast } from 'react-toastify';
 
 import * as S from './write.css';
@@ -117,7 +118,9 @@ const WritePage = () => {
         content: content.trim(),
       }),
     onSuccess: () => {
-      setHasUnsavedChanges(false);
+      flushSync(() => {
+        setHasUnsavedChanges(false);
+      });
       if (myProfile && myProfile.studentId && myProfile.name) {
         router.push(`/profile/${myProfile.studentId}${myProfile.name}`);
         toast.success('작성이 완료되었습니다.');
