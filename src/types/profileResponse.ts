@@ -5,6 +5,7 @@ export interface Profile {
   wanted: string[];
   major: string;
   content: string;
+  isLinked: boolean;
 }
 
 export interface ProfileResponse {
