@@ -114,11 +114,15 @@ export default function ProfileListPage() {
             <div
               key={profile.studentId}
               className={S.Card}
-              onClick={() =>
+              onClick={() => {
+                if (profile.isLinked && profile.content) {
+                  window.open(profile.content, '_blank');
+                  return;
+                }
                 router.push(
                   `/profile/${encodeURIComponent(profile.studentId + profile.name)}`
-                )
-              }
+                );
+              }}
             >
               <div className={T.TextContainer}>
                 <p className={T.Tag}>이름</p>
